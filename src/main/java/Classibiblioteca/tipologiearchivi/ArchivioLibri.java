@@ -1,57 +1,59 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Classibiblioteca.tipologiearchivi;
 
 import Classibiblioteca.Entità.Libro;
-import Classibiblioteca.Entità.Utente;
-import java.time.LocalDate;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author centr
- */
-public class ArchivioLibri
-{
+public class ArchivioLibri implements Serializable {
+    
+    
     private List<Libro> listlibro;
     
-    public ArchivioLibri()
-    {
-        listlibro = new ArrayList<>();
+    public ArchivioLibri() {
+        this.listlibro = new ArrayList<>();
     }
     
+    // --- Gestione Lista ---
     
-    public int hashCode()
-    {
-        
-    }    
-    public int equals()
-    {
-        
-    }
-    public void aggiungiLibro(Libro x)
-    {
+    public void aggiungiLibro(Libro x) {
+        // Da implementare: controllo duplicati ISBN
         listlibro.add(x);
     }
     
-    public Libro eliminaLibro()
-    {
-    }
-//decidere cosa fare con il campo autori nella modifica    
-    public void modificaLibro(String titolo,LocalDate annopubbl,int numerocopie)
-    {
-        
+    public boolean eliminaLibro(String ISBN) {
+        // Da implementare
+        return false;
     }
     
-    public Libro ricercaLibro(String campo)
-    {
-        
+    // Per la modifica, restituisci il libro e lo modifichi nel controller, oppure passi i dati qui
+    public Libro getLibroByISBN(String ISBN) {
+        // Da implementare
+        return null;
     }
-     
     
+    // --- Metodi per la Ricerca (UC-4) ---
     
+    public List<Libro> ricercaLibro(String keyword) {
+        // Da implementare (ricerca per titolo, autore, ISBN)
+        return new ArrayList<>(); 
+    }
+    
+    // --- Metodi per l'Interfaccia Grafica (Ordinamento) ---
+    
+    // Requisito UI-1.1
+    public List<Libro> getLibriPerTitolo() {
+        // Da implementare: return lista ordinata per titolo
+        return listlibro; 
+    }
+
+    // Requisito UI-1.2
+    public List<Libro> getLibriPerAutore() {
+        // Da implementare: return lista ordinata per autore
+        return listlibro;
+    }
+    
+    public List<Libro> getLista() {
+        return listlibro;
+    }
 }

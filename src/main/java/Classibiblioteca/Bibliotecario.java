@@ -1,23 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Classibiblioteca;
 
+import java.io.Serializable;
+
 /**
- *
- * @author centr
+ * Rappresenta l'attore (Stakeholder) che interagisce con il sistema.
+ * Mantiene il riferimento all'Archivio corrente.
  */
-public class Bibliotecario 
-{
+public class Bibliotecario implements Serializable {
+    
+
     private final String nomeBiblioteca;
     private final Archivio archiviobiblioteca;
     
-    public Bibliotecario(String nomeBiblioteca , Archivio archiviobiblioteca)
-    {
-        this.nomeBiblioteca= nomeBiblioteca;
-        this.archiviobiblioteca=archiviobiblioteca;
+    public Bibliotecario(String nomeBiblioteca, Archivio archiviobiblioteca) {
+        this.nomeBiblioteca = nomeBiblioteca;
+        this.archiviobiblioteca = archiviobiblioteca;
     }
-    
+
+    public String getNomeBiblioteca() {
+        return nomeBiblioteca;
+    }
+
+    public Archivio getArchivio() {
+        return archiviobiblioteca;
+    }
 }

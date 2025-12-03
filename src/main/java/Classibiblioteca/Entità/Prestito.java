@@ -1,31 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Classibiblioteca.Entità;
 
-/**
- *
- * @author centr
- */
-public class Prestito
-{
+import java.io.Serializable;
+import java.time.LocalDate;
+
+public class Prestito implements Serializable {
+
+
     private String emailuser;
     private String matricola;
     private String titololibro;
-    private int ISBN;
+    private String ISBN;
+    
     private LocalDate datainizio;
-    private LocalDate datarest;
+    private LocalDate dataScadenzaPrevista;      
+    private LocalDate dataRestituzioneEffettiva; 
 
-    public Prestito(String emailuser, String matricola, String titololibro, int ISBN, LocalDate datainizio, LocalDate datarest) {
+    public Prestito(String emailuser, String matricola, String titololibro, String ISBN, LocalDate datainizio, LocalDate dataScadenzaPrevista) {
         this.emailuser = emailuser;
         this.matricola = matricola;
         this.titololibro = titololibro;
         this.ISBN = ISBN;
         this.datainizio = datainizio;
-        this.datarest = datarest;
+        this.dataScadenzaPrevista = dataScadenzaPrevista;
+        this.dataRestituzioneEffettiva = null; 
     }
+
+    // --- Getter e Setter ---
 
     public String getEmailuser() {
         return emailuser;
@@ -51,11 +51,11 @@ public class Prestito
         this.titololibro = titololibro;
     }
 
-    public int getISBN() {
+    public String getISBN() {
         return ISBN;
     }
 
-    public void setISBN(int ISBN) {
+    public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
 
@@ -67,26 +67,46 @@ public class Prestito
         this.datainizio = datainizio;
     }
 
-    public LocalDate getDatarest() {
-        return datarest;
+    public LocalDate getDataScadenzaPrevista() {
+        return dataScadenzaPrevista;
     }
 
-    public void setDatarest(LocalDate datarest) {
-        this.datarest = datarest;
+    public void setDataScadenzaPrevista(LocalDate dataScadenzaPrevista) {
+        this.dataScadenzaPrevista = dataScadenzaPrevista;
+    }
+
+    public LocalDate getDataRestituzioneEffettiva() {
+        return dataRestituzioneEffettiva;
+    }
+
+    public void setDataRestituzioneEffettiva(LocalDate dataRestituzioneEffettiva) {
+        this.dataRestituzioneEffettiva = dataRestituzioneEffettiva;
+    }
+
+    // --- Metodo per la UI (Stato) ---
+    // Questo serve alla TableView per la colonna "Stato"
+    public String getStato() {
+        if (dataRestituzioneEffettiva != null) {
+            return "Concluso";
+        }
+        if (LocalDate.now().isAfter(dataScadenzaPrevista)) {
+            return "IN RITARDO";
+        }
+        return "In Corso";
+    }
+
+    // --- Metodi di Logica (Prototipi) ---
+
+    public boolean isInRitardo() {
+        return false; // Da implementare meglio se serve logica complessa
+    }
+
+    public void chiudiPrestito() {
+        // Da implementare
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Prestito{emailuser=").append(emailuser);
-        sb.append(", matricola=").append(matricola);
-        sb.append(", titololibro=").append(titololibro);
-        sb.append(", ISBN=").append(ISBN);
-        sb.append(", datainizio=").append(datainizio);
-        sb.append(", datarest=").append(datarest);
-        sb.append('}');
-        return sb.toString();
+        return "Prestito{" + "matricola=" + matricola + ", ISBN=" + ISBN + ", scadenza=" + dataScadenzaPrevista + '}';
     }
-    
-    
 }

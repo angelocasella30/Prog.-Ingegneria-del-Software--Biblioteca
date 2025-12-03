@@ -5,30 +5,30 @@
  */
 package Classibiblioteca.Entità;
 
-import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
-/**
- *
- * @author centr
- */
-public class Utente 
-{
+public class Utente implements Serializable {
+
     private String nome;
     private String cognome;
     private final String matricola;
     private String email;
-    private List <Prestito> prestitiattivi;
+    
+    private List<Prestito> prestitiattivi;
     private final List<Prestito> storicoprestiti;
 
-    public Utente(String nome, String cognome, String matricola, String email)
-    {
+    public Utente(String nome, String cognome, String matricola, String email) {
         this.nome = nome;
         this.cognome = cognome;
         this.matricola = matricola;
-        this.email = email;   
-        prestitiattivi = new ArrayList<> ();
+        this.email = email;
+        this.prestitiattivi = new ArrayList<>();
+        this.storicoprestiti = new ArrayList<>();
     }
+
+    // --- Getter e Setter ---
 
     public String getNome() {
         return nome;
@@ -46,6 +46,10 @@ public class Utente
         this.cognome = cognome;
     }
 
+    public String getMatricola() {
+        return matricola;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -54,11 +58,27 @@ public class Utente
         this.email = email;
     }
 
-    @Override
-    public String toString() 
-    {
+    public List<Prestito> getPrestitiattivi() {
+        return prestitiattivi;
     }
-    
 
-    
+    public void setPrestitiattivi(List<Prestito> prestitiattivi) {
+        this.prestitiattivi = prestitiattivi;
+    }
+
+    public List<Prestito> getStoricoprestiti() {
+        return storicoprestiti;
+    }
+
+    // --- Metodi di Logica (Prototipi) ---
+
+    // Prototipo: controlla se può prendere altri prestiti (Max 3)
+    public boolean puoRichiederePrestito() {
+        return false; // Da implementare
+    }
+
+    @Override
+    public String toString() {
+        return "Utente{" + "nome=" + nome + ", cognome=" + cognome + ", matricola=" + matricola + ", email=" + email + '}';
+    }
 }

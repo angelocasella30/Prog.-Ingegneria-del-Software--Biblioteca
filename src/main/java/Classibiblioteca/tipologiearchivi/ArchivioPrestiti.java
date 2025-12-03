@@ -1,54 +1,46 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Classibiblioteca.tipologiearchivi;
 
 import Classibiblioteca.Entità.Prestito;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author centr
- */
-public class ArchivioPrestiti 
-{
-    private List<Prestito> listprestiti;
+public class ArchivioPrestiti implements Serializable {
     
-    public ArchivioPrestiti()
-    {
-        listprestiti = new ArrayList<>();
+    
+    private  List<Prestito> listprestiti;
+    
+    public ArchivioPrestiti() {
+        this.listprestiti = new ArrayList<>();
     }
+    
+    // --- Gestione Lista ---
     
     public void aggiungiPrestito(Prestito p)
     {
-        
     }
     
-    public Prestito restituzioneLibro()
-    {
-        
+    // UC-12: Gestione Restituzione
+    public boolean restituzioneLibro(String matricola, String ISBN) {
+        // Da implementare: trova prestito, chiudilo, rimuovilo o spostalo nello storico
+        return false;
     }
     
+    // --- Metodi per l'Interfaccia Grafica ---
     
-    public Prestito ricercaPrestito()
-    {
-        
-    }
-   @Override
-    public String toString()
-    {
-        
+    // Requisito UI-1.4: Visualizzazione ordinata per data scadenza
+    public List<Prestito> getPrestitiOrdinatiPerScadenza() {
+        // Da implementare: ordinamento cronologico
+        return listprestiti;
     }
     
-     public int hashCode()
-    {
-        
-    }    
-    public int equals()
-    {
-        
+    // Metodo utile per il controller (opzionale)
+    public List<Prestito> getPrestitiScaduti() {
+        // Da implementare: filtra solo quelli con ritardo
+        return new ArrayList<>();
+    }
+    
+    public List<Prestito> getLista() {
+        return listprestiti;
     }
 }

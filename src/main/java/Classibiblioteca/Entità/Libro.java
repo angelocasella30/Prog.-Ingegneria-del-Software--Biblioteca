@@ -1,34 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Classibiblioteca.Entità;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author centr
- */
-public class Libro 
-{
+public class Libro implements Serializable {
+    
+
     private String titolo;
-    private List <String> autore;
+    private List<String> autore;
     private LocalDate datapubbl;
     private final String ISBN;
-    public static int numerocopie;
+    private int numerocopie;
 
-    public Libro(String titolo, LocalDate datapubbl, String ISBN,int numerocopie)
-    {
+    public Libro(String titolo, LocalDate datapubbl, String ISBN, int numerocopie) {
         this.titolo = titolo;
-        autore = new ArrayList<>();
+        this.autore = new ArrayList<>();
         this.datapubbl = datapubbl;
         this.ISBN = ISBN;
-        this.numerocopie=numerocopie;
+        this.numerocopie = numerocopie;
     }
+
+    // --- Getter e Setter ---
 
     public String getTitolo() {
         return titolo;
@@ -54,18 +48,27 @@ public class Libro
         this.datapubbl = datapubbl;
     }
 
-    public static int getNumerocopie() {
+    public String getISBN() {
+        return ISBN;
+    }
+
+    public int getNumerocopie() {
         return numerocopie;
     }
 
-    public static void setNumerocopie(int numerocopie) {
-        Libro.numerocopie = numerocopie;
+    public void setNumerocopie(int numerocopie) {
+        this.numerocopie = numerocopie;
+    }
+
+    // --- Metodi di Logica (Prototipi) ---
+    
+    // Prototipo: verifica se ci sono copie disponibili
+    public boolean isDisponibile() {
+        return false; // Da implementare
     }
 
     @Override
     public String toString() {
-        return "Libro{" + "titolo=" + titolo + ", autore=" + autore + ", datapubbl=" + datapubbl + ", ISBN=" + ISBN + '}';
+        return "Libro{" + "titolo=" + titolo + ", autore=" + autore + ", datapubbl=" + datapubbl + ", ISBN=" + ISBN + ", numerocopie=" + numerocopie + '}';
     }
-    
-    
 }

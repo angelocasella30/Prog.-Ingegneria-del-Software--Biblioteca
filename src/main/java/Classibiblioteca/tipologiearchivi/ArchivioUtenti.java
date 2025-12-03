@@ -1,53 +1,52 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Classibiblioteca.tipologiearchivi;
 
 import Classibiblioteca.Entità.Utente;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author centr
- */
-public class ArchivioUtenti
-{
+public class ArchivioUtenti implements Serializable {
+    
+    
     private List<Utente> listutenti;
     
-    public ArchivioUtenti()
-    {
-        listutenti = new ArrayList<>();
+    public ArchivioUtenti() {
+        this.listutenti = new ArrayList<>();
     }
     
-    public void aggiungiUtente(Utente x)
-    {
+    // --- Gestione Lista ---
+    
+    public void aggiungiUtente(Utente x) {
+        // Da implementare: controllo matricola univoca
         listutenti.add(x);
     }
     
-    public Utente eliminaUtente()
-    {
+    public boolean eliminaUtente(String matricola) {
+        // Da implementare
+        return false;
     }
     
-    public void modificaUtente(String nome,String cognome,String email)
-    {
-        
+    public Utente getUtenteByMatricola(String matricola) {
+        // Da implementare
+        return null;
     }
     
-    public Utente ricercaUtente(String campo)
-    {
-        
+    // --- Metodi per la Ricerca (UC-8) ---
+    
+    public List<Utente> ricercaUtente(String keyword) {
+        // Da implementare (cognome, matricola)
+        return new ArrayList<>();
     }
     
-     public int hashCode()
-    {
-        
-    }    
-    public int equals()
-    {
-        
+    // --- Metodi per l'Interfaccia Grafica ---
+    
+    // Requisito UI-1.3
+    public List<Utente> getUtentiOrdinati() {
+        // Da implementare: ordinamento per Cognome poi Nome
+        return listutenti;
     }
     
+    public List<Utente> getLista() {
+        return listutenti;
+    }
 }
