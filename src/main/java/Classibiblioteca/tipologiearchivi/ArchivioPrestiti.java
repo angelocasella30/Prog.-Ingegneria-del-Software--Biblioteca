@@ -5,6 +5,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe Prestito
+ * @implements serializable
+ * 
+ * gestisce aggiuntaprestito e restituzione in archivioprestiti
+ */
+
 public class ArchivioPrestiti implements Serializable {
     
     
