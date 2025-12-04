@@ -4,6 +4,12 @@ import Classibiblioteca.Entità.Utente;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * Classe ArchivioUtenti 
+ * @implements serializable
+ * 
+ * gestisce aggiunta,elimina,ricerca e modifica in archivio utenti
+ */
 
 public class ArchivioUtenti implements Serializable {
     
