@@ -5,6 +5,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe Libro 
+ * @implements serializable
+ * 
+ * rappresenta libro con dettagli, get e set di data
+ */
 public class Libro implements Serializable {
     
 
@@ -66,7 +72,11 @@ public class Libro implements Serializable {
     public boolean isDisponibile() {
         return false; // Da implementare
     }
-
+/**
+ * @override
+ * @return restituisce stringa libro con titolo, autore, anno, isbn e copie
+ */
+    
     @Override
     public String toString() {
         return "Libro{" + "titolo=" + titolo + ", autore=" + autore + ", datapubbl=" + datapubbl + ", ISBN=" + ISBN + ", numerocopie=" + numerocopie + '}';
