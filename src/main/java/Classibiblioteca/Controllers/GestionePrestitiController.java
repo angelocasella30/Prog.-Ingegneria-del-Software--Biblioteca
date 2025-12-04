@@ -9,6 +9,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
+/**
+ * Controller che gestisce operazioni sui prestiti
+ * come la gestione di nuovo prestito e restituzione
+ */
+
 public class GestionePrestitiController {
 
     @FXML
@@ -32,21 +37,43 @@ public class GestionePrestitiController {
     private ArchivioPrestiti archivioPrestiti;
     private ArchivioLibri archivioLibri; // Serve per restituire le copie
 
+/**
+ * Metodo initData
+ * 
+ * collega archiviolibri e archivioprestiti
+ */
     public void initData(ArchivioPrestiti archivioP, ArchivioLibri archivioL) {
         this.archivioPrestiti = archivioP;
         this.archivioLibri = archivioL;
     }
-
+/**
+ * Metodo initialize
+ * 
+ * inizializza la vista tabella con dati archivioprestiti e archiviolibri
+ * 
+ */
+    
     @FXML
     public void initialize() {
         // TODO: Collegare colonne e impostare RowFactory per il colore rosso
     }
-
+/**
+ * Metodo handleNuovoPrestito gestisce la richiesta di prestito
+ * 
+ * gestisce il form prestito, e il controllo di disponibilità copie
+ * e numero di libri in prestito per utente
+ */
+    
     @FXML
     void handleNuovoPrestito(ActionEvent event) {
         // TODO: Aprire popup nuovo prestito (UC-9)
     }
-
+/**
+ * Metodo handleRestituzione gestisce la richiesta di restituzione
+ * 
+ * gestisce il form restituzione, e aggiornamento dataritorno
+ */
+    
     @FXML
     void handleRestituzione(ActionEvent event) {
         // TODO: Gestire restituzione (UC-11)
