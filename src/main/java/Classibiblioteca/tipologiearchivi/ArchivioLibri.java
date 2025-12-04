@@ -5,6 +5,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe ArchivioLibri
+ * @implements serializable
+ * 
+ * gestisce aggiunta,elimina,crea e modifca libro in archivio
+ */
 public class ArchivioLibri implements Serializable {
     
     
