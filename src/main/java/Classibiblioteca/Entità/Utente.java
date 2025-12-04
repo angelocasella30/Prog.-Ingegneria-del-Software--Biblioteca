@@ -8,7 +8,12 @@ package Classibiblioteca.Entità;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Classe Utente 
+ * @implements serializable
+ * 
+ * rappresenta utente con dettagli, get e set di data
+ */
 public class Utente implements Serializable {
 
     private String nome;
@@ -76,7 +81,11 @@ public class Utente implements Serializable {
     public boolean puoRichiederePrestito() {
         return false; // Da implementare
     }
-
+/**
+ * @override
+ * @return restituisce stringa utente con nome,cognome,matricola,email
+ */
+    
     @Override
     public String toString() {
         return "Utente{" + "nome=" + nome + ", cognome=" + cognome + ", matricola=" + matricola + ", email=" + email + '}';
