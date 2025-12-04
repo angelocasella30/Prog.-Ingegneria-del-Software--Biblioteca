@@ -104,7 +104,11 @@ public class Prestito implements Serializable {
     public void chiudiPrestito() {
         // Da implementare
     }
-
+/**
+ * @override
+ * @return restituisce stringa prestito con matricola,isbn e scadenza
+ */
+    
     @Override
     public String toString() {
         return "Prestito{" + "matricola=" + matricola + ", ISBN=" + ISBN + ", scadenza=" + dataScadenzaPrevista + '}';
