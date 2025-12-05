@@ -19,6 +19,7 @@ public class Libro implements Serializable {
     private LocalDate datapubbl;
     private final String ISBN;
     private int numerocopie;
+    private int copieprestate;
 
     public Libro(String titolo, LocalDate datapubbl, String ISBN, int numerocopie) {
         this.titolo = titolo;
@@ -26,6 +27,7 @@ public class Libro implements Serializable {
         this.datapubbl = datapubbl;
         this.ISBN = ISBN;
         this.numerocopie = numerocopie;
+        this.copieprestate=0;
     }
 
     // --- Getter e Setter ---
@@ -71,6 +73,12 @@ public class Libro implements Serializable {
     // Prototipo: verifica se ci sono copie disponibili
     public boolean isDisponibile() {
         return false; // Da implementare
+    }
+    
+    // Prototipo: verifica se ci sono delle copie prestate
+    public boolean isPrestato()
+    {
+        return this.copieprestate!=0;
     }
 /**
  * @override

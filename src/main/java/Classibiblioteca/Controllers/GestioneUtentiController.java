@@ -59,7 +59,7 @@ public class GestioneUtentiController {
  */
     
     @FXML
-    void handleCerca(ActionEvent event) {
+    void handleCercaUtente(ActionEvent event) {
         // TODO: Implementare ricerca (UC-8)
     }
 /**
@@ -69,7 +69,7 @@ public class GestioneUtentiController {
  */
     
     @FXML
-    void handleReset(ActionEvent event) {
+    void handleResetUtenti(ActionEvent event) {
         // TODO: Mostra tutti
     }
 /**
@@ -80,7 +80,7 @@ public class GestioneUtentiController {
  */
     
     @FXML
-    void handleNuovo(ActionEvent event) {
+    void handleCreaUtente(ActionEvent event) {
         // TODO: Nuovo utente (UC-5)
     }
 /**
@@ -90,7 +90,7 @@ public class GestioneUtentiController {
  */
     
     @FXML
-    void handleModifica(ActionEvent event) {
+    void handleModificaUtente(ActionEvent event) {
         // TODO: Modifica utente (UC-6)
     }
 
@@ -102,7 +102,7 @@ public class GestioneUtentiController {
  */
 
     @FXML
-    void handleElimina(ActionEvent event) {
+    void handleEliminaUtente(ActionEvent event) {
         // TODO: Elimina utente (UC-7)
     }
 }

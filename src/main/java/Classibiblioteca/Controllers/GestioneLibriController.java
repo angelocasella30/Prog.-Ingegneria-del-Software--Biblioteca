@@ -64,7 +64,7 @@ public class GestioneLibriController {
  */
 
     @FXML
-    void handleCerca(ActionEvent event) {
+    void handleCercaLibro(ActionEvent event) {
         // TODO: Implementare ricerca (UC-4)
     }
 /**
@@ -74,7 +74,7 @@ public class GestioneLibriController {
  */
     
     @FXML
-    void handleReset(ActionEvent event) {
+    void handleResetLibro(ActionEvent event) {
         // TODO: Resettare filtri e mostrare tutto
     }
 /**
@@ -85,7 +85,7 @@ public class GestioneLibriController {
  */
     
     @FXML
-    void handleNuovo(ActionEvent event) {
+    void handleCreaLibro(ActionEvent event) {
         // TODO: Aprire popup nuovo libro (UC-1)
     }
 /**
@@ -95,7 +95,7 @@ public class GestioneLibriController {
  */
     
     @FXML
-    void handleModifica(ActionEvent event) {
+    void handleModificaLibro(ActionEvent event) {
         // TODO: Aprire popup modifica libro (UC-2)
     }
 /**
@@ -106,7 +106,9 @@ public class GestioneLibriController {
  */
     
     @FXML
-    void handleElimina(ActionEvent event) {
+    void handleEliminaLibro(ActionEvent event) {
         // TODO: Eliminare libro selezionato (UC-3)
     }
+    
+    
 }

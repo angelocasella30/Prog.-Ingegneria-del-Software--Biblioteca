@@ -27,7 +27,7 @@ public class ArchivioUtenti implements Serializable {
         listutenti.add(x);
     }
     
-    public boolean eliminaUtente(String matricola) {
+    public boolean eliminaUtente(Utente x) {
         // Da implementare
         return false;
     }

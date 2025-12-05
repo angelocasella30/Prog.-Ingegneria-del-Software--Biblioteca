@@ -81,6 +81,11 @@ public class Utente implements Serializable {
     public boolean puoRichiederePrestito() {
         return false; // Da implementare
     }
+    
+    public boolean verificaPrestitiAttivi()
+    {
+        return this.prestitiattivi==null;
+    }
 /**
  * @override
  * @return restituisce stringa utente con nome,cognome,matricola,email
