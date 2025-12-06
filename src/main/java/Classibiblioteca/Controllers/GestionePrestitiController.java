@@ -83,4 +83,9 @@ public class GestionePrestitiController {
     public void handleVisualizzaPrestiti() {
         // da completare mostra la lista
     }
+    
+    @FXML
+    public void handleCercaPrestiti() {
+        // da completare mostra la lista
+    }
 }
