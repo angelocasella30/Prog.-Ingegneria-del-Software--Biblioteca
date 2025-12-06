@@ -40,7 +40,10 @@ public class ArchivioUtenti implements Serializable {
         // Da implementare
         return null;
     }
-    
+    public boolean aggiornaUtenti(String nome,String cognome) {
+    // da completare
+    return false;
+    }
     // --- Metodi per la Ricerca (UC-8) ---
     
     public List<Utente> ricercaUtente(String keyword) {
