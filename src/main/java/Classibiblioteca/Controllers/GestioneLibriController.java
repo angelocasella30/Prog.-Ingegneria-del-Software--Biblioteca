@@ -16,7 +16,25 @@ public class GestioneLibriController {
 
     @FXML
     private TextField txtRicerca;
-
+    
+    @FXML
+    private TextField fldTitolo;
+    
+    @FXML
+    private TextField fldAutori;
+    
+    @FXML
+    private TextField fldAnno;
+    
+    @FXML
+    private TextField fldISBN;
+    
+    @FXML
+    private TextField fldCopieDisponibile;
+    
+    @FXML
+    private TextField fldCopiePrestate;
+    
     @FXML
     private TableView<Libro> tableLibri;
 
@@ -36,6 +54,14 @@ public class GestioneLibriController {
     private TableColumn<Libro, Integer> colCopie;
 
     private ArchivioLibri archivioLibri;
+    
+    private boolean validateFormLibri() {
+    String titolo = fldTitolo.getText();
+    String isbn = fldISBN.getText();
+
+    //da completare
+    return true;
+    }
 
 /**
  * Metodo initData
@@ -110,5 +136,11 @@ public class GestioneLibriController {
         // TODO: Eliminare libro selezionato (UC-3)
     }
     
+    
+    @FXML
+    void handleSalvaFormLibro(ActionEvent event) {
+        if (!validateFormLibri()) return;
+        // da completare passa valori ad archivio
+    }
     
 }

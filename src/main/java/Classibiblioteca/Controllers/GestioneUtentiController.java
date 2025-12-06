@@ -17,7 +17,19 @@ public class GestioneUtentiController {
 
     @FXML
     private TextField txtRicerca;
-
+    
+    @FXML
+    private TextField fldNome;
+    
+    @FXML
+    private TextField fldCognome;
+    
+    @FXML
+    private TextField fldEmail;
+    
+    @FXML
+    private TextField fldMatricola;
+    
     @FXML
     private TableView<Utente> tableUtenti;
 
@@ -35,6 +47,15 @@ public class GestioneUtentiController {
 
     private ArchivioUtenti archivioUtenti;
 
+    private boolean validateFormUtenti() {
+    String nome = fldNome.getText();
+    String cognome = fldCognome.getText();
+    String email = fldEmail.getText();
+    String matricola = fldMatricola.getText();
+
+    //da completare
+    return true;
+    }
 /**
  * Metodo initData 
  * collega l'archivio e carica i dati
@@ -104,5 +125,11 @@ public class GestioneUtentiController {
     @FXML
     void handleEliminaUtente(ActionEvent event) {
         // TODO: Elimina utente (UC-7)
+    }
+    
+    @FXML
+    void handleSalvaFormUtenti(ActionEvent event) {
+        if (!validateFormUtenti()) return;
+        // da completare passa valori ad archivio
     }
 }
