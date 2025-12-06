@@ -32,6 +32,10 @@ public class ArchivioUtenti implements Serializable {
         return false;
     }
     
+    public boolean existByMatricola(String matricola) {
+    // confronto se esiste  in archivio utente
+    }
+    
     public Utente getUtenteByMatricola(String matricola) {
         // Da implementare
         return null;

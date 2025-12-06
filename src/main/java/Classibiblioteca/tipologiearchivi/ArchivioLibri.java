@@ -32,6 +32,10 @@ public class ArchivioLibri implements Serializable {
         return false;
     }
     
+    public boolean existByIsbn(String ISBN) {
+    // confronto se esiste il libro per isbn in archivio
+    }
+    
     // Per la modifica, restituisci il libro e lo modifichi nel controller, oppure passi i dati qui
     public Libro getLibroByISBN(String ISBN) {
         // Da implementare
