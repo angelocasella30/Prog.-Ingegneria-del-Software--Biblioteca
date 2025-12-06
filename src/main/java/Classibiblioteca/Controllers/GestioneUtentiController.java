@@ -132,4 +132,9 @@ public class GestioneUtentiController {
         if (!validateFormUtenti()) return;
         // da completare passa valori ad archivio
     }
+    
+    @FXML
+    public void handleVisualizzaUtenti() {
+        // da completare mostra la lista
+    }
 }

@@ -78,4 +78,9 @@ public class GestionePrestitiController {
     void handleRestituzione(ActionEvent event) {
         // TODO: Gestire restituzione (UC-11)
     }
+    
+    @FXML
+    public void handleVisualizzaPrestiti() {
+        // da completare mostra la lista
+    }
 }

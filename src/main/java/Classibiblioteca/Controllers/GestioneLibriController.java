@@ -143,4 +143,8 @@ public class GestioneLibriController {
         // da completare passa valori ad archivio
     }
     
+    @FXML
+    public void handleVisualizzaLibri() {
+        // da completare mostra la lista
+    }
 }
