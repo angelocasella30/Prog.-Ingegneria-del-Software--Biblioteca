@@ -1,6 +1,6 @@
 package Classibiblioteca.tipologiearchivi;
 
-import Classibiblioteca.Entità.Libro;
+import Classibiblioteca.Entita.Libro;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

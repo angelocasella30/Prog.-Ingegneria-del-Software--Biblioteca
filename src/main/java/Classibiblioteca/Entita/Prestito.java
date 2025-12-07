@@ -1,4 +1,4 @@
-package Classibiblioteca.Entità;
+package Classibiblioteca.Entita;
 
 import java.io.Serializable;
 import java.time.LocalDate;

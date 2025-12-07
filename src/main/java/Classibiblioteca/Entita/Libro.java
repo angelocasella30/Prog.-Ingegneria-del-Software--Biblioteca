@@ -1,4 +1,4 @@
-package Classibiblioteca.Entità;
+package Classibiblioteca.Entita;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -120,11 +120,13 @@ public class Libro implements Serializable {
     /**
      * Decrementa il contatore delle copie prestate (restituzione).
      */
-    public void restituisci() 
+    public boolean restituisci() 
     {
         if (copiePrestate > 0) {
             copiePrestate--;
+            return true;
         }
+        return false;
     }
     
     /**
