@@ -1,6 +1,6 @@
 package Classibiblioteca.tipologiearchivi;
 
-import Classibiblioteca.Entit√†.Libro;
+import Classibiblioteca.Entit‡.Libro;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class ArchivioLibri implements Serializable {
     private List<Libro> listlibro;
     
     public ArchivioLibri() {
-        this.listlibro = new ArrayList<>();
+        this.listlibro = new ArrayList <>();
     }
     
     // --- Gestione Lista ---
@@ -34,6 +34,7 @@ public class ArchivioLibri implements Serializable {
     
     public boolean existByIsbn(String ISBN) 
     {
+        return false;
     // confronto se esiste il libro per isbn in archivio
     }
     
