@@ -2,16 +2,17 @@ package Classibiblioteca.Entità;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Prestito implements Serializable {
 
-
+    private static final long serialVersionUID = 1L;
     private String emailuser;
     private String matricola;
     private String titololibro;
     private String ISBN;
     
-    private LocalDate datainizio;
+    private LocalDate dataInizio;
     private LocalDate dataScadenzaPrevista;      
     private LocalDate dataRestituzioneEffettiva; 
 
@@ -20,7 +21,7 @@ public class Prestito implements Serializable {
         this.matricola = matricola;
         this.titololibro = titololibro;
         this.ISBN = ISBN;
-        this.datainizio = datainizio;
+        this.dataInizio = datainizio;
         this.dataScadenzaPrevista = dataScadenzaPrevista;
         this.dataRestituzioneEffettiva = null; 
     }
@@ -60,11 +61,11 @@ public class Prestito implements Serializable {
     }
 
     public LocalDate getDatainizio() {
-        return datainizio;
+        return dataInizio;
     }
 
     public void setDatainizio(LocalDate datainizio) {
-        this.datainizio = datainizio;
+        this.dataInizio = datainizio;
     }
 
     public LocalDate getDataScadenzaPrevista() {
@@ -79,9 +80,6 @@ public class Prestito implements Serializable {
         return dataRestituzioneEffettiva;
     }
 
-    public void setDataRestituzioneEffettiva(LocalDate dataRestituzioneEffettiva) {
-        this.dataRestituzioneEffettiva = dataRestituzioneEffettiva;
-    }
 
     // --- Metodo per la UI (Stato) ---
     // Questo serve alla TableView per la colonna "Stato"
@@ -89,28 +87,69 @@ public class Prestito implements Serializable {
         if (dataRestituzioneEffettiva != null) {
             return "Concluso";
         }
-        if (LocalDate.now().isAfter(dataScadenzaPrevista)) {
+        if (isInRitardo()) {
             return "IN RITARDO";
         }
         return "In Corso";
     }
 
-    // --- Metodi di Logica (Prototipi) ---
+    // --- Metodi di Logica  ---
+    /*
+    Verifica se il prestito è in ritardo oppure no. Il primo controllo
+    viene fatto per evitare il caso in cui il prestito sia già stato concluso
+    */
 
-    public boolean isInRitardo() {
-        return false; // Da implementare meglio se serve logica complessa
-    }
-
-    public void chiudiPrestito() {
-        // Da implementare
-    }
-/**
- * @override
- * @return restituisce stringa prestito con matricola,isbn e scadenza
- */
+    public boolean isInRitardo() 
+    {
+        if (dataRestituzioneEffettiva != null) 
+        {
+            return false; // Se l'ha restituito, non è in ritardo
+        }
+        return LocalDate.now().isAfter(dataScadenzaPrevista);    }
     
+      /*
+      Chiude il prestito impostando la data di restituzione a oggi.
+     */
+
+    public void chiudiPrestito() 
+    {
+        this.dataRestituzioneEffettiva = LocalDate.now();
+    }    
+
+    // --- Metodi per la ricerca ---
+
+       /*
+    Un prestito è uguale se il suo campo matricola isbn e data di inizio sono uguali contemporaneamente
+    */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Prestito prestito = (Prestito) o;
+        // Un prestito è unico per la combinazione: Utente + Libro + Data Inizio
+        // (Perché lo stesso utente può prendere lo stesso libro in date diverse)
+        return this.matricola.equals(prestito.matricola) &&
+               this.ISBN.equals(prestito.ISBN) &&
+               this.dataInizio.equals(prestito.dataInizio);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(matricola, ISBN, dataInizio);
+    }
+
     @Override
     public String toString() {
-        return "Prestito{" + "matricola=" + matricola + ", ISBN=" + ISBN + ", scadenza=" + dataScadenzaPrevista + '}';
+        StringBuilder sb = new StringBuilder();
+ 
+        sb.append("Prestito {");
+        sb.append("Matricola='").append(matricola).append('\'');
+        sb.append(", ISBN='").append(ISBN).append('\'');
+        sb.append(", DataInizio=").append(dataInizio);
+        sb.append(", Scadenza=").append(dataScadenzaPrevista);
+        sb.append(", Stato=").append(getStato());
+        sb.append('}');
+         //Modificarla agigungendo gli spazi a capo credo
+        return sb.toString();
     }
 }
