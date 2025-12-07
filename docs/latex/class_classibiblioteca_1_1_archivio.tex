@@ -1,0 +1,82 @@
+\doxysection{Classibiblioteca.\+Archivio Class Reference}
+\hypertarget{class_classibiblioteca_1_1_archivio}{}\label{class_classibiblioteca_1_1_archivio}\index{Classibiblioteca.Archivio@{Classibiblioteca.Archivio}}
+Inheritance diagram for Classibiblioteca.\+Archivio\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_classibiblioteca_1_1_archivio}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_classibiblioteca_1_1_archivio_a88171acfea92c7f929b010c842e59220}\label{class_classibiblioteca_1_1_archivio_a88171acfea92c7f929b010c842e59220} 
+{\bfseries Archivio} (\mbox{\hyperlink{class_classibiblioteca_1_1tipologiearchivi_1_1_archivio_utenti}{Archivio\+Utenti}} listautenti, \mbox{\hyperlink{class_classibiblioteca_1_1tipologiearchivi_1_1_archivio_libri}{Archivio\+Libri}} listalibri, \mbox{\hyperlink{class_classibiblioteca_1_1tipologiearchivi_1_1_archivio_prestiti}{Archivio\+Prestiti}} listaprestiti)
+\item 
+\Hypertarget{class_classibiblioteca_1_1_archivio_a09c45471fd7ff36c44e5920defaf0591}\label{class_classibiblioteca_1_1_archivio_a09c45471fd7ff36c44e5920defaf0591} 
+\mbox{\hyperlink{class_classibiblioteca_1_1tipologiearchivi_1_1_archivio_utenti}{Archivio\+Utenti}} {\bfseries get\+Archivio\+Utenti} ()
+\item 
+\Hypertarget{class_classibiblioteca_1_1_archivio_a64682638e670815b49b1839f53dac655}\label{class_classibiblioteca_1_1_archivio_a64682638e670815b49b1839f53dac655} 
+\mbox{\hyperlink{class_classibiblioteca_1_1tipologiearchivi_1_1_archivio_libri}{Archivio\+Libri}} {\bfseries get\+Archivio\+Libri} ()
+\item 
+\Hypertarget{class_classibiblioteca_1_1_archivio_a79021dc82bc7096ca958a549306cbece}\label{class_classibiblioteca_1_1_archivio_a79021dc82bc7096ca958a549306cbece} 
+\mbox{\hyperlink{class_classibiblioteca_1_1tipologiearchivi_1_1_archivio_prestiti}{Archivio\+Prestiti}} {\bfseries get\+Archivio\+Prestiti} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_classibiblioteca_1_1_archivio_acfbb5ade9341b3d7cd31da8dd65af1fd}{salva\+Archivio}} (Archivio archivio, String filepath)  throws IOException 
+\item 
+static Archivio \mbox{\hyperlink{class_classibiblioteca_1_1_archivio_ac4d7fd65c5540b28b260043e9157e804}{carica\+Archivio}} (String filepath)  throws IOException, Class\+Not\+Found\+Exception 
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe Facade che aggrega tutti gli archivi del sistema. Gestisce la persistenza dei dati su file (DF-\/1.\+4). 
+
+\label{doc-func-members}
+\Hypertarget{class_classibiblioteca_1_1_archivio_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_classibiblioteca_1_1_archivio_ac4d7fd65c5540b28b260043e9157e804}\index{Classibiblioteca.Archivio@{Classibiblioteca.Archivio}!caricaArchivio@{caricaArchivio}}
+\index{caricaArchivio@{caricaArchivio}!Classibiblioteca.Archivio@{Classibiblioteca.Archivio}}
+\doxysubsubsection{\texorpdfstring{caricaArchivio()}{caricaArchivio()}}
+{\footnotesize\ttfamily \label{class_classibiblioteca_1_1_archivio_ac4d7fd65c5540b28b260043e9157e804} 
+Archivio Classibiblioteca.\+Archivio.\+carica\+Archivio (\begin{DoxyParamCaption}\item[{String}]{filepath}{}\end{DoxyParamCaption}) throws IOException, Class\+Not\+Found\+Exception\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Carica lo stato dell\textquotesingle{}archivio da un file binario. 
+\begin{DoxyParams}{Parameters}
+{\em filepath} & Il percorso del file da leggere. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+L\textquotesingle{}oggetto \doxylink{class_classibiblioteca_1_1_archivio}{Archivio} ricostruito. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em IOException} & Se il file non esiste o non è leggibile. \\
+\hline
+{\em Class\+Not\+Found\+Exception} & Se la classe nel file non corrisponde al codice. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_classibiblioteca_1_1_archivio_acfbb5ade9341b3d7cd31da8dd65af1fd}\index{Classibiblioteca.Archivio@{Classibiblioteca.Archivio}!salvaArchivio@{salvaArchivio}}
+\index{salvaArchivio@{salvaArchivio}!Classibiblioteca.Archivio@{Classibiblioteca.Archivio}}
+\doxysubsubsection{\texorpdfstring{salvaArchivio()}{salvaArchivio()}}
+{\footnotesize\ttfamily \label{class_classibiblioteca_1_1_archivio_acfbb5ade9341b3d7cd31da8dd65af1fd} 
+void Classibiblioteca.\+Archivio.\+salva\+Archivio (\begin{DoxyParamCaption}\item[{Archivio}]{archivio}{, }\item[{String}]{filepath}{}\end{DoxyParamCaption}) throws IOException\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Salva l\textquotesingle{}intero stato dell\textquotesingle{}archivio su un file binario. 
+\begin{DoxyParams}{Parameters}
+{\em archivio} & L\textquotesingle{}oggetto da salvare. \\
+\hline
+{\em filepath} & Il percorso del file. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em IOException} & Se ci sono errori di scrittura su disco. \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/\+Classibiblioteca/Archivio.\+java\end{DoxyCompactItemize}
