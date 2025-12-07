@@ -25,7 +25,7 @@ public class LibroTest
         System.out.println("Test Disponibilità e Prestito");
         
         // 1. Creo un libro con 2 copie totali
-        Libro libro = new Libro("Il signore degli anelli", LocalDate.now(), "888-123", 2);
+        Libro libro = new Libro("Il signore degli anelli", LocalDate.now(), "888-153", 2);
         
         // All'inizio deve essere disponibile
         assertTrue(libro.isDisponibile(), "Appena creato deve essere disponibile");
