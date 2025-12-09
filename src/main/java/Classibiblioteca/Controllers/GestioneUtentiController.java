@@ -2,6 +2,10 @@ package Classibiblioteca.Controllers;
 
 import Classibiblioteca.Entita.Utente;
 import Classibiblioteca.tipologiearchivi.ArchivioUtenti;
+import javafx.collections.transformation.SortedList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -34,16 +38,19 @@ public class GestioneUtentiController {
     private TableView<Utente> tableUtenti;
 
     @FXML
-    private TableColumn<Utente, String> colMatricola;
+    private Button btnCercaUtente;
 
     @FXML
-    private TableColumn<Utente, String> colCognome;
+    private TableColumn<Utente, String> clmnMatricolaUtente;
 
     @FXML
-    private TableColumn<Utente, String> colNome;
+    private TableColumn<Utente, String> clmnCognomeUtente;
 
     @FXML
-    private TableColumn<Utente, String> colEmail;
+    private TableColumn<Utente, String> clmnNomeUtente;
+
+    @FXML
+    private TableColumn<Utente, String> clmnEmailUtente;
 
     private ArchivioUtenti archivioUtenti;
 
@@ -71,6 +78,14 @@ public class GestioneUtentiController {
     @FXML
     public void initialize() {
         // TODO: Collegare colonne
+        clmnMatricolaUtente.setCellValueFactory(new PropertyValueFactory<>("matricola"));
+        clmnCognomeUtente.setCellValueFactory(new PropertyValueFactory<>("cognome"));
+        clmnNomeUtente.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        clmnEmailUtente.setCellValueFactory(new PropertyValueFactory<>("email"));
+        if (tableUtenti.getColumns().isEmpty()) {
+            tableUtenti.getColumns().addAll(clmnMatricolaUtente,clmnCognomeUtente,clmnNomeUtente,clmnEmailUtente);
+    }
+        tableUtenti.setItems(FXCollections.observableArrayList());
     }
 /**
  * Metodo handleCerca gestisce l'evento ricerca utente
@@ -81,7 +96,29 @@ public class GestioneUtentiController {
     
     @FXML
     void handleCercaUtente(ActionEvent event) {
-        // TODO: Implementare ricerca (UC-8)
+        if (ArchivioUtenti == null) return; 
+        
+        String cercamatricolaUtente = fldMatricola.getText().trim().toLowerCase();
+        String cercacognomeUtente = fldCognome.getText().trim().toLowerCase();
+
+        if (cercamatricolaUtente.isEmpty() && cercacognomeUtente.isEmpty()) {
+            return;
+        }
+        ObservableList<Utente> listaUtenti = FXCollections.observableArrayList(ArchivioUtenti.getUtentiOrdinati());
+
+        FilteredList<Utente> filteredList = new FilteredList<>(listaUtenti, utente -> true);
+
+        filteredList.setPredicate(utente -> {
+            boolean matricolacheckcampo = cercamatricolaUtente.isEmpty() || utente.getMatricola().toLowerCase().contains(cercamatricolaUtente);
+            boolean cognomecheckcampo = cercacognomeUtente.isEmpty() || utente.getCognome().toLowerCase().contains(cercacognomeUtente);
+            return matricolacheckcampo || cognomecheckcampo;
+        });
+
+        SortedList<Utente> sortedList = new SortedList<>(filteredList);
+        sortedList.comparatorProperty().bind(tableUtenti.comparatorProperty());
+        tableUtenti.setItems(sortedList);
+       }
+
     }
 /**
  * Metodo handleReset gestisce l'evento reset
