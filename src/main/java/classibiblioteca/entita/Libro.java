@@ -129,6 +129,15 @@ public class Libro implements Serializable {
         return false;
     }
     
+    /*
+    Metodo aggiunto per avere un ordinamento basato sul primo autore più funzionale
+    */
+    public String getPrimoAutore() 
+    {
+    return (autori != null && !autori.isEmpty()) ? autori.get(0) : "";
+        
+    }
+    
     /**
      * Verifica se ci sono delle copie attualmente fuori in prestito.
      */

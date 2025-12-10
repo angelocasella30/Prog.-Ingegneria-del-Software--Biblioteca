@@ -2,75 +2,170 @@ package classibiblio.tipologiearchivi;
 
 import classibiblioteca.entita.Libro;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
  * Classe ArchivioLibri
  * @implements serializable
- * 
- * gestisce aggiunta,elimina,crea e modifca libro in archivio
+ * * gestisce aggiunta, elimina, crea e modifica libro in archivio
  */
 public class ArchivioLibri implements Serializable {
-    
-    
-    private List<Libro> listlibro;
-    
+
+    private static final long serialVersionUID = 1L;
+    private final List<Libro> listlibro;
+
     public ArchivioLibri() {
-        this.listlibro = new ArrayList <>();
+        this.listlibro = new ArrayList<>();
     }
-    
+
     // --- Gestione Lista ---
-    
-    public void aggiungiLibro(Libro x) {
-        // Da implementare: controllo duplicati ISBN
-        listlibro.add(x);
+
+    public void aggiungiLibro(Libro x)
+    {
+        // 1. Controllo campi vuoti
+        if (x.getTitolo() == null || x.getTitolo().trim().isEmpty() ||
+            x.getISBN() == null || x.getISBN().trim().isEmpty() ||
+            x.getAutori() == null || x.getAutori().isEmpty() ||
+            x.getDatapubbl() == null) 
+        {
+            System.out.println("Errore: Impossibile salvare un libro con campi vuoti.");
+            return; 
+        }
+
+        // 2. Controllo duplicati ISBN
+        if (!existByIsbn(x.getISBN())) 
+        {
+            listlibro.add(x);
+        } else {
+            System.out.println("Errore: Libro con ISBN " + x.getISBN() + " già presente.");
+        }
     }
-    
-    public boolean eliminaLibro(String ISBN) {
-        // Da implementare
+
+    // --- MODIFICA QUI ---
+    public boolean eliminaLibro(String ISBN) 
+    {
+        Libro daEliminare = getLibroByISBN(ISBN);
+        if (daEliminare != null) {
+            
+            // CONTROLLO AGGIUNTO: Se ci sono copie prestate, blocco l'eliminazione
+            if (daEliminare.getCopiePrestate() > 0) {
+                System.out.println("Attenzione: Impossibile eliminare il libro (ISBN: " + ISBN + "). Ci sono copie in prestito.");
+                return false; 
+            }
+            
+            return listlibro.remove(daEliminare);
+        }
         return false;
     }
-    
+    // --------------------
+
     public boolean existByIsbn(String ISBN) 
     {
+        if (ISBN == null) return false;
+        for(Libro l : listlibro) {
+            if (l.getISBN().equalsIgnoreCase(ISBN))
+            {
+                return true;
+            }
+        }
         return false;
-    // confronto se esiste il libro per isbn in archivio
-    }
-    
-    public boolean aggiornaLibro(String titolo) {
-    // da completare
-    return false;
     }
 
-    // Per la modifica, restituisci il libro e lo modifichi nel controller, oppure passi i dati qui
-    public Libro getLibroByISBN(String ISBN) {
-        // Da implementare
+    public boolean aggiornaLibro(String ISBN, String nuovoTitolo, List<String> nuoviAutori, LocalDate nuovaData, int nuoveCopie) 
+    {
+        // 1 Controllo che i nuovi dati non siano vuoti
+        if (nuovoTitolo == null || nuovoTitolo.trim().isEmpty() ||
+            nuoviAutori == null || nuoviAutori.isEmpty() ||
+            nuovaData == null) 
+        {
+            return false; 
+        }
+
+        Libro l = getLibroByISBN(ISBN);
+        if (l != null) 
+        {
+            l.setTitolo(nuovoTitolo);
+            l.setAutori(nuoviAutori);
+            l.setDatapubbl(nuovaData);
+            l.setNumeroCopie(nuoveCopie);
+            return true;
+        }
+        return false;
+    }
+
+    public Libro getLibroByISBN(String ISBN)
+    {
+        if (ISBN == null) return null;
+        for (Libro l : listlibro) 
+        {
+            if (l.getISBN().equalsIgnoreCase(ISBN)) 
+            {
+                return l;
+            }
+        }
         return null;
     }
-    
+
     // --- Metodi per la Ricerca (UC-4) ---
-    
-    public List<Libro> ricercaLibro(String keyword) {
-        // Da implementare (ricerca per titolo, autore, ISBN)
-        return new ArrayList<>(); 
-    }
-    
-    // --- Metodi per l'Interfaccia Grafica (Ordinamento) ---
-    
-    // Requisito UI-1.1
-    public List<Libro> getLibriPerTitolo() {
-        // Da implementare: return lista ordinata per titolo
-        return listlibro; 
+
+    public List<Libro> ricercaLibro(String keyword)
+    {
+        List<Libro> risultati = new ArrayList<>();
+        
+        if (keyword == null || keyword.isEmpty()) 
+        {
+            return risultati;
+        }
+
+        String cerca = keyword.toLowerCase();
+
+        for (Libro l : listlibro) 
+        {
+            boolean matchTitolo = l.getTitolo().toLowerCase().contains(cerca);
+            boolean matchISBN = l.getISBN().toLowerCase().contains(cerca);
+            
+            boolean matchAutore = false;
+            if (l.getAutori() != null) 
+            {
+                for (String autore : l.getAutori()) 
+                {
+                    if (autore.toLowerCase().contains(cerca)) 
+                    {
+                        matchAutore = true;
+                        break;
+                    }
+                }
+            }
+
+            if (matchTitolo || matchISBN || matchAutore) 
+            {
+                risultati.add(l);
+            }
+        }
+        return risultati; 
     }
 
-    // Requisito UI-1.2
-    public List<Libro> getLibriPerAutore() {
-        // Da implementare: return lista ordinata per autore
-        return listlibro;
+    // --- Metodi per l'Interfaccia Grafica (Ordinamento) ---
+
+    public List<Libro> getLibriPerTitolo() 
+    {
+        List<Libro> ordinata = new ArrayList<>(listlibro);
+        ordinata.sort(Comparator.comparing(Libro::getTitolo, String.CASE_INSENSITIVE_ORDER));
+        return ordinata; 
     }
-    
-    public List<Libro> getLista() {
+
+    public List<Libro> getLibriPerAutore() 
+    {
+      List<Libro> ordinata = new ArrayList<>(listlibro);
+        ordinata.sort(Comparator.comparing(Libro::getPrimoAutore, String.CASE_INSENSITIVE_ORDER));
+        return ordinata;
+    }
+
+    public List<Libro> getLista() 
+    {
         return listlibro;
     }
 }

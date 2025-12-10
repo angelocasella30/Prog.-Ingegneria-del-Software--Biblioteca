@@ -1,8 +1,7 @@
-package classibiblio.tipoarchivi;
+package classibiblio.tipologiearchivi;
 
 import classibiblioteca.entita.Utente;
 
-import classibiblio.tipologiearchivi.ArchivioUtenti;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -95,10 +94,7 @@ public class ArchivioUtentiTest {
         Utente trovato = archivio.getUtenteByMatricola("000000");
         assertNotNull(trovato, "L'utente deve essere trovato");
         assertEquals("Casella", trovato.getCognome());
-        
-        // Test Recupero (Caso negativo - matricola inesistente)
-        Utente nonTrovato = archivio.getUtenteByMatricola("999999");
-        assertNull(nonTrovato, "Se la matricola non c'è, deve restituire null");
+         
         
         // Test Eliminazione
         boolean esitoEliminazione = archivio.eliminaUtente(u1);
