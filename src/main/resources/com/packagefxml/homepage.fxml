@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutY="-7.0" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <SplitPane dividerPositions="0.10051107325383304" layoutY="6.0" orientation="VERTICAL" prefHeight="394.0" prefWidth="600.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <Button fx:id="btnEsporta" layoutX="493.0" layoutY="5.0" mnemonicParsing="false" text="Esporta" />
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <TabPane prefHeight="349.0" prefWidth="597.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab fx:id="tabLIBRI" text="LIBRI">
+                                 <content>
+                                    <SplitPane dividerPositions="0.09479166666666666" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                                      <items>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="42.0" prefWidth="597.0">
+                                             <children>
+                                                <TextField fx:id="fldCercaISBNLibro" layoutX="249.0" layoutY="1.0" prefHeight="25.0" prefWidth="107.0" text="ISBN..." />
+                                                <TextField fx:id="fldCercaAutoreLibro" layoutX="372.0" layoutY="1.0" prefHeight="25.0" prefWidth="107.0" text="Autore..." />
+                                                <TextField fx:id="fldCercaTitoloLibro" layoutX="122.0" layoutY="1.0" prefHeight="25.0" prefWidth="107.0" text="Titolo...." />
+                                                <Button fx:id="btnCercaLibro" layoutX="506.0" layoutY="1.0" mnemonicParsing="false" text="CercaLibro" />
+                                             </children>
+                                          </AnchorPane>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="278.0" prefWidth="597.0">
+                                             <children>
+                                                <SplitPane dividerPositions="0.16367713004484305" layoutY="5.0" prefHeight="282.0" prefWidth="597.0">
+                                                  <items>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                         <children>
+                                                            <VBox layoutX="11.0" layoutY="23.0" prefHeight="200.0" prefWidth="74.0">
+                                                               <children>
+                                                                  <Button fx:id="btnAggiungiLibro" mnemonicParsing="false" text="Aggiungi">
+                                                                     <VBox.margin>
+                                                                        <Insets top="10.0" />
+                                                                     </VBox.margin>
+                                                                  </Button>
+                                                                  <Button fx:id="btnModificaLibro" mnemonicParsing="false" text="Modifica">
+                                                                     <VBox.margin>
+                                                                        <Insets top="20.0" />
+                                                                     </VBox.margin>
+                                                                  </Button>
+                                                                  <Button fx:id="btnEliminaLibro" mnemonicParsing="false" text="Elimina">
+                                                                     <VBox.margin>
+                                                                        <Insets left="5.0" top="20.0" />
+                                                                     </VBox.margin>
+                                                                  </Button>
+                                                                  <Button fx:id="btnListaLibri" mnemonicParsing="false" text="Lista libri">
+                                                                     <VBox.margin>
+                                                                        <Insets top="20.0" />
+                                                                     </VBox.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="279.0" prefWidth="499.0">
+                                                         <children>
+                                                            <TableView fx:id="tableviewLibri" layoutY="-6.0" prefHeight="285.0" prefWidth="494.0">
+                                                              <columns>
+                                                                <TableColumn fx:id="clmnTitoloLibro" prefWidth="75.0" text="Titolo" />
+                                                                <TableColumn fx:id="clmnAutoreLibro" prefWidth="75.0" text="Autore" />
+                                                                  <TableColumn fx:id="clmnAnnoLibro" prefWidth="75.0" text="Anno" />
+                                                                  <TableColumn fx:id="clmnISBNLibro" prefWidth="75.0" text="ISBN" />
+                                                                  <TableColumn fx:id="clmnDispLibro" prefWidth="75.0" text="Disponib." />
+                                                                  <TableColumn fx:id="clmnPrestLibro" prefWidth="75.0" text="Prestati" />
+                                                              </columns>
+                                                            </TableView>
+                                                         </children>
+                                                      </AnchorPane>
+                                                  </items>
+                                                </SplitPane>
+                                             </children>
+                                          </AnchorPane>
+                                      </items>
+                                    </SplitPane>
+                                 </content>
+                              </Tab>
+                            <Tab fx:id="tabUTENTI" text="UTENTI">
+                                 <content>
+                                    <SplitPane dividerPositions="0.09479166666666666" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                                       <items>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="42.0" prefWidth="597.0">
+                                             <children>
+                                                <TextField fx:id="fldCercaMatricolaUtente" layoutX="249.0" layoutY="1.0" prefHeight="25.0" prefWidth="107.0" text="Matricola..." />
+                                                <TextField fx:id="fldCercaCognomeUtente" layoutX="372.0" layoutY="1.0" prefHeight="25.0" prefWidth="107.0" text="Cognome..." />
+                                                <Button fx:id="btnCercaUtente" layoutX="495.0" layoutY="1.0" mnemonicParsing="false" text="CercaUtente" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="278.0" prefWidth="597.0">
+                                             <children>
+                                                <SplitPane dividerPositions="0.14013452914798205" layoutY="5.0" prefHeight="282.0" prefWidth="597.0">
+                                                   <items>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="279.0" prefWidth="116.0">
+                                                         <children>
+                                                            <VBox layoutX="2.0" layoutY="23.0" prefHeight="200.0" prefWidth="88.0">
+                                                               <children>
+                                                                  <Button fx:id="btnCreaUtente" mnemonicParsing="false" text="Aggiungi">
+                                                                     <VBox.margin>
+                                                                        <Insets left="5.0" top="10.0" />
+                                                                     </VBox.margin>
+                                                                  </Button>
+                                                                  <Button fx:id="btnModificaUtente" mnemonicParsing="false" text="Modifica">
+                                                                     <VBox.margin>
+                                                                        <Insets left="5.0" top="20.0" />
+                                                                     </VBox.margin>
+                                                                  </Button>
+                                                                  <Button fx:id="btnEliminaUtente" mnemonicParsing="false" text="Elimina">
+                                                                     <VBox.margin>
+                                                                        <Insets left="10.0" top="20.0" />
+                                                                     </VBox.margin>
+                                                                  </Button>
+                                                                  <Button fx:id="btnListaUtente" mnemonicParsing="false" text="Lista Utenti">
+                                                                     <VBox.margin>
+                                                                        <Insets top="20.0" />
+                                                                     </VBox.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="279.0" prefWidth="479.0">
+                                                         <children>
+                                                            <TableView fx:id="tableviewUtenti" layoutY="-6.0" prefHeight="285.0" prefWidth="511.0">
+                                                               <columns>
+                                                                  <TableColumn fx:id="clmnNomeUtente" prefWidth="75.0" text="Nome" />
+                                                                  <TableColumn fx:id="clmnCognomeUtente" prefWidth="75.0" text="Cognome" />
+                                                                  <TableColumn fx:id="clmnMatricolaUtente" prefWidth="75.0" text="Matricola" />
+                                                                  <TableColumn fx:id="clmnEmailUtente" prefWidth="75.0" text="Email" />
+                                                                  <TableColumn fx:id="clmnLibro1Utente" prefWidth="75.0" text="Libro1" />
+                                                                  <TableColumn fx:id="clmnLibro2Utente" prefWidth="75.0" text="Libro2" />
+                                                                  <TableColumn fx:id="clmnLibro3Utente" prefWidth="75.0" text="Libro3" />
+                                                               </columns>
+                                                            </TableView>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </items>
+                                                </SplitPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </items>
+                                    </SplitPane>
+                                 </content>
+                              </Tab>
+                              <Tab fx:id="tabPrestiti" text="PRESTITI">
+                                 <content>
+                                    <SplitPane dividerPositions="0.09479166666666666" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                                       <items>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="42.0" prefWidth="597.0">
+                                             <children>
+                                                <TextField fx:id="fldMatricolaPrestiti" layoutX="249.0" layoutY="1.0" prefHeight="25.0" prefWidth="107.0" text="Matricola..." />
+                                                <TextField fx:id="fldISBNPrestiti" layoutX="372.0" layoutY="1.0" prefHeight="25.0" prefWidth="107.0" text="ISBN..." />
+                                                <Button fx:id="btnCercaPrestiti" layoutX="495.0" layoutY="1.0" mnemonicParsing="false" text="Cerca" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="278.0" prefWidth="597.0">
+                                             <children>
+                                                <SplitPane dividerPositions="0.22589686098654713" layoutY="5.0" prefHeight="282.0" prefWidth="597.0">
+                                                   <items>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="279.0" prefWidth="111.0">
+                                                         <children>
+                                                            <VBox layoutX="11.0" layoutY="23.0" prefHeight="200.0" prefWidth="111.0">
+                                                               <children>
+                                                                  <Button fx:id="btnCreaPrestiti" mnemonicParsing="false" text="Crea Prest">
+                                                                     <VBox.margin>
+                                                                        <Insets left="15.0" top="10.0" />
+                                                                     </VBox.margin>
+                                                                  </Button>
+                                                                  <Button fx:id="BtnRestituisciPrestiti" mnemonicParsing="false" text="Restituisci">
+                                                                     <VBox.margin>
+                                                                        <Insets left="15.0" top="20.0" />
+                                                                     </VBox.margin>
+                                                                  </Button>
+                                                                  <Button fx:id="BtnListaRestituiti" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" text="Lista Restituzioni">
+                                                                     <VBox.margin>
+                                                                        <Insets top="20.0" />
+                                                                     </VBox.margin>
+                                                                  </Button>
+                                                                  <Button fx:id="BtnListaPrestiti" mnemonicParsing="false" text="Lista Prestiti">
+                                                                     <VBox.margin>
+                                                                        <Insets left="15.0" top="20.0" />
+                                                                     </VBox.margin>
+                                                                  </Button>
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="279.0" prefWidth="499.0">
+                                                         <children>
+                                                            <TableView fx:id="tableviewPrestiti" layoutY="-6.0" prefHeight="285.0" prefWidth="494.0">
+                                                               <columns>
+                                                                  <TableColumn fx:id="clmnMatricolaPrestiti" prefWidth="75.0" text="Matricola" />
+                                                                  <TableColumn fx:id="clmnISBNPrestiti" prefWidth="75.0" text="ISBN" />
+                                                                  <TableColumn fx:id="clmnTitoloPrestiti" prefWidth="75.0" text="Titolo" />
+                                                                  <TableColumn fx:id="clmnInizioPrestiti" prefWidth="75.0" text="Data Inizio" />
+                                                                  <TableColumn fx:id="clmnFinePrestiti" prefWidth="75.0" text="Data Fine" />
+                                                                  <TableColumn fx:id="clmnRitardoPrestiti" prefWidth="75.0" text="Ritardo" />
+                                                               </columns>
+                                                            </TableView>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </items>
+                                                </SplitPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </items>
+                                    </SplitPane>
+                                 </content>
+                              </Tab>
+                          </tabs>
+                        </TabPane>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>
