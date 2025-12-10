@@ -1,0 +1,75 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+/* --- IMPOSTAZIONI GENERALI --- */
+.root {
+    /* Sfondo bianco pulito */
+    -fx-background-color: #FFFFFF;
+    /* Impostiamo Saira come font predefinito */
+    -fx-font-family: "Saira", "Arial", sans-serif; 
+    -fx-font-size: 14px;
+}
+
+/* --- TITOLO MACRO (Quello grosso della Home) --- */
+.titolo-home {
+    /* Il tuo Blu specifico: rgb(17, 85, 204) */
+    -fx-text-fill: rgb(17, 85, 204); 
+    -fx-font-size: 48px;  /* Molto grande */
+    -fx-font-weight: 800; /* Extra Bold (tipico di Saira) */
+    -fx-effect: none;     /* Niente ombre, stile flat pulito */
+}
+
+/* --- TITOLI NORMALI E LABEL --- */
+.label {
+    -fx-text-fill: #000000; /* Nero assoluto come richiesto */
+}
+
+/* Se vuoi distinguere i titoletti in grassetto */
+.label-bold {
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+
+/* --- BOTTONI (Uso il blu dei titoli per coerenza) --- */
+.button {
+    -fx-background-color: rgb(17, 85, 204); /* Blu Google */
+    -fx-text-fill: white;
+    -fx-background-radius: 4; /* Angoli leggermente smussati */
+    -fx-font-family: "Saira";
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-padding: 10 20;
+}
+
+/* Effetto Hover (quando passi sopra) */
+.button:hover {
+    -fx-background-color: rgb(13, 66, 158); /* Un blu leggermente più scuro */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 1);
+}
+
+/* Effetto Click */
+.button:pressed {
+    -fx-background-color: #000000; /* Diventa nero quando clicchi */
+}
+
+/* --- TABELLE (Stile Minimal) --- */
+.table-view {
+    -fx-base: #FFFFFF;
+    -fx-control-inner-background: #FFFFFF;
+    -fx-table-cell-border-color: #E0E0E0;
+    -fx-table-header-border-color: transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #FFFFFF;
+    -fx-border-bottom-color: #000000;
+    -fx-border-width: 0 0 2 0; /* Solo una linea nera sotto l'intestazione */
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #000000;
+    -fx-font-weight: bold;
+    -fx-font-family: "Saira";
+}
