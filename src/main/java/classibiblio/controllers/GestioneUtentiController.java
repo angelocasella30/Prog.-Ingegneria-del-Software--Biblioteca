@@ -1,6 +1,6 @@
 package classibiblio.controllers;
 
-import classibiblio.entita.Utente;
+import classibiblioteca.entita.Utente;
 import classibiblio.tipologiearchivi.ArchivioUtenti;
 import javafx.collections.transformation.SortedList;
 import javafx.collections.transformation.FilteredList;

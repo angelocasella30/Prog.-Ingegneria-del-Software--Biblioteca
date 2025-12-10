@@ -1,6 +1,6 @@
 package classibiblio.controllers;
 
-import classibiblio.entita.Prestito;
+import classibiblioteca.entita.Prestito;
 import classibiblio.tipologiearchivi.ArchivioLibri;
 import classibiblio.tipologiearchivi.ArchivioPrestiti;
 import java.time.LocalDate;

@@ -1,6 +1,6 @@
 package classibiblio.controllers;
 
-import classibiblio.entita.Libro;
+import classibiblioteca.entita.Libro;
 import classibiblio.tipologiearchivi.ArchivioLibri;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
