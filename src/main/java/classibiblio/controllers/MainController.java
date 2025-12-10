@@ -1,7 +1,7 @@
-package Classibiblioteca.Controllers;
+package classibiblio.controllers;
 
-import Classibiblioteca.Archivio;
-import Classibiblioteca.Bibliotecario;
+import classibiblio.Archivio;
+import classibiblio.Bibliotecario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Classibiblioteca.Entita;
+package classibiblio.entita;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,6 +18,8 @@ import java.util.List;
 public class Utente implements Serializable {
 
     private static final long serialVersionUID = 1L; // Serve per il salvataggio dei file
+    private static final String DOMINIO_STUDENTI = "@studenti.uni.it";
+    private static final String DOMINIO_DOCENTI = "@docente.uni.it";
     private static final int MAX_PRESTITI = 3; // Regola di business per validità prestito
     private String nome;
     private String cognome;
@@ -81,9 +83,18 @@ public class Utente implements Serializable {
     Regola: Deve avere meno di 3 prestiti attivi.
     */
     public boolean puoRichiederePrestito() {
-        return prestitiAttivi.size()<MAX_PRESTITI; //
+        return prestitiAttivi.size()<MAX_PRESTITI && isEmailValida() ; //modificare diagramma delle classi
     }
     /*
+    Verifica se l'utente ha un email valida per richiedere il prestito
+    Vincolo FC 1.4
+    
+    */
+    public boolean isEmailValida()
+    {
+       return this.email.endsWith(DOMINIO_STUDENTI) || this.email.endsWith(DOMINIO_DOCENTI);
+    }
+     /*
     Verifica se l'utente ha prestiti attivi
     */
     public boolean verificaPrestitiAttivi()

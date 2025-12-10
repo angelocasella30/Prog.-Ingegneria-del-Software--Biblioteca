@@ -1,7 +1,7 @@
-package Classibiblioteca.Controllers;
+package classibiblio.controllers;
 
-import Classibiblioteca.Entita.Libro;
-import Classibiblioteca.tipologiearchivi.ArchivioLibri;
+import classibiblio.entita.Libro;
+import classibiblio.tipologiearchivi.ArchivioLibri;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;

@@ -1,8 +1,8 @@
-package Classibiblioteca.Controllers;
+package classibiblio.controllers;
 
-import Classibiblioteca.Entita.Prestito;
-import Classibiblioteca.tipologiearchivi.ArchivioLibri;
-import Classibiblioteca.tipologiearchivi.ArchivioPrestiti;
+import classibiblio.entita.Prestito;
+import classibiblio.tipologiearchivi.ArchivioLibri;
+import classibiblio.tipologiearchivi.ArchivioPrestiti;
 import java.time.LocalDate;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

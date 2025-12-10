@@ -1,16 +1,18 @@
-package Classibiblioteca.Controllers;
+package classibiblio.controllers;
 
-import Classibiblioteca.Entita.Utente;
-import Classibiblioteca.tipologiearchivi.ArchivioUtenti;
+import classibiblio.entita.Utente;
+import classibiblio.tipologiearchivi.ArchivioUtenti;
 import javafx.collections.transformation.SortedList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * Controller che gestisce operazioni su utenti
@@ -160,7 +162,8 @@ public class GestioneUtentiController {
  */
 
     @FXML
-    void handleEliminaUtente(ActionEvent event) {
+    void handleEliminaUtente(ActionEvent event)
+    {
         // TODO: Elimina utente (UC-7)
     }
     

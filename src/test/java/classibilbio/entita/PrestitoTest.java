@@ -1,6 +1,6 @@
-package Test.Classibiblioteca.Entita;
+package classibilbio.entita;
 
-import Classibiblioteca.Entita.Prestito;
+import classibiblio.entita.Prestito;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,8 +1,8 @@
-package Classibiblioteca;
+package classibiblio;
 
-import Classibiblioteca.tipologiearchivi.ArchivioLibri;
-import Classibiblioteca.tipologiearchivi.ArchivioPrestiti;
-import Classibiblioteca.tipologiearchivi.ArchivioUtenti;
+import classibiblio.tipologiearchivi.ArchivioLibri;
+import classibiblio.tipologiearchivi.ArchivioPrestiti;
+import classibiblio.tipologiearchivi.ArchivioUtenti;
 import java.io.*;
 
 /**

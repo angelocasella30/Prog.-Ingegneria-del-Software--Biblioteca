@@ -1,4 +1,4 @@
-package Classibiblioteca;
+package classibiblio;
 
 import java.io.Serializable;
 

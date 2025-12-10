@@ -1,7 +1,7 @@
-package Test.Classibiblioteca.Entita;
+package classibilbio.entita;
 
-import Classibiblioteca.Entita.Prestito;
-import Classibiblioteca.Entita.Utente;
+import classibiblio.entita.Prestito;
+import classibiblio.entita.Utente;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
@@ -85,7 +85,7 @@ public class UtenteTest
         assertEquals(p, u.getStoricoprestiti().get(0), "L'elemento nello storico deve essere quello restituito");
     }
 
-    /**
+    /*
      * Test Equals: Verifica che due utenti siano uguali se hanno la stessa matricola.
      */
     @Test
@@ -98,5 +98,29 @@ public class UtenteTest
         
         assertEquals(u1, u2, "Gli utenti con la stessa matricola devono essere uguali");
         assertNotEquals(u1, u3, "Gli utenti con una matricola diversa devono essere diversi");
+    }
+    /*
+    Test per validità dominio email:
+    Verifica che l
+    */
+    @Test
+    public void testValiditaEmailDoppioDominio() {
+        System.out.println("Test Validità Email (Studenti e Docenti)");
+        
+        // 1. Caso Studente Valido
+        Utente studente = new Utente("Mario", "Rossi", "S01", "mario@studenti.uni.it");
+        assertTrue(studente.puoRichiederePrestito(), "Email @studenti.uni.it deve essere accettata");
+
+        // 2. Caso Docente Valido
+        Utente docente = new Utente("Prof", "Bianchi", "D01", "prof@docente.uni.it");
+        assertTrue(docente.puoRichiederePrestito(), "Email @docente.uni.it deve essere accettata");
+
+        // 3. Caso Utente Esterno (Invalido)
+        Utente esterno = new Utente("Hacker", "Evil", "X99", "hacker@gmail.com");
+        assertFalse(esterno.puoRichiederePrestito(), "Email @gmail.com NON deve essere accettata");
+        
+        // 4. Caso Email Errata o Parziale
+        Utente errato = new Utente("Test", "Test", "X00", "mario@uni.it"); // Manca "studenti" o "docente"
+        assertFalse(errato.puoRichiederePrestito(), "Email parziale non valida deve essere rifiutata");
     }
 }
