@@ -8,6 +8,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -37,6 +40,18 @@ public class GestioneUtentiController {
     private TextField fldMatricola;
     
     @FXML
+    private TextField fldScMatricolaUtente;
+    
+    @FXML
+    private TextField fldScCognomeUtente;
+    
+    @FXML
+    private TextField fldScNomeUtente;
+    
+    @FXML
+    private TextField fldScEmailUtente;
+    
+    @FXML
     private TableView<Utente> tableUtenti;
 
     @FXML
@@ -53,6 +68,9 @@ public class GestioneUtentiController {
 
     @FXML
     private TableColumn<Utente, String> clmnEmailUtente;
+    
+    @FXML
+    private Pane schedaUser;
 
     private ArchivioUtenti archivioUtenti;
 
@@ -73,6 +91,14 @@ public class GestioneUtentiController {
     public void initData(ArchivioUtenti archivio) {
         this.archivioUtenti = archivio;
     }
+    
+    private void showAlert(String title, String message) {
+    Alert alert = new Alert(Alert.AlertType.WARNING);
+    alert.setTitle(title);
+    alert.setHeaderText(null);
+    alert.setContentText(message);
+    alert.showAndWait();
+}
 /**
  * Inzializza la vista tabella utenti con collegamento di colonne
  */
@@ -88,6 +114,16 @@ public class GestioneUtentiController {
             tableUtenti.getColumns().addAll(clmnMatricolaUtente,clmnCognomeUtente,clmnNomeUtente,clmnEmailUtente);
     }
         tableUtenti.setItems(FXCollections.observableArrayList());
+         tableUtenti.setOnMouseClicked(event -> { if (event.getClickCount() == 1) { 
+                Utente utenteSelezionato = tableUtenti.getSelectionModel().getSelectedItem();
+                String matricola = utenteSelezionato.getMatricola();
+                Utente utente = archivioUtenti.getUtenteByMatricola(matricola);
+                fldMatricola.setText(utente.getMatricola());
+                fldNome.setText(utente.getNome());
+                fldCognome.setText(utente.getCognome());
+                fldEmail.setText(utente.getEmail());
+            
+    };
     }
 /**
  * Metodo handleCerca gestisce l'evento ricerca utente
@@ -98,7 +134,7 @@ public class GestioneUtentiController {
     
     @FXML
     void handleCercaUtente(ActionEvent event) {
-        if (ArchivioUtenti == null) return; 
+        if (archivioUtenti == null) return; 
         
         String cercamatricolaUtente = fldMatricola.getText().trim().toLowerCase();
         String cercacognomeUtente = fldCognome.getText().trim().toLowerCase();
@@ -130,7 +166,11 @@ public class GestioneUtentiController {
     
     @FXML
     void handleResetUtenti(ActionEvent event) {
-        // TODO: Mostra tutti
+        fldScMatricolaUtente.clear();
+        fldScCognomeUtente.clear();
+        fldScNomeUtente.clear();
+        fldScEmailUtente.clear();
+        handleVisualizzaUtenti();
     }
 /**
  * Metodo handleNuovo gestisce l'evento nuovo utente
@@ -151,7 +191,19 @@ public class GestioneUtentiController {
     
     @FXML
     void handleModificaUtente(ActionEvent event) {
-        // TODO: Modifica utente (UC-6)
+        Utente utenteSelezionato = tableUtenti.getSelectionModel().getSelectedItem();
+        if (utenteSelezionato == null) {
+            showAlert("Attenzione", "Nessun utente selezionato");
+            return;
+        }
+        String matricola = utenteSelezionato.getMatricola();
+
+        Utente utente = archivioUtenti.getUtenteByMatricola(matricola);
+        fldMatricola.setText(utente.getMatricola());
+        fldNome.setText(utente.getNome());
+        fldCognome.setText(utente.getCognome());
+        fldEmail.setText(utente.getEmail());
+        schedaUser.setVisible(true);
     }
 
 /**
@@ -162,9 +214,27 @@ public class GestioneUtentiController {
  */
 
     @FXML
-    void handleEliminaUtente(ActionEvent event)
-    {
-        // TODO: Elimina utente (UC-7)
+    void handleEliminaUtente(ActionEvent event){
+        Utente utenteSelezionato = tableUtenti.getSelectionModel().getSelectedItem();
+
+        if (utenteSelezionato == null) {
+            showAlert("Attenzione", "Nessun utente selezionato");
+            return;
+        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("L'utente selezionato sarà eliminato permanentemente.");
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                boolean utenteRimosso = archivioUtenti.eliminaUtente(utenteSelezionato);
+            if (utenteRimosso) {
+                tableUtenti.getItems().remove(utenteSelezionato);
+                showAlert("Successo", "L'utente è stato eliminato.");
+            } else {
+                showAlert("Errore", "Ci sono prestiti in corso");
+            }
+        }
+    });
     }
     
     @FXML
