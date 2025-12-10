@@ -139,7 +139,7 @@ public class GestioneUtentiController {
     
     @FXML
     void handleCreaUtente(ActionEvent event) {
-        // TODO: Nuovo utente (UC-5)
+        schedaUser.setVisible(true);
     }
 /**
  * Metodo handleModifica gestisce l'evento modifica utente
@@ -166,12 +166,28 @@ public class GestioneUtentiController {
     
     @FXML
     void handleSalvaFormUtenti(ActionEvent event) {
-        if (!validateFormUtenti()) return;
-        // da completare passa valori ad archivio
+        String nome = fldScNomeUtente.getText().trim();
+        String cognome = fldScCognomeUtente.getText().trim();
+        String email = fldScEmailUtente.getText().trim();
+        String matricola = fldScMatricolaUtente.getText().trim();
+        if (nome.isEmpty() || cognome.isEmpty() || email.isEmpty() || matricola.isEmpty()) {
+            showAlert("Attenzione", "Ci sono campi vuoti");
+            return;
+        }
+        if (archivioUtenti.existByMatricola(matricola)) {
+            showAlert("Attenzione", "La matricola esiste");
+            return;
+        }
+        Utente newUtente = new Utente(matricola, nome, cognome, email);
+        archivioUtenti.aggiungiUtente(newUtente);
+        tableUtenti.setItems(archivioUtenti.getUtentiOrdinati());
+        schedaUser.setVisible(false);
+       
     }
     
     @FXML
     public void handleVisualizzaUtenti() {
-        // da completare mostra la lista
+        ObservableList<Utente> utenti = FXCollections.observableArrayList(archivioUtenti.getUtentiOrdinati());
+        tableUtenti.setItems(utenti);
     }
 }
