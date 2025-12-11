@@ -10,10 +10,10 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
 
 /**
  * FXML Controller class
@@ -23,41 +23,49 @@ import javafx.scene.control.TextField;
 public class HomepageController implements Initializable {
 
     @FXML
+    private Button btnEsporta1;
+    @FXML
+    private Button btnEsporta11;
+    @FXML
+    private Button btnEsporta12;
+    @FXML
+    private Button btnEsporta13;
+    @FXML
     private Button btnEsporta;
     @FXML
-    private Tab tabLIBRI;
+    private StackPane stackpaneHome;
     @FXML
-    private TextField fldCercaISBNLibro;
+    private StackPane stackpanePrestiti;
     @FXML
-    private TextField fldCercaAutoreLibro;
+    private TextField fldMatricolaPrestiti;
     @FXML
-    private TextField fldCercaTitoloLibro;
+    private TextField fldISBNPrestiti;
     @FXML
-    private Button btnCercaLibro;
+    private Button btnCercaPrestiti;
     @FXML
-    private Button btnAggiungiLibro;
+    private Button btnCreaPrestiti;
     @FXML
-    private Button btnModificaLibro;
+    private Button BtnRestituisciPrestiti;
     @FXML
-    private Button btnEliminaLibro;
+    private Button BtnListaRestituiti;
     @FXML
-    private Button btnListaLibri;
+    private Button BtnListaPrestiti;
     @FXML
-    private TableView<?> tableviewLibri;
+    private TableView<?> tableviewPrestiti;
     @FXML
-    private TableColumn<?, ?> clmnTitoloLibro;
+    private TableColumn<?, ?> clmnMatricolaPrestiti;
     @FXML
-    private TableColumn<?, ?> clmnAutoreLibro;
+    private TableColumn<?, ?> clmnISBNPrestiti;
     @FXML
-    private TableColumn<?, ?> clmnAnnoLibro;
+    private TableColumn<?, ?> clmnTitoloPrestiti;
     @FXML
-    private TableColumn<?, ?> clmnISBNLibro;
+    private TableColumn<?, ?> clmnInizioPrestiti;
     @FXML
-    private TableColumn<?, ?> clmnDispLibro;
+    private TableColumn<?, ?> clmnFinePrestiti;
     @FXML
-    private TableColumn<?, ?> clmnPrestLibro;
+    private TableColumn<?, ?> clmnRitardoPrestiti;
     @FXML
-    private Tab tabUTENTI;
+    private StackPane stackpaneUtenti;
     @FXML
     private TextField fldCercaMatricolaUtente;
     @FXML
@@ -89,35 +97,37 @@ public class HomepageController implements Initializable {
     @FXML
     private TableColumn<?, ?> clmnLibro3Utente;
     @FXML
-    private Tab tabPrestiti;
+    private StackPane stackpaneLibri;
     @FXML
-    private TextField fldMatricolaPrestiti;
+    private TextField fldCercaISBNLibro;
     @FXML
-    private TextField fldISBNPrestiti;
+    private TextField fldCercaAutoreLibro;
     @FXML
-    private Button btnCercaPrestiti;
+    private TextField fldCercaTitoloLibro;
     @FXML
-    private Button btnCreaPrestiti;
+    private Button btnCercaLibro;
     @FXML
-    private Button BtnRestituisciPrestiti;
+    private Button btnAggiungiLibro;
     @FXML
-    private Button BtnListaRestituiti;
+    private Button btnModificaLibro;
     @FXML
-    private Button BtnListaPrestiti;
+    private Button btnEliminaLibro;
     @FXML
-    private TableView<?> tableviewPrestiti;
+    private Button btnListaLibri;
     @FXML
-    private TableColumn<?, ?> clmnMatricolaPrestiti;
+    private TableView<?> tableviewLibri;
     @FXML
-    private TableColumn<?, ?> clmnISBNPrestiti;
+    private TableColumn<?, ?> clmnTitoloLibro;
     @FXML
-    private TableColumn<?, ?> clmnTitoloPrestiti;
+    private TableColumn<?, ?> clmnAutoreLibro;
     @FXML
-    private TableColumn<?, ?> clmnInizioPrestiti;
+    private TableColumn<?, ?> clmnAnnoLibro;
     @FXML
-    private TableColumn<?, ?> clmnFinePrestiti;
+    private TableColumn<?, ?> clmnISBNLibro;
     @FXML
-    private TableColumn<?, ?> clmnRitardoPrestiti;
+    private TableColumn<?, ?> clmnDispLibro;
+    @FXML
+    private TableColumn<?, ?> clmnPrestLibro;
 
     /**
      * Initializes the controller class.
