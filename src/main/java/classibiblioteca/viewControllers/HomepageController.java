@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.packagefxml;
+package classibiblioteca.viewControllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import 
 
 /**
  * FXML Controller class
@@ -23,13 +24,13 @@ import javafx.scene.layout.StackPane;
 public class HomepageController implements Initializable {
 
     @FXML
-    private Button btnEsporta1;
+    private Button btnHomePage;
     @FXML
-    private Button btnEsporta11;
+    private Button btnLibriPage;
     @FXML
-    private Button btnEsporta12;
+    private Button btnUtentiPage;
     @FXML
-    private Button btnEsporta13;
+    private Button btnPrestitiPage;
     @FXML
     private Button btnEsporta;
     @FXML
@@ -47,23 +48,11 @@ public class HomepageController implements Initializable {
     @FXML
     private Button BtnRestituisciPrestiti;
     @FXML
-    private Button BtnListaRestituiti;
+    private Button BtnListaRestituiti
     @FXML
     private Button BtnListaPrestiti;
     @FXML
-    private TableView<?> tableviewPrestiti;
-    @FXML
-    private TableColumn<?, ?> clmnMatricolaPrestiti;
-    @FXML
-    private TableColumn<?, ?> clmnISBNPrestiti;
-    @FXML
-    private TableColumn<?, ?> clmnTitoloPrestiti;
-    @FXML
-    private TableColumn<?, ?> clmnInizioPrestiti;
-    @FXML
-    private TableColumn<?, ?> clmnFinePrestiti;
-    @FXML
-    private TableColumn<?, ?> clmnRitardoPrestiti;
+    private TableView<Prestito> tableviewPrestiti;
     @FXML
     private StackPane stackpaneUtenti;
     @FXML
@@ -81,21 +70,7 @@ public class HomepageController implements Initializable {
     @FXML
     private Button btnListaUtente;
     @FXML
-    private TableView<?> tableviewUtenti;
-    @FXML
-    private TableColumn<?, ?> clmnNomeUtente;
-    @FXML
-    private TableColumn<?, ?> clmnCognomeUtente;
-    @FXML
-    private TableColumn<?, ?> clmnMatricolaUtente;
-    @FXML
-    private TableColumn<?, ?> clmnEmailUtente;
-    @FXML
-    private TableColumn<?, ?> clmnLibro1Utente;
-    @FXML
-    private TableColumn<?, ?> clmnLibro2Utente;
-    @FXML
-    private TableColumn<?, ?> clmnLibro3Utente;
+    private TableView<Utente> tableviewUtenti;
     @FXML
     private StackPane stackpaneLibri;
     @FXML
@@ -115,26 +90,48 @@ public class HomepageController implements Initializable {
     @FXML
     private Button btnListaLibri;
     @FXML
-    private TableView<?> tableviewLibri;
-    @FXML
-    private TableColumn<?, ?> clmnTitoloLibro;
-    @FXML
-    private TableColumn<?, ?> clmnAutoreLibro;
-    @FXML
-    private TableColumn<?, ?> clmnAnnoLibro;
-    @FXML
-    private TableColumn<?, ?> clmnISBNLibro;
-    @FXML
-    private TableColumn<?, ?> clmnDispLibro;
-    @FXML
-    private TableColumn<?, ?> clmnPrestLibro;
+    private TableView<Libro> tableviewLibri;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        stackpaneHome.setVisible(true);
+        stackpaneLibri.setVisible(false);
+        stackpanePrestiti.setVisible(false);
+        stackpaneUtenti.setVisible(false);
     }    
     
+    @FXML
+    private void handleHomePage() {
+        stackpaneHome.setVisible(true);
+        stackpaneLibri.setVisible(false);
+        stackpanePrestiti.setVisible(false);
+        stackpaneUtenti.setVisible(false);
+    }
+
+    @FXML
+    private void handleLibriPage() {
+        stackpaneHome.setVisible(false);
+        stackpaneLibri.setVisible(true);
+        stackpanePrestiti.setVisible(false);
+        stackpaneUtenti.setVisible(false);
+}
+
+    @FXML
+    private void handleUtentiPage() {
+        stackpaneHome.setVisible(false);
+        stackpaneLibri.setVisible(false);
+        stackpanePrestiti.setVisible(false);
+        stackpaneUtenti.setVisible(true);
+    }
+
+    @FXML
+    private void handlePrestitiPage() {
+        stackpaneHome.setVisible(false);
+        stackpaneLibri.setVisible(false);
+        stackpanePrestiti.setVisible(true);
+        stackpaneUtenti.setVisible(false);
+    }
 }

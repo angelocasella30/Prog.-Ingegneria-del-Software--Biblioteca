@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
@@ -23,22 +22,22 @@
                      <children>
                         <HBox layoutX="19.0" layoutY="2.0" prefHeight="36.0" prefWidth="573.0">
                            <children>
-                              <Button fx:id="btnEsporta1" maxHeight="25.0" maxWidth="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="80.0" text="Home">
+                              <Button fx:id="btnHomePage" maxHeight="25.0" maxWidth="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleHomePage" prefWidth="80.0" text="Home">
                                  <HBox.margin>
                                     <Insets right="15.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button fx:id="btnEsporta11" maxHeight="25.0" maxWidth="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="80.0" text="Libri">
+                              <Button fx:id="btnLibriPage" maxHeight="25.0" maxWidth="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleLibriPage" prefWidth="80.0" text="Libri">
                                  <HBox.margin>
                                     <Insets right="15.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button fx:id="btnEsporta12" maxHeight="25.0" maxWidth="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="80.0" text="Utenti">
+                              <Button fx:id="btnUtentiPage" maxHeight="25.0" maxWidth="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleUtentiPage" prefWidth="80.0" text="Utenti">
                                  <HBox.margin>
                                     <Insets right="15.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button fx:id="btnEsporta13" maxHeight="25.0" maxWidth="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="80.0" text="Prestiti">
+                              <Button fx:id="btnPrestitiPage" maxHeight="25.0" maxWidth="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#HandlePrestitiPage" prefWidth="80.0" text="Prestiti">
                                  <HBox.margin>
                                     <Insets right="15.0" top="5.0" />
                                  </HBox.margin>
@@ -112,16 +111,7 @@
                                                 </AnchorPane>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="302.0" prefWidth="458.0">
                                                    <children>
-                                                      <TableView fx:id="tableviewPrestiti" layoutY="-6.0" prefHeight="312.0" prefWidth="458.0">
-                                                         <columns>
-                                                            <TableColumn fx:id="clmnMatricolaPrestiti" prefWidth="75.0" text="Matricola" />
-                                                            <TableColumn fx:id="clmnISBNPrestiti" prefWidth="75.0" text="ISBN" />
-                                                            <TableColumn fx:id="clmnTitoloPrestiti" prefWidth="75.0" text="Titolo" />
-                                                            <TableColumn fx:id="clmnInizioPrestiti" prefWidth="75.0" text="Data Inizio" />
-                                                            <TableColumn fx:id="clmnFinePrestiti" prefWidth="75.0" text="Data Fine" />
-                                                            <TableColumn fx:id="clmnRitardoPrestiti" prefWidth="75.0" text="Ritardo" />
-                                                         </columns>
-                                                      </TableView>
+                                                      <TableView fx:id="tableviewPrestiti" layoutY="-6.0" prefHeight="312.0" prefWidth="458.0" />
                                                    </children>
                                                 </AnchorPane>
                                              </items>
@@ -177,17 +167,7 @@
                                                 </AnchorPane>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="309.0" prefWidth="509.0">
                                                    <children>
-                                                      <TableView fx:id="tableviewUtenti" layoutY="-6.0" prefHeight="319.0" prefWidth="511.0">
-                                                         <columns>
-                                                            <TableColumn fx:id="clmnNomeUtente" prefWidth="75.0" text="Nome" />
-                                                            <TableColumn fx:id="clmnCognomeUtente" prefWidth="75.0" text="Cognome" />
-                                                            <TableColumn fx:id="clmnMatricolaUtente" prefWidth="75.0" text="Matricola" />
-                                                            <TableColumn fx:id="clmnEmailUtente" prefWidth="75.0" text="Email" />
-                                                            <TableColumn fx:id="clmnLibro1Utente" prefWidth="75.0" text="Libro1" />
-                                                            <TableColumn fx:id="clmnLibro2Utente" prefWidth="75.0" text="Libro2" />
-                                                            <TableColumn fx:id="clmnLibro3Utente" prefWidth="75.0" text="Libro3" />
-                                                         </columns>
-                                                      </TableView>
+                                                      <TableView fx:id="tableviewUtenti" layoutY="-6.0" prefHeight="319.0" prefWidth="511.0" />
                                                    </children>
                                                 </AnchorPane>
                                              </items>
@@ -244,16 +224,7 @@
                                                 </AnchorPane>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="296.0" prefWidth="495.0">
                                                    <children>
-                                                      <TableView fx:id="tableviewLibri" layoutY="-6.0" prefHeight="312.0" prefWidth="494.0">
-                                                        <columns>
-                                                          <TableColumn fx:id="clmnTitoloLibro" prefWidth="75.0" text="Titolo" />
-                                                          <TableColumn fx:id="clmnAutoreLibro" prefWidth="75.0" text="Autore" />
-                                                            <TableColumn fx:id="clmnAnnoLibro" prefWidth="75.0" text="Anno" />
-                                                            <TableColumn fx:id="clmnISBNLibro" prefWidth="75.0" text="ISBN" />
-                                                            <TableColumn fx:id="clmnDispLibro" prefWidth="75.0" text="Disponib." />
-                                                            <TableColumn fx:id="clmnPrestLibro" prefWidth="75.0" text="Prestati" />
-                                                        </columns>
-                                                      </TableView>
+                                                      <TableView fx:id="tableviewLibri" layoutY="-6.0" prefHeight="312.0" prefWidth="494.0" />
                                                    </children>
                                                 </AnchorPane>
                                             </items>
