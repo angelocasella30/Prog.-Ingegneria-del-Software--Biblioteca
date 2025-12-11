@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="SchedaCreaLibro" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.packagefxml.SchedalibroController">
+   <children>
+      <AnchorPane layoutX="12.0" layoutY="9.0" prefHeight="322.0" prefWidth="503.0">
+         <children>
+            <VBox layoutX="30.0" layoutY="43.0" prefHeight="285.0" prefWidth="409.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Titolo" />
+                  <TextField fx:id="fldTitoloScLibro" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Autore" />
+                  <TextField fx:id="fldAutoreScLibro" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Anno" wrappingWidth="60.70703125" />
+                  <TextField fx:id="fldAnnoScLibro" prefHeight="25.0" prefWidth="193.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN" wrappingWidth="60.70703125" />
+                  <TextField fx:id="fldISBNScLibro" prefHeight="25.0" prefWidth="193.0" />
+                  <HBox prefHeight="55.0" prefWidth="409.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Copie Disponibili:" wrappingWidth="89.37371826171875">
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </Text>
+                        <TextField fx:id="fldICopieDisponScLibro" prefHeight="25.0" prefWidth="77.0">
+                           <HBox.margin>
+                              <Insets top="20.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="55.0" prefWidth="409.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Copie Prestate:" wrappingWidth="72.04037475585938">
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </Text>
+                        <TextField fx:id="fldICopiePrestScLibro" prefHeight="25.0" prefWidth="77.0">
+                           <HBox.margin>
+                              <Insets left="18.0" top="20.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox layoutX="413.0" layoutY="226.0" prefHeight="90.0" prefWidth="77.0">
+               <children>
+                  <Button fx:id="btnSalvaScLibro" mnemonicParsing="false" prefHeight="36.0" prefWidth="81.0" text="salva" />
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>
