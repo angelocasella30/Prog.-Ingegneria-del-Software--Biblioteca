@@ -16,14 +16,14 @@
             <VBox layoutX="28.0" layoutY="104.0" prefHeight="230.0" prefWidth="346.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nome" />
-                  <TextField />
+                  <TextField fx:id="ModificaUtentefldNome" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cognome" />
-                  <TextField />
+                  <TextField fx:id="ModificaUtentefldCognome" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="e-mail" />
-                  <TextField />
+                  <TextField fx:id="ModificaUtentefldEmail" />
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <Button layoutX="254.0" layoutY="50.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="salva" />
+                        <Button fx:id="btnSalvaModificaUtente" layoutX="254.0" layoutY="50.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="salva" />
                      </children>
                   </AnchorPane>
                </children>
@@ -33,7 +33,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Text>
-            <Label layoutX="244.0" layoutY="59.0" prefHeight="17.0" prefWidth="99.0" text="MATRICOLA" />
+            <Label fx:id="ModificaUtenteLabel" layoutX="244.0" layoutY="59.0" prefHeight="17.0" prefWidth="99.0" text="MATRICOLA" />
          </children>
       </AnchorPane>
    </children>

@@ -17,8 +17,8 @@
          <children>
             <VBox layoutX="62.0" layoutY="81.0" prefHeight="253.0" prefWidth="267.0">
                <children>
-                  <ComboBox prefHeight="30.0" prefWidth="361.0" promptText="LIBRI DISPONIBILI" />
-                  <ComboBox prefHeight="30.0" prefWidth="349.0" promptText="UTENTI DISPONIBILI">
+                  <ComboBox fx:id="PrestitoLibriDispBox" prefHeight="30.0" prefWidth="361.0" promptText="LIBRI DISPONIBILI" />
+                  <ComboBox fx:id="PrestitoUtentiDispBox" prefHeight="30.0" prefWidth="349.0" promptText="UTENTI DISPONIBILI">
                      <VBox.margin>
                         <Insets top="30.0" />
                      </VBox.margin>
@@ -28,10 +28,10 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </Text>
-                  <TextField />
+                  <TextField fx:id="PrestitoFldScadenza" />
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="61.0" prefWidth="267.0">
                      <children>
-                        <Button layoutX="175.0" layoutY="26.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="salva" />
+                        <Button fx:id="btnPrestitoSalva" layoutX="175.0" layoutY="26.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="salva" />
                      </children>
                   </AnchorPane>
                </children>
@@ -41,7 +41,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Text>
-            <Label layoutX="260.0" layoutY="59.0" text="Data inizio" />
+            <Label fx:id="PrestitoDataInizioLabel" layoutX="260.0" layoutY="59.0" text="Data inizio" />
          </children>
       </AnchorPane>
    </children>

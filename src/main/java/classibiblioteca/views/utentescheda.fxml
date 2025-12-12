@@ -15,16 +15,16 @@
             <VBox layoutX="28.0" layoutY="66.0" prefHeight="268.0" prefWidth="346.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nome" />
-                  <TextField />
+                  <TextField fx:id="fldCreaNomeUtente" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cognome" />
-                  <TextField />
+                  <TextField fx:id="fldCreaCognomeUtente" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="e-mail" />
-                  <TextField />
+                  <TextField fx:id="fldCreaEmailUtente" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="matricola" />
-                  <TextField />
+                  <TextField fx:id="fldCreaMatricolaUtente" />
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <Button layoutX="234.0" layoutY="50.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="salva" />
+                        <Button fx:id="btnSalvaCreaUtente" layoutX="234.0" layoutY="50.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="salva" />
                      </children>
                   </AnchorPane>
                </children>

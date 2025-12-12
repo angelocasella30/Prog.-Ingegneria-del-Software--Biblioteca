@@ -18,11 +18,11 @@
             <VBox layoutX="47.0" layoutY="82.0" prefHeight="246.0" prefWidth="302.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Titolo" />
-                  <TextField fx:id="fldTitoloScLibro" />
+                  <TextField fx:id="fldModificaTitoloScLibro" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Autore" />
-                  <TextField fx:id="fldAutoreScLibro" />
+                  <TextField fx:id="fldModificaAutoreScLibro" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Data pubblicazione" wrappingWidth="109.37368774414062" />
-                  <TextField fx:id="fldAnnoScLibro" prefHeight="25.0" prefWidth="193.0" />
+                  <TextField fx:id="fldModificaAnnoScLibro" prefHeight="25.0" prefWidth="193.0" />
                   <HBox prefHeight="55.0" prefWidth="409.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Copie Disponibili:" wrappingWidth="68.0404052734375">
@@ -30,7 +30,7 @@
                               <Insets top="10.0" />
                            </HBox.margin>
                         </Text>
-                        <TextField fx:id="fldICopieDisponScLibro" prefHeight="25.0" prefWidth="77.0">
+                        <TextField fx:id="fldIModificaCopieDisponScLibro" prefHeight="25.0" prefWidth="77.0">
                            <HBox.margin>
                               <Insets top="20.0" />
                            </HBox.margin>
@@ -39,7 +39,7 @@
                   </HBox>
                   <AnchorPane prefHeight="72.0" prefWidth="219.0">
                      <children>
-                        <Button fx:id="btnSalvaScLibro" layoutX="221.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="81.0" text="Salva" />
+                        <Button fx:id="btnModificaSalvaScLibro" layoutX="221.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="81.0" text="Salva" />
                      </children>
                   </AnchorPane>
                </children>
@@ -49,7 +49,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Text>
-            <Label layoutX="255.0" layoutY="53.0" prefHeight="17.0" prefWidth="81.0" text="ISBN" />
+            <Label fx:id="ModificaLibroISBNLabel" layoutX="255.0" layoutY="53.0" prefHeight="17.0" prefWidth="81.0" text="ISBN" />
          </children>
       </AnchorPane>
    </children>
