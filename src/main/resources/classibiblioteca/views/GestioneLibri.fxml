@@ -14,11 +14,11 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classibiblioteca.views.GestioneLibriController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" stylesheets="@../../styles/maincontrollerview.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classibiblioteca.viewControllers.GestioneLibriController">
    <children>
       <AnchorPane layoutY="-7.0" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <SplitPane layoutY="6.0" orientation="VERTICAL" prefHeight="394.0" prefWidth="600.0">
+            <SplitPane layoutY="6.0" orientation="VERTICAL" prefHeight="350.0" prefWidth="600.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="346.0" prefWidth="598.0">
                      <children>
@@ -187,19 +187,34 @@
                         </StackPane>
                         <StackPane fx:id="stackpanePrestiti" prefHeight="350.0" prefWidth="598.0">
                            <children>
-                              <SplitPane dividerPositions="0.09479166666666666" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                              <SplitPane dividerPositions="0.14798850574712644" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                                  <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="42.0" prefWidth="597.0">
                                        <children>
-                                          <TextField fx:id="txtrRicerca" layoutX="249.0" layoutY="1.0" onAction="#handleCercaLibro" prefHeight="25.0" prefWidth="107.0" text="Cerca...." />
-                                          <Button fx:id="btnCercaHomePrestiti" layoutX="495.0" layoutY="1.0" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="Cerca" />
-                                          <MenuButton fx:id="cmbFiltro" alignment="CENTER" contentDisplay="RIGHT" layoutX="388.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleCercaLibro" prefHeight="25.0" prefWidth="94.0" text="Filtro">
+                                          <TextField fx:id="txtrRicerca" layoutX="248.0" layoutY="5.0" onAction="#handleCercaLibro" prefHeight="20.0" prefWidth="94.0" text="Cerca...." AnchorPane.topAnchor="5.0">
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                          </TextField>
+                                          <Button fx:id="btnCercaHomePrestiti" layoutX="495.0" layoutY="5.0" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="Cerca" AnchorPane.topAnchor="5.0">
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                          </Button>
+                                          <MenuButton fx:id="cmbFiltro" alignment="CENTER" contentDisplay="RIGHT" layoutX="388.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleCercaLibro" prefHeight="25.0" prefWidth="94.0" text="Filtro" AnchorPane.leftAnchor="370.0" AnchorPane.topAnchor="8.0">
                                             <items>
-                                              <MenuItem mnemonicParsing="false" text="ISBN" />
-                                              <MenuItem mnemonicParsing="false" text="Matricola" />
+                                                <MenuItem mnemonicParsing="false" onAction="#handleOrdinaPerTitolo" text="Titolo" />
+                                              <MenuItem mnemonicParsing="false" onAction="#handleOrdinaPerAutore" text="Autore" />
+                                              <MenuItem mnemonicParsing="false" onAction="#handleMostraTutti" text="Nessuno" />
                                             </items>
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
                                           </MenuButton>
                                        </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="278.0" prefWidth="597.0">
                                        <children>
@@ -219,19 +234,24 @@
                                                                   <Insets left="5.0" top="20.0" />
                                                                </VBox.margin>
                                                             </Button>
+                                                            <Button mnemonicParsing="false" onAction="#handleEliminaLibro" prefHeight="26.0" prefWidth="79.0" text="Elimina">
+                                                               <VBox.margin>
+                                                                  <Insets left="5.0" top="20.0" />
+                                                               </VBox.margin>
+                                                            </Button>
                                                          </children>
                                                       </VBox>
                                                    </children>
                                                 </AnchorPane>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="302.0" prefWidth="458.0">
                                                    <children>
-                                                      <TableView fx:id="tabellaLibri" layoutX="-5.0" layoutY="-2.0" prefHeight="312.0" prefWidth="486.0">
+                                                      <TableView fx:id="tabellaLibri" layoutX="-9.0" layoutY="-1.0" prefHeight="312.0" prefWidth="486.0">
                                                          <columns>
-                                                            <TableColumn prefWidth="120.60616302490234" text="Titolo" />
-                                                            <TableColumn prefWidth="101.393798828125" text="Autori" />
-                                                            <TableColumn prefWidth="57.990386962890625" text="Anno" />
-                                                            <TableColumn prefWidth="51.8880615234375" text="ISBN" />
-                                                            <TableColumn prefWidth="59.6834716796875" text="N° Copie" />
+                                                            <TableColumn fx:id="colTitolo" prefWidth="120.60616302490234" text="Titolo" />
+                                                            <TableColumn fx:id="colAutori" prefWidth="101.393798828125" text="Autori" />
+                                                            <TableColumn fx:id="colAnno" prefWidth="57.990386962890625" text="Anno" />
+                                                            <TableColumn fx:id="colISBN" prefWidth="51.8880615234375" text="ISBN" />
+                                                            <TableColumn fx:id="colCopie" prefWidth="59.6834716796875" text="N° Copie" />
                                                             <TableColumn prefWidth="90.59466552734375" text="Copie Prestate" />
                                                          </columns>
                                                       </TableView>

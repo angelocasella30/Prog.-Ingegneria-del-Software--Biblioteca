@@ -1,75 +1,107 @@
-/*
- * Empty Stylesheet file.
- */
-
 /* --- IMPOSTAZIONI GENERALI --- */
 .root {
-    /* Sfondo bianco pulito */
     -fx-background-color: #FFFFFF;
-    /* Impostiamo Saira come font predefinito */
-    -fx-font-family: "Saira", "Arial", sans-serif; 
-    -fx-font-size: 14px;
+    /* Riduco leggermente il font base per far entrare tutto meglio */
+    -fx-font-family: "Saira", "Arial", sans-serif;
+    -fx-font-size: 13px; 
 }
 
-/* --- TITOLO MACRO (Quello grosso della Home) --- */
+/* --- TITOLO MACRO (Home) --- */
 .titolo-home {
-    /* Il tuo Blu specifico: rgb(17, 85, 204) */
     -fx-text-fill: rgb(17, 85, 204); 
-    -fx-font-size: 48px;  /* Molto grande */
-    -fx-font-weight: 800; /* Extra Bold (tipico di Saira) */
-    -fx-effect: none;     /* Niente ombre, stile flat pulito */
+    -fx-font-size: 32px;  /* Ridotto da 48 a 32 per evitare che esca */
+    -fx-font-weight: 800; 
+    -fx-effect: none;
+    -fx-text-alignment: center;
 }
 
 /* --- TITOLI NORMALI E LABEL --- */
 .label {
-    -fx-text-fill: #000000; /* Nero assoluto come richiesto */
+    -fx-text-fill: #000000;
 }
 
-/* Se vuoi distinguere i titoletti in grassetto */
+/* Label in grassetto (es. sottotitoli) */
 .label-bold {
     -fx-font-weight: bold;
-    -fx-font-size: 16px;
+    -fx-font-size: 14px; /* Leggermente più grande del testo base */
 }
 
-/* --- BOTTONI (Uso il blu dei titoli per coerenza) --- */
+/* --- BOTTONI DEL MENU --- */
 .button {
-    -fx-background-color: rgb(17, 85, 204); /* Blu Google */
+    -fx-background-color: rgb(17, 85, 204);
     -fx-text-fill: white;
-    -fx-background-radius: 4; /* Angoli leggermente smussati */
+    -fx-background-radius: 4;
     -fx-font-family: "Saira";
     -fx-font-weight: bold;
-    -fx-font-size: 14px;
+    -fx-font-size: 13px; /* Ridotto per rendere i bottoni più eleganti */
     -fx-cursor: hand;
-    -fx-padding: 10 20;
+    /* Riduco il padding (spaziatura interna) così i bottoni sono meno "grassi" */
+    -fx-padding: 6 12 6 12; 
 }
 
-/* Effetto Hover (quando passi sopra) */
 .button:hover {
-    -fx-background-color: rgb(13, 66, 158); /* Un blu leggermente più scuro */
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 1);
+    -fx-background-color: rgb(13, 66, 158);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 3, 0, 0, 1);
 }
 
-/* Effetto Click */
 .button:pressed {
-    -fx-background-color: #000000; /* Diventa nero quando clicchi */
+    -fx-background-color: #000000;
 }
 
-/* --- TABELLE (Stile Minimal) --- */
+/* --- TABELLE --- */
 .table-view {
     -fx-base: #FFFFFF;
     -fx-control-inner-background: #FFFFFF;
     -fx-table-cell-border-color: #E0E0E0;
     -fx-table-header-border-color: transparent;
+    -fx-font-size: 12px; /* Testo tabella compatto */
 }
 
 .table-view .column-header-background {
     -fx-background-color: #FFFFFF;
     -fx-border-bottom-color: #000000;
-    -fx-border-width: 0 0 2 0; /* Solo una linea nera sotto l'intestazione */
+    -fx-border-width: 0 0 2 0;
 }
 
 .table-view .column-header .label {
     -fx-text-fill: #000000;
     -fx-font-weight: bold;
+    -fx-font-size: 12px;
+}
+
+/* --- HEADER DIALOG (Fascia blu in alto) --- */
+.header-panel {
+    -fx-background-color: rgb(17, 85, 204);
+    -fx-padding: 15;      /* Aggiunge un po' di spazio attorno */
+    -fx-alignment: CENTER; /* Centra il contenuto se è un HBox */
+}
+
+/* Regola "intelligente": Tutte le Label DENTRO l'header-panel diventano bianche */
+.header-panel .label {
+    -fx-text-fill: white;
     -fx-font-family: "Saira";
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+}
+
+/* Testo del titolo dentro la fascia */
+.titolo-dialog {
+    -fx-text-fill: white;      /* Bianco su sfondo blu */
+    -fx-font-size: 20px;       /* Grande ma non enorme */
+    -fx-font-weight: bold;
+    -fx-font-family: "Saira";
+}
+
+/* --- FORM DIALOG (Etichette e Campi) --- */
+/* QUESTA È LA PARTE NUOVA PER I CAMPI */
+
+.label-form {
+    -fx-font-size: 15px;      /* Più grande e leggibile */
+    -fx-font-weight: bold;    /* Grassetto */
+    -fx-text-fill: #333333;   /* Grigio scuro quasi nero */
+}
+
+.text-field {
+    -fx-font-size: 14px;      /* Testo dentro le caselle più leggibile */
+    -fx-padding: 8;           /* Più spazio interno (stile moderno) */
 }
