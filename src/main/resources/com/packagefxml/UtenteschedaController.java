@@ -22,15 +22,15 @@ import javafx.scene.control.TextField;
 public class UtenteschedaController implements Initializable {
 
     @FXML
-    private ComboBox<?> PrestitoLibriDispBox;
+    private ComboBox<?> RestituzioneBoxLibro;
     @FXML
-    private ComboBox<?> PrestitoUtentiDispBox;
+    private ComboBox<?> RestituzioneBoxUtenti;
     @FXML
-    private TextField PrestitoFldScadenza;
+    private Label RestituzioneInizioLabel;
     @FXML
-    private Button btnPrestitoSalva;
+    private Label RestituzioneConsegnaLabel;
     @FXML
-    private Label PrestitoDataInizioLabel;
+    private Button btnRestituzioneSalva;
 
     /**
      * Initializes the controller class.
