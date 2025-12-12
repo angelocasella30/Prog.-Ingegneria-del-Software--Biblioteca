@@ -2,6 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -44,7 +46,7 @@
                               </Button>
                               <Button fx:id="btnEsporta" maxHeight="25.0" maxWidth="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="80.0" text="Esporta">
                                  <HBox.margin>
-                                    <Insets left="80.0" top="5.0" />
+                                    <Insets left="100.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
                            </children>
@@ -66,6 +68,77 @@
                               </AnchorPane>
                            </children>
                         </StackPane>
+                        <StackPane fx:id="stackpaneLibri" prefHeight="349.0" prefWidth="597.0">
+                           <children>
+                              <SplitPane dividerPositions="0.09479166666666666" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="42.0" prefWidth="597.0">
+                                       <children>
+                                          <TextField fx:id="fldCercaTitoloLibro" layoutX="288.0" layoutY="1.0" prefHeight="25.0" prefWidth="107.0" text="Titolo...." />
+                                          <Button fx:id="btnCercaLibro" layoutX="506.0" layoutY="1.0" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="CercaLibro" />
+                                          <MenuButton layoutX="412.0" layoutY="1.0" mnemonicParsing="false" text="Seleziona">
+                                             <items>
+                                                <MenuItem mnemonicParsing="false" text="Titolo" />
+                                                <MenuItem mnemonicParsing="false" text="ISBN" />
+                                                <MenuItem mnemonicParsing="false" text="Autore" />
+                                             </items>
+                                          </MenuButton>
+                                       </children>
+                                    </AnchorPane>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="278.0" prefWidth="597.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.16367713004484305" layoutY="5.0" prefHeight="317.0" prefWidth="597.0">
+                                            <items>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                      <VBox layoutX="4.0" layoutY="23.0" prefHeight="97.0" prefWidth="87.0">
+                                                         <children>
+                                                            <Button fx:id="btnAggiungiLibro" maxHeight="25.0" maxWidth="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="80.0" text="Aggiungi">
+                                                               <VBox.margin>
+                                                                  <Insets top="10.0" />
+                                                               </VBox.margin>
+                                                            </Button>
+                                                            <Button fx:id="btnModificaLibro" maxHeight="25.0" maxWidth="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="80.0" text="Modifica">
+                                                               <VBox.margin>
+                                                                  <Insets top="20.0" />
+                                                               </VBox.margin>
+                                                            </Button>
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox layoutX="4.0" layoutY="120.0" prefHeight="97.0" prefWidth="87.0">
+                                                         <children>
+                                                            <Button fx:id="btnEliminaLibro" maxHeight="25.0" maxWidth="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="80.0" text="Elimina" />
+                                                            <MenuButton alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" popupSide="RIGHT" prefHeight="25.0" prefWidth="81.0" text="Ordina">
+                                                              <items>
+                                                                <MenuItem mnemonicParsing="false" text="Titolo" />
+                                                                <MenuItem mnemonicParsing="false" text="Autore" />
+                                                              </items>
+                                                               <VBox.margin>
+                                                                  <Insets top="20.0" />
+                                                               </VBox.margin>
+                                                            </MenuButton>
+                                                            <Button fx:id="btnListaLibri" maxHeight="25.0" maxWidth="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="80.0" text="Lista">
+                                                               <VBox.margin>
+                                                                  <Insets top="20.0" />
+                                                               </VBox.margin>
+                                                            </Button>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </AnchorPane>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="296.0" prefWidth="495.0">
+                                                   <children>
+                                                      <TableView fx:id="tableviewLibri" layoutY="-6.0" prefHeight="312.0" prefWidth="494.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                            </items>
+                                          </SplitPane>
+                                       </children>
+                                    </AnchorPane>
+                                </items>
+                              </SplitPane>
+                           </children>
+                        </StackPane>
                         <StackPane fx:id="stackpanePrestiti" prefHeight="350.0" prefWidth="598.0">
                            <children>
                               <SplitPane dividerPositions="0.09479166666666666" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
@@ -85,7 +158,7 @@
                                                    <children>
                                                       <VBox layoutX="11.0" layoutY="23.0" prefHeight="200.0" prefWidth="111.0">
                                                          <children>
-                                                            <Button fx:id="btnCreaPrestiti" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="Crea Prest">
+                                                            <Button fx:id="btnCreaPrestiti" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="Aggiungi">
                                                                <VBox.margin>
                                                                   <Insets left="15.0" top="10.0" />
                                                                </VBox.margin>
@@ -95,12 +168,16 @@
                                                                   <Insets left="15.0" top="20.0" />
                                                                </VBox.margin>
                                                             </Button>
-                                                            <Button fx:id="BtnListaRestituiti" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="Lista Restituzioni">
+                                                            <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" popupSide="RIGHT" text="Tipologia">
+                                                              <items>
+                                                                <MenuItem mnemonicParsing="false" text="Prestiti in corso" />
+                                                                <MenuItem mnemonicParsing="false" text="Restituiti" />
+                                                              </items>
                                                                <VBox.margin>
                                                                   <Insets left="15.0" top="20.0" />
                                                                </VBox.margin>
-                                                            </Button>
-                                                            <Button fx:id="BtnListaPrestiti" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="Lista Prestiti">
+                                                            </MenuButton>
+                                                            <Button maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="Lista">
                                                                <VBox.margin>
                                                                   <Insets left="15.0" top="20.0" />
                                                                </VBox.margin>
@@ -128,9 +205,14 @@
                                  <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="42.0" prefWidth="597.0">
                                        <children>
-                                          <TextField fx:id="fldCercaMatricolaUtente" layoutX="249.0" layoutY="1.0" prefHeight="25.0" prefWidth="107.0" text="Matricola..." />
-                                          <TextField fx:id="fldCercaCognomeUtente" layoutX="372.0" layoutY="1.0" prefHeight="25.0" prefWidth="107.0" text="Cognome..." />
-                                          <Button fx:id="btnCercaUtente" layoutX="495.0" layoutY="1.0" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="CercaUtente" />
+                                          <MenuButton layoutX="399.0" layoutY="1.0" mnemonicParsing="false" text="Seleziona">
+                                            <items>
+                                              <MenuItem mnemonicParsing="false" text="Matricola" />
+                                              <MenuItem mnemonicParsing="false" text="Cognome" />
+                                            </items>
+                                          </MenuButton>
+                                          <TextField fx:id="fldCercaCognomeUtente" layoutX="281.0" layoutY="2.0" prefHeight="25.0" prefWidth="107.0" text="Cerca...." />
+                                          <Button fx:id="btnCercaUtente" layoutX="495.0" layoutY="1.0" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="Cerca" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="278.0" prefWidth="597.0">
@@ -139,24 +221,42 @@
                                              <items>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="279.0" prefWidth="116.0">
                                                    <children>
-                                                      <VBox layoutX="3.0" layoutY="23.0" prefHeight="200.0" prefWidth="87.0">
+                                                      <VBox layoutX="3.0" layoutY="23.0" prefHeight="97.0" prefWidth="87.0">
                                                          <children>
-                                                            <Button fx:id="btnCreaUtente" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="Aggiungi">
+                                                            <Button fx:id="btnCreaUtente" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="Cognome">
                                                                <VBox.margin>
                                                                   <Insets top="10.0" />
                                                                </VBox.margin>
                                                             </Button>
-                                                            <Button fx:id="btnModificaUtente" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="Modifica">
+                                                            <Button fx:id="btnModificaUtente" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="Matricola">
                                                                <VBox.margin>
                                                                   <Insets top="20.0" />
                                                                </VBox.margin>
                                                             </Button>
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox layoutX="3.0" layoutY="110.0" prefHeight="187.0" prefWidth="87.0">
+                                                         <children>
                                                             <Button fx:id="btnEliminaUtente" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="Elimina">
                                                                <VBox.margin>
+                                                                  <Insets top="10.0" />
+                                                               </VBox.margin>
+                                                            </Button>
+                                                            <MenuButton alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" popupSide="RIGHT" prefHeight="25.0" prefWidth="80.0" text="Ordina">
+                                                              <items>
+                                                                <MenuItem mnemonicParsing="false" text="Nome" />
+                                                                <MenuItem mnemonicParsing="false" text="Cognome" />
+                                                              </items>
+                                                               <VBox.margin>
+                                                                  <Insets top="20.0" />
+                                                               </VBox.margin>
+                                                            </MenuButton>
+                                                            <Button fx:id="btnModificaUtente1" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="Lista">
+                                                               <VBox.margin>
                                                                   <Insets top="20.0" />
                                                                </VBox.margin>
                                                             </Button>
-                                                            <Button fx:id="btnListaUtente" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="Lista Utenti">
+                                                            <Button fx:id="btnModificaUtente11" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="Storico">
                                                                <VBox.margin>
                                                                   <Insets top="20.0" />
                                                                </VBox.margin>
@@ -175,63 +275,6 @@
                                        </children>
                                     </AnchorPane>
                                  </items>
-                              </SplitPane>
-                           </children>
-                        </StackPane>
-                        <StackPane fx:id="stackpaneLibri" prefHeight="349.0" prefWidth="597.0">
-                           <children>
-                              <SplitPane dividerPositions="0.09479166666666666" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
-                                <items>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="42.0" prefWidth="597.0">
-                                       <children>
-                                          <TextField fx:id="fldCercaISBNLibro" layoutX="249.0" layoutY="1.0" prefHeight="25.0" prefWidth="107.0" text="ISBN..." />
-                                          <TextField fx:id="fldCercaAutoreLibro" layoutX="372.0" layoutY="1.0" prefHeight="25.0" prefWidth="107.0" text="Autore..." />
-                                          <TextField fx:id="fldCercaTitoloLibro" layoutX="122.0" layoutY="1.0" prefHeight="25.0" prefWidth="107.0" text="Titolo...." />
-                                          <Button fx:id="btnCercaLibro" layoutX="506.0" layoutY="1.0" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="CercaLibro" />
-                                       </children>
-                                    </AnchorPane>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="278.0" prefWidth="597.0">
-                                       <children>
-                                          <SplitPane dividerPositions="0.16367713004484305" layoutY="5.0" prefHeight="317.0" prefWidth="597.0">
-                                            <items>
-                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                                   <children>
-                                                      <VBox layoutX="4.0" layoutY="23.0" prefHeight="200.0" prefWidth="87.0">
-                                                         <children>
-                                                            <Button fx:id="btnAggiungiLibro" maxHeight="25.0" maxWidth="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="80.0" text="Aggiungi">
-                                                               <VBox.margin>
-                                                                  <Insets top="10.0" />
-                                                               </VBox.margin>
-                                                            </Button>
-                                                            <Button fx:id="btnModificaLibro" maxHeight="25.0" maxWidth="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="80.0" text="Modifica">
-                                                               <VBox.margin>
-                                                                  <Insets top="20.0" />
-                                                               </VBox.margin>
-                                                            </Button>
-                                                            <Button fx:id="btnEliminaLibro" maxHeight="25.0" maxWidth="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="80.0" text="Elimina">
-                                                               <VBox.margin>
-                                                                  <Insets top="20.0" />
-                                                               </VBox.margin>
-                                                            </Button>
-                                                            <Button fx:id="btnListaLibri" maxHeight="25.0" maxWidth="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="80.0" text="Lista libri">
-                                                               <VBox.margin>
-                                                                  <Insets top="20.0" />
-                                                               </VBox.margin>
-                                                            </Button>
-                                                         </children>
-                                                      </VBox>
-                                                   </children>
-                                                </AnchorPane>
-                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="296.0" prefWidth="495.0">
-                                                   <children>
-                                                      <TableView fx:id="tableviewLibri" layoutY="-6.0" prefHeight="312.0" prefWidth="494.0" />
-                                                   </children>
-                                                </AnchorPane>
-                                            </items>
-                                          </SplitPane>
-                                       </children>
-                                    </AnchorPane>
-                                </items>
                               </SplitPane>
                            </children>
                         </StackPane>
