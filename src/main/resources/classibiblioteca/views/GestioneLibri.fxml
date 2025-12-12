@@ -5,55 +5,22 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.packagefxml.HomepageController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classibiblioteca.views.GestioneLibriController">
    <children>
       <AnchorPane layoutY="-7.0" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <SplitPane dividerPositions="0.10051107325383304" layoutY="6.0" orientation="VERTICAL" prefHeight="394.0" prefWidth="600.0">
+            <SplitPane layoutY="6.0" orientation="VERTICAL" prefHeight="394.0" prefWidth="600.0">
               <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                     <children>
-                        <HBox layoutX="19.0" layoutY="2.0" prefHeight="36.0" prefWidth="573.0">
-                           <children>
-                              <Button fx:id="btnHomePage" maxHeight="25.0" maxWidth="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleHomePage" prefWidth="80.0" text="Home">
-                                 <HBox.margin>
-                                    <Insets right="15.0" top="5.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button fx:id="btnLibriPage" maxHeight="25.0" maxWidth="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleLibriPage" prefWidth="80.0" text="Libri">
-                                 <HBox.margin>
-                                    <Insets right="15.0" top="5.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button fx:id="btnUtentiPage" maxHeight="25.0" maxWidth="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleUtentiPage" prefWidth="80.0" text="Utenti">
-                                 <HBox.margin>
-                                    <Insets right="15.0" top="5.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button fx:id="btnPrestitiPage" maxHeight="25.0" maxWidth="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#HandlePrestitiPage" prefWidth="80.0" text="Prestiti">
-                                 <HBox.margin>
-                                    <Insets right="15.0" top="5.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button fx:id="btnEsporta" maxHeight="25.0" maxWidth="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="80.0" text="Esporta">
-                                 <HBox.margin>
-                                    <Insets left="100.0" top="5.0" />
-                                 </HBox.margin>
-                              </Button>
-                           </children>
-                        </HBox>
-                     </children>
-                  </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="346.0" prefWidth="598.0">
                      <children>
                         <StackPane fx:id="stackpaneHome" prefHeight="349.0" prefWidth="597.0">
                            <children>
@@ -224,9 +191,9 @@
                                  <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="42.0" prefWidth="597.0">
                                        <children>
-                                          <TextField fx:id="fldCercaHomePrestiti" layoutX="249.0" layoutY="1.0" prefHeight="25.0" prefWidth="107.0" text="Cerca...." />
+                                          <TextField fx:id="txtrRicerca" layoutX="249.0" layoutY="1.0" onAction="#handleCercaLibro" prefHeight="25.0" prefWidth="107.0" text="Cerca...." />
                                           <Button fx:id="btnCercaHomePrestiti" layoutX="495.0" layoutY="1.0" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="Cerca" />
-                                          <MenuButton fx:id="MenuButtonTipoCercaPrestiti" alignment="CENTER" contentDisplay="RIGHT" layoutX="388.0" layoutY="1.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Tipo">
+                                          <MenuButton fx:id="cmbFiltro" alignment="CENTER" contentDisplay="RIGHT" layoutX="388.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleCercaLibro" prefHeight="25.0" prefWidth="94.0" text="Filtro">
                                             <items>
                                               <MenuItem mnemonicParsing="false" text="ISBN" />
                                               <MenuItem mnemonicParsing="false" text="Matricola" />
@@ -236,34 +203,20 @@
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="278.0" prefWidth="597.0">
                                        <children>
-                                          <SplitPane dividerPositions="0.22589686098654713" layoutY="5.0" prefHeight="312.0" prefWidth="597.0">
+                                          <SplitPane dividerPositions="0.1957983193277311" layoutY="5.0" prefHeight="312.0" prefWidth="597.0">
                                              <items>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="279.0" prefWidth="111.0">
                                                    <children>
                                                       <VBox layoutX="11.0" layoutY="23.0" prefHeight="200.0" prefWidth="111.0">
                                                          <children>
-                                                            <Button fx:id="btnAggiungiHomePrestiti" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="Aggiungi">
+                                                            <Button maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" onAction="#handleCreaLibro" prefWidth="80.0" text="Aggiungi">
                                                                <VBox.margin>
-                                                                  <Insets left="15.0" top="10.0" />
+                                                                  <Insets left="5.0" top="10.0" />
                                                                </VBox.margin>
                                                             </Button>
-                                                            <Button fx:id="btnRestituisciHomePrestiti" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="Restituisci">
+                                                            <Button mnemonicParsing="false" onAction="#handleModificaLibro" prefHeight="26.0" prefWidth="80.0" text="Modifica">
                                                                <VBox.margin>
-                                                                  <Insets left="15.0" top="20.0" />
-                                                               </VBox.margin>
-                                                            </Button>
-                                                            <MenuButton fx:id="MenuButtonHomeTIpoPrestiti" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" popupSide="RIGHT" text="Tipologia">
-                                                              <items>
-                                                                <MenuItem mnemonicParsing="false" text="Prestiti in corso" />
-                                                                <MenuItem mnemonicParsing="false" text="Restituiti" />
-                                                              </items>
-                                                               <VBox.margin>
-                                                                  <Insets left="15.0" top="20.0" />
-                                                               </VBox.margin>
-                                                            </MenuButton>
-                                                            <Button fx:id="btnListaHomePrestiti" maxHeight="25.0" maxWidth="80.0" mnemonicParsing="false" prefWidth="80.0" text="Lista">
-                                                               <VBox.margin>
-                                                                  <Insets left="15.0" top="20.0" />
+                                                                  <Insets left="5.0" top="20.0" />
                                                                </VBox.margin>
                                                             </Button>
                                                          </children>
@@ -272,7 +225,16 @@
                                                 </AnchorPane>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="302.0" prefWidth="458.0">
                                                    <children>
-                                                      <TableView fx:id="tableviewPrestiti" layoutY="-6.0" prefHeight="312.0" prefWidth="458.0" />
+                                                      <TableView fx:id="tabellaLibri" layoutX="-5.0" layoutY="-2.0" prefHeight="312.0" prefWidth="486.0">
+                                                         <columns>
+                                                            <TableColumn prefWidth="120.60616302490234" text="Titolo" />
+                                                            <TableColumn prefWidth="101.393798828125" text="Autori" />
+                                                            <TableColumn prefWidth="57.990386962890625" text="Anno" />
+                                                            <TableColumn prefWidth="51.8880615234375" text="ISBN" />
+                                                            <TableColumn prefWidth="59.6834716796875" text="N° Copie" />
+                                                            <TableColumn prefWidth="90.59466552734375" text="Copie Prestate" />
+                                                         </columns>
+                                                      </TableView>
                                                    </children>
                                                 </AnchorPane>
                                              </items>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.packagefxml;
+package classibiblioteca.viewControllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,20 +20,10 @@ import javafx.scene.layout.VBox;
 /**
  * FXML Controller class
  *
- * @author Utente
+ * @author jiren
  */
-public class HomepageController implements Initializable {
+public class GestioneLibriController implements Initializable {
 
-    @FXML
-    private Button btnHomePage;
-    @FXML
-    private Button btnLibriPage;
-    @FXML
-    private Button btnUtentiPage;
-    @FXML
-    private Button btnPrestitiPage;
-    @FXML
-    private Button btnEsporta;
     @FXML
     private StackPane stackpaneHome;
     @FXML
@@ -85,21 +75,13 @@ public class HomepageController implements Initializable {
     @FXML
     private StackPane stackpanePrestiti;
     @FXML
-    private TextField fldCercaHomePrestiti;
+    private TextField txtrRicerca;
     @FXML
     private Button btnCercaHomePrestiti;
     @FXML
-    private MenuButton MenuButtonTipoCercaPrestiti;
+    private MenuButton cmbFiltro;
     @FXML
-    private Button btnAggiungiHomePrestiti;
-    @FXML
-    private Button btnRestituisciHomePrestiti;
-    @FXML
-    private MenuButton MenuButtonHomeTIpoPrestiti;
-    @FXML
-    private Button btnListaHomePrestiti;
-    @FXML
-    private TableView<?> tableviewPrestiti;
+    private TableView<?> tabellaLibri;
 
     /**
      * Initializes the controller class.
@@ -110,19 +92,15 @@ public class HomepageController implements Initializable {
     }    
 
     @FXML
-    private void handleHomePage(ActionEvent event) {
+    private void handleCercaLibro(ActionEvent event) {
     }
 
     @FXML
-    private void handleLibriPage(ActionEvent event) {
+    private void handleCreaLibro(ActionEvent event) {
     }
 
     @FXML
-    private void handleUtentiPage(ActionEvent event) {
-    }
-
-    @FXML
-    private void HandlePrestitiPage(ActionEvent event) {
+    private void handleModificaLibro(ActionEvent event) {
     }
     
 }
