@@ -16,7 +16,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-
+import classibiblioteca.entita.Libro;
+import classibiblioteca.entita.Prestito;
+import classibiblioteca.entita.Utente;
 /**
  * FXML Controller class
  *
@@ -25,104 +27,63 @@ import javafx.scene.layout.VBox;
 public class HomepageController implements Initializable {
 
     @FXML
-    private Button btnHomePage;
+    private Button btnHomePage,btnLibriPage,btnUtentiPage,btnPrestitiPage,btnEsporta;
     @FXML
-    private Button btnLibriPage;
-    @FXML
-    private Button btnUtentiPage;
-    @FXML
-    private Button btnPrestitiPage;
-    @FXML
-    private Button btnEsporta;
-    @FXML
-    private StackPane stackpaneHome;
-    @FXML
-    private StackPane stackpaneLibri;
+    private StackPane stackpaneHome,stackpaneUtenti,stackpaneLibri,stackpanePrestiti;
     @FXML
     private TextField fldCercaTitoloLibro;
     @FXML
     private Button btnCercaHomeLibro;
     @FXML
-    private MenuButton MenuButtonSelezionaHomeLibro;
+    private MenuButton MenuButtonSelezionaHomeLibro,MenuButtonOrdinaHomeLibro,MenuButtonHomeCercaUtente,MenuButtonHomeOrdinaUtente,MenuButtonTipoCercaPrestiti,MenuButtonHomeTIpoPrestiti;
     @FXML
-    private Button btnAggiungiHomeLibro;
+    private Button btnAggiungiHomeLibro,btnModificaHomeLibro,btnEliminaHomeLibro,btnListaHomeLibri;
     @FXML
-    private Button btnModificaHomeLibro;
+    private VBox HomeVboxVisLibro,HomeVboxUtenti;
     @FXML
-    private VBox HomeVboxVisLibro;
+    private TableView<Libro> tableviewLibri,tableviewUtenti,tableviewPrestiti;
     @FXML
-    private Button btnEliminaHomeLibro;
+    private TextField fldCercaHomeUtente,fldCercaHomePrestiti;
     @FXML
-    private MenuButton MenuButtonOrdinaHomeLibro;
+    private Button btnCercaHomeUtente,btnAggiungHomeUtente,btnModificaHomeUtente;
     @FXML
-    private Button btnListaHomeLibri;
+    private Button btnEliminaHomeUtente,btnListaHomeUtente,btnStoricoHomeUtente;
     @FXML
-    private TableView<?> tableviewLibri;
-    @FXML
-    private StackPane stackpaneUtenti;
-    @FXML
-    private MenuButton MenuButtonHomeCercaUtente;
-    @FXML
-    private TextField fldCercaHomeUtente;
-    @FXML
-    private Button btnCercaHomeUtente;
-    @FXML
-    private Button btnAggiungHomeUtente;
-    @FXML
-    private Button btnModificaHomeUtente;
-    @FXML
-    private VBox HomeVboxUtenti;
-    @FXML
-    private Button btnEliminaHomeUtente;
-    @FXML
-    private MenuButton MenuButtonHomeOrdinaUtente;
-    @FXML
-    private Button btnListaHomeUtente;
-    @FXML
-    private Button btnStoricoHomeUtente;
-    @FXML
-    private TableView<?> tableviewUtenti;
-    @FXML
-    private StackPane stackpanePrestiti;
-    @FXML
-    private TextField fldCercaHomePrestiti;
-    @FXML
-    private Button btnCercaHomePrestiti;
-    @FXML
-    private MenuButton MenuButtonTipoCercaPrestiti;
-    @FXML
-    private Button btnAggiungiHomePrestiti;
-    @FXML
-    private Button btnRestituisciHomePrestiti;
-    @FXML
-    private MenuButton MenuButtonHomeTIpoPrestiti;
-    @FXML
-    private Button btnListaHomePrestiti;
-    @FXML
-    private TableView<?> tableviewPrestiti;
+    private Button btnCercaHomePrestiti,btnAggiungiHomePrestiti,btnRestituisciHomePrestiti,btnListaHomePrestiti;
+    
+    private final String BLACK = "-fx-background-color: #555555; -fx-text-fill: white;";
+    private final String GRAY = "-fx-background-color: #cccccc; -fx-text-fill: black;";
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        stackpaneHome.setVisible(true);
+        stackpaneLibri.setVisible(false);
+        stackpanePrestiti.setVisible(false);
+        stackpaneUtenti.setVisible(false);
+        
+        btnHomePage.setStyle(BLACK);
+        btnUtentiPage.setStyle(GRAY);
+        btnLibriPage.setStyle(GRAY);
+        btnPrestitiPage.setStyle(GRAY);
+        
     }    
 
     @FXML
-    private void handleHomePage(ActionEvent event) {
+    private void handleButtonPage(ActionEvent e) {
+        Button clicked = (Button) e.getSource();
+        stackpaneHome.setVisible(clicked == btnHomePage);
+        stackpaneLibri.setVisible(clicked == btnLibriPage);
+        stackpanePrestiti.setVisible(clicked == btnPrestitiPage);
+        stackpaneUtenti.setVisible(clicked == btnUtentiPage);
+
+        btnHomePage.setStyle(clicked==btnHomePage ? BLACK : GRAY);
+        btnLibriPage.setStyle(clicked==btnLibriPage ? BLACK : GRAY);
+        btnPrestitiPage.setStyle(clicked==btnPrestitiPage ? BLACK : GRAY);
+        btnUtentiPage.setStyle(clicked==btnUtentiPage ? BLACK : GRAY);
+        
     }
 
-    @FXML
-    private void handleLibriPage(ActionEvent event) {
-    }
-
-    @FXML
-    private void handleUtentiPage(ActionEvent event) {
-    }
-
-    @FXML
-    private void HandlePrestitiPage(ActionEvent event) {
-    }
-    
 }
