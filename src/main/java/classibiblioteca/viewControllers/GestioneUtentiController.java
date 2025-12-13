@@ -30,6 +30,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Field;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -46,11 +47,16 @@ public class GestioneUtentiController implements Initializable {
     @FXML private TableColumn<Utente, String> colTitoloLibro1;
     @FXML private TableColumn<Utente, String> colTitoloLibro2;
     @FXML private TableColumn<Utente, String> colTitoloLibro3;
-    @FXML private TextField txtRicerca;
+    @FXML private TextField btnCercaHomeUtente;
+    @FXML private Field fldcercaUtente; 
     @FXML MenuButton MenuButtonHomeOrdinaUtente;
     @FXML MenuItem Nome;
     @FXML MenuItem Cognome;
     @FXML private Button btnModificaHomeUtente,btnEliminaHomeUtente,btnListaHomeUtente;
+    @FXML private MenuButton MenuButtonHomeCercaUtente;
+    @FXML private MenuItem ItemMatricola,ItemCognome;
+    @FXML private Button btnCerca;
+    private String tipoRicerca = "matricola";//matricola impostato come predefinito
     private ArchivioUtenti archivio;
     private ObservableList<Utente> utenti;
     private ArchivioPrestiti archivioPrestiti;
@@ -81,9 +87,11 @@ public class GestioneUtentiController implements Initializable {
         });
         Nome.setOnAction(event->handleListaOrdinatiPerNome(event));
         Cognome.setOnAction(event->handleListaOrdinatiPerCognome(event));
+        
+        ItemMatricola.setOnAction(event -> tipoRicerca = "matricola");
+        ItemCognome.setOnAction(event -> tipoRicerca = "cognome");
+        btnCercaHomeUtente.setOnAction(this::handleCercaUtente);
     }
-    
-    
 
     private void configuraColonne() {
         colNome.setCellValueFactory(c ->
@@ -209,18 +217,22 @@ public class GestioneUtentiController implements Initializable {
 
     @FXML
     private void handleCercaUtente(ActionEvent event) {
-        String testo = txtRicerca.getText();
-
-        if (testo == null || testo.trim().isEmpty()) {
-            caricaUtenti();
+        String testo = fldcercaUtente.getText();
+        if (testo.isEmpty()) {
+        caricaUtenti();
         } else {
-            utenti.setAll(archivio.ricercaUtente(testo));
+            if (tipoRicerca.equals("matricola")) {
+                utenti.setAll(archivio.ricercaUtentePerMatricola(testo));
+            } else if (tipoRicerca.equals("cognome")) {
+                utenti.setAll(archivio.ricercaUtentePerCognome(testo));
         }
+    }
+    tabellaUtenti.refresh();
     }
     
     @FXML
     private void handleListaUtenti() {
-        String testoRicerca = txtRicerca.getText().trim();
+        String testoRicerca = fldcercaUtente.getText().trim();
 
         if (testoRicerca.isEmpty()) {
         utenti.setAll(archivio.getLista());

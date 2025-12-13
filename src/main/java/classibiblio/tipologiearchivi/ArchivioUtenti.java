@@ -106,9 +106,27 @@ public class ArchivioUtenti implements Serializable {
                             .thenComparing(Utente::getCognome, String.CASE_INSENSITIVE_ORDER));
     return ordinata;
     }
-
-
     
+    public List<Utente> ricercaUtentePerMatricola(String matricola) {
+        List<Utente> risultati = new ArrayList<>();
+        for (Utente u : listutenti) {
+            if (u.getMatricola().contains(matricola)) {  // Usa contains per cercare una sottostringa
+            risultati.add(u);
+        }
+    }
+    return risultati;
+}
+
+    public List<Utente> ricercaUtentePerCognome(String cognome) {
+        List<Utente> risultati = new ArrayList<>();
+        for (Utente u : listutenti) {
+            if (u.getCognome().toLowerCase().contains(cognome.toLowerCase())) {  // Cerca per cognome
+            risultati.add(u);
+        }
+    }
+    return risultati;
+}
+
     public List<Utente> getLista() {
         return listutenti;
     }
