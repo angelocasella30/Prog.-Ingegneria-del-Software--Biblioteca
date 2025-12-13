@@ -92,15 +92,22 @@ public class ArchivioUtenti implements Serializable {
     // --- Metodi per l'Interfaccia Grafica ---
     
     // Requisito UI-1.3
-    public List<Utente> getUtentiOrdinati()
-    {
+    
+    public List<Utente> getUtentiOrdinatiPerCognome() {
         List<Utente> ordinata = new ArrayList<>(listutenti);
-        
-        // Ordina per Cognome, e a parità di cognome, per Nome
+  
         ordinata.sort(Comparator.comparing(Utente::getCognome, String.CASE_INSENSITIVE_ORDER)
-                                .thenComparing(Utente::getNome, String.CASE_INSENSITIVE_ORDER));
+                            .thenComparing(Utente::getNome, String.CASE_INSENSITIVE_ORDER));
         return ordinata;
     }
+    public List<Utente> getUtentiOrdinatiPerNome() {
+        List<Utente> ordinata = new ArrayList<>(listutenti);
+        ordinata.sort(Comparator.comparing(Utente::getNome, String.CASE_INSENSITIVE_ORDER)
+                            .thenComparing(Utente::getCognome, String.CASE_INSENSITIVE_ORDER));
+    return ordinata;
+    }
+
+
     
     public List<Utente> getLista() {
         return listutenti;

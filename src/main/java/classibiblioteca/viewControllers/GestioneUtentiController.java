@@ -27,6 +27,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -44,6 +47,10 @@ public class GestioneUtentiController implements Initializable {
     @FXML private TableColumn<Utente, String> colTitoloLibro2;
     @FXML private TableColumn<Utente, String> colTitoloLibro3;
     @FXML private TextField txtRicerca;
+    @FXML MenuButton MenuButtonHomeOrdinaUtente;
+    @FXML MenuItem Nome;
+    @FXML MenuItem Cognome;
+    @FXML private Button btnModificaHomeUtente,btnEliminaHomeUtente,btnListaHomeUtente;
     private ArchivioUtenti archivio;
     private ObservableList<Utente> utenti;
     private ArchivioPrestiti archivioPrestiti;
@@ -57,7 +64,26 @@ public class GestioneUtentiController implements Initializable {
         tabellaUtenti.setItems(utenti);
         configuraColonne();
         caricaUtenti();
+        btnModificaHomeUtente.setDisable(true);
+        btnEliminaHomeUtente.setDisable(true);
+
+        // Aggiungi un listener per la selezione della tabella
+        tabellaUtenti.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                // Abilita i pulsanti quando una riga è selezionata
+                btnModificaHomeUtente.setDisable(false);
+                btnEliminaHomeUtente.setDisable(false);
+            } else {
+                // Disabilita i pulsanti quando nessuna riga è selezionata
+                btnModificaHomeUtente.setDisable(true);
+                btnEliminaHomeUtente.setDisable(true);
+            }
+        });
+        Nome.setOnAction(event->handleListaOrdinatiPerNome(event));
+        Cognome.setOnAction(event->handleListaOrdinatiPerCognome(event));
     }
+    
+    
 
     private void configuraColonne() {
         colNome.setCellValueFactory(c ->
@@ -95,6 +121,15 @@ public class GestioneUtentiController implements Initializable {
 
         return corrente.getTitololibro();
     }
+    
+    private void handleListaOrdinatiPerNome(ActionEvent event){
+        utenti.setAll(FXCollections.observableArrayList(archivio.getUtentiOrdinatiPerNome()));
+        tabellaUtenti.refresh();
+    }
+    private void handleListaOrdinatiPerCognome(ActionEvent event){
+        utenti.setAll(FXCollections.observableArrayList(archivio.getUtentiOrdinatiPerCognome()));
+        tabellaUtenti.refresh();
+    }
 
     @FXML
     private void handleCreaUtente(ActionEvent event) {
@@ -119,6 +154,8 @@ public class GestioneUtentiController implements Initializable {
             Utente nuovo = controller.getUtente();
             archivio.aggiungiUtente(nuovo);
             utenti.add(nuovo);
+            
+            handleListaUtenti();
             }
 
     } catch (IOException e) {
@@ -152,6 +189,7 @@ public class GestioneUtentiController implements Initializable {
 
         if (controller.isOkClicked()) {
             tabellaUtenti.refresh();
+            handleListaUtenti();
         }
 
     } catch (IOException e) {
@@ -179,6 +217,18 @@ public class GestioneUtentiController implements Initializable {
             utenti.setAll(archivio.ricercaUtente(testo));
         }
     }
+    
+    @FXML
+    private void handleListaUtenti() {
+        String testoRicerca = txtRicerca.getText().trim();
+
+        if (testoRicerca.isEmpty()) {
+        utenti.setAll(archivio.getLista());
+        } else {
+        utenti.setAll(archivio.ricercaUtente(testoRicerca)); 
+    }
+    tabellaUtenti.refresh();
+}
 
     private Utente utenteSelezionato() {
         return tabellaUtenti.getSelectionModel().getSelectedItem();
