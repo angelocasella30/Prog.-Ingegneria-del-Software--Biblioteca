@@ -104,6 +104,21 @@ public class ArchivioPrestiti implements Serializable {
         }
         return attivi;
     }
+    
+    public Prestito getSingoloPrestitoAttivo(String matricola, Prestito precedente) {
+    boolean trovatoPrecedente = (precedente == null); 
+    for (Prestito p : listprestiti) {
+        if (p.getMatricola().equals(matricola) && p.getDataRestituzioneEffettiva() == null) {
+            if (trovatoPrecedente) {
+                return p;
+            }
+            if (p.equals(precedente)) {
+                trovatoPrecedente = true;
+            }
+        }
+    }
+    return null;
+}
 
     public List<Prestito> getLista() {
         return listprestiti;
