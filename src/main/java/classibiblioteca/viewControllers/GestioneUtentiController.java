@@ -98,27 +98,66 @@ public class GestioneUtentiController implements Initializable {
 
     @FXML
     private void handleCreaUtente(ActionEvent event) {
-        Optional<Utente> risultato = apriDialogUtente(null);
+        try {
+            FXMLLoader loader = new FXMLLoader(
+            getClass().getResource("/classibiblioteca/views/utentescheda.fxml")
+        );
+        Pane page = loader.load();
 
-        risultato.ifPresent(u -> {
-            archivio.aggiungiUtente(u);
-            utenti.add(u);
-        });
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Crea utente");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(tabellaUtenti.getScene().getWindow());
+        dialogStage.setScene(new Scene(page));
+
+        SchedaUtentecontroller controller = loader.getController();
+        controller.setDialogStage(dialogStage);
+
+        dialogStage.showAndWait();
+
+        if (controller.isOkClicked()) {
+            Utente nuovo = controller.getUtente();
+            archivio.aggiungiUtente(nuovo);
+            utenti.add(nuovo);
+            }
+
+    } catch (IOException e) {
+        e.printStackTrace();
     }
-
+}
     @FXML
     private void handleModificaUtente(ActionEvent event) {
         Utente selezionato = utenteSelezionato();
-
         if (selezionato == null) {
             avvisaSelezione();
             return;
         }
+        try {
+            FXMLLoader loader = new FXMLLoader(
+            getClass().getResource("/classibiblioteca/views/modificautente.fxml")
+        );
+        Pane page = loader.load();
 
-        apriDialogUtente(selezionato);
-        aggiornaVista();
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Modifica Utente");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(tabellaUtenti.getScene().getWindow());
+        dialogStage.setScene(new Scene(page));
+
+        ModificaUtenteController controller = loader.getController();
+        controller.setDialogStage(dialogStage);
+        controller.setUtente(selezionato); // passa l'utente da modificare
+
+        dialogStage.showAndWait();
+
+        if (controller.isOkClicked()) {
+            tabellaUtenti.refresh();
+        }
+
+    } catch (IOException e) {
+        e.printStackTrace();
     }
-
+}
     @FXML
     private void handleEliminaUtente(ActionEvent event) {
         Utente selezionato = utenteSelezionato();
@@ -141,33 +180,6 @@ public class GestioneUtentiController implements Initializable {
         }
     }
 
-    private Optional<Utente> apriDialogUtente(Utente utente) {
-        try {
-            FXMLLoader loader = new FXMLLoader(
-            getClass().getResource("/classibiblioteca/views/utentescheda.fxml"));
-            Pane page = loader.load();
-
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Scheda Utente");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(tabellaUtenti.getScene().getWindow());
-            dialogStage.setScene(new Scene(page));
-
-            SchedaUtentecontroller controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-            controller.setUtente(utente);
-
-            dialogStage.showAndWait();
-
-            if (controller.isOkClicked()) {
-                return Optional.of(controller.getUtente());
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return Optional.empty();
-    }
     private Utente utenteSelezionato() {
         return tabellaUtenti.getSelectionModel().getSelectedItem();
     }
