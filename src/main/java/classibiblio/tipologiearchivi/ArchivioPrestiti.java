@@ -95,6 +95,33 @@ public class ArchivioPrestiti implements Serializable {
         return scaduti;
     }
     
+    
+    // Metodo per cercare i prestiti per matricola
+    public List<Prestito> ricercaPrestitoPerMatricola(String matricola) {
+        List<Prestito> risultati = new ArrayList<>();
+    
+    for (Prestito p : listprestiti) {
+        if (p.getMatricola().contains(matricola)) {  
+            risultati.add(p);
+        }
+    }
+    
+    return risultati;
+}
+
+    // Metodo per cercare i prestiti per ISBN
+    public List<Prestito> ricercaPrestitoPerISBN(String isbn) {
+        List<Prestito> risultati = new ArrayList<>();
+    
+    for (Prestito p : listprestiti) {
+        if (p.getISBN().contains(isbn)) {
+            risultati.add(p);
+        }
+    }
+    
+    return risultati;
+}
+
     // Metodo per vedere solo i prestiti ATTIVI (non ancora restituiti)
     public List<Prestito> getPrestitiAttivi() {
         List<Prestito> attivi = new ArrayList<>();

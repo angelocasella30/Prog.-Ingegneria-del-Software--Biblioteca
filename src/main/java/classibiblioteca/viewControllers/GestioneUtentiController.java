@@ -30,7 +30,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.Field;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -48,7 +47,7 @@ public class GestioneUtentiController implements Initializable {
     @FXML private TableColumn<Utente, String> colTitoloLibro2;
     @FXML private TableColumn<Utente, String> colTitoloLibro3;
     @FXML private TextField btnCercaHomeUtente;
-    @FXML private Field fldcercaUtente; 
+    @FXML private TextField fldcercaUtente; 
     @FXML MenuButton MenuButtonHomeOrdinaUtente;
     @FXML MenuItem Nome;
     @FXML MenuItem Cognome;
