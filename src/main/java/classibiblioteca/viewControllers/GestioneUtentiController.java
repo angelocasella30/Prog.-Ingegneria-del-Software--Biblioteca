@@ -205,6 +205,30 @@ public class GestioneUtentiController implements Initializable {
     }
 }
     @FXML
+    private void handleStoricoUtente(ActionEvent event) {
+        Utente selezionato = utenteSelezionato();
+        if (selezionato == null) {
+            avvisaSelezione();
+            return;
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/classibiblioteca/views/schedamodificautente.fxml"));
+            Pane page = loader.load();
+            Storicoschedacontroller controller = loader.getController();
+            controller.setUtente(selezionato);
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Storico Utente");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(tabellaUtenti.getScene().getWindow());
+            dialogStage.setScene(new Scene(page));
+            dialogStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+    }
+}
+    @FXML
     private void handleEliminaUtente(ActionEvent event) {
         Utente selezionato = utenteSelezionato();
         if (selezionato == null) {

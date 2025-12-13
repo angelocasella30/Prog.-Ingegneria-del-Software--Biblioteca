@@ -1,6 +1,7 @@
 package classibiblio.tipologiearchivi;
 
 import classibiblioteca.entita.Prestito;
+import classibiblioteca.entita.Utente;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -104,7 +105,20 @@ public class ArchivioPrestiti implements Serializable {
         }
         return attivi;
     }
-    
+    //metodo per ottenere la lista prestitiattivi per utente
+    public List<Prestito> getPrestitiAttiviPerUtente(Utente utente) {
+        List<Prestito> prestitiAttiviUtente = new ArrayList<>();
+        
+        for (Prestito p : listprestiti) {
+            // Verifica se il prestito è attivo per l'utente specifico (controlla matricola)
+            if (p.getMatricola().equalsIgnoreCase(utente.getMatricola()) && p.getDataRestituzioneEffettiva() == null) {
+                prestitiAttiviUtente.add(p);
+            }
+        }
+        
+        return prestitiAttiviUtente;
+    }
+    //metodo per ottenere il singolo prestito attivo
     public Prestito getSingoloPrestitoAttivo(String matricola, Prestito precedente) {
     boolean trovatoPrecedente = (precedente == null); 
     for (Prestito p : listprestiti) {
