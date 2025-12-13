@@ -145,7 +145,17 @@ public class Libro implements Serializable {
     {
         return copiePrestate > 0;
     }
+    
+     public void decrementaCopieDisponibili() {
+        if (numeroCopie > 0) {
+            numeroCopie--;
+        }
+    }
 
+    // Metodo per incrementare le copie disponibili (quando un libro viene restituito)
+    public void incrementaCopieDisponibili() {
+        numeroCopie++;
+    }
     // --- Equals, HashCode e ToString ---
 
     @Override

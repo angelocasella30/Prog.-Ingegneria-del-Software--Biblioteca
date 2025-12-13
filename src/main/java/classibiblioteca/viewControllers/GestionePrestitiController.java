@@ -23,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -48,7 +49,7 @@ public class GestionePrestitiController implements Initializable {
     @FXML private Button btnCreaPrestito;
     @FXML private Button btnRestituisci;
     @FXML private Button btnVisualizzaPrestiti;
-    @FXML private Button btnEliminaPrestito;
+    @FXML private Button btnVisualizzaRestituzioni;
     @FXML private Button btnCercaHomePrestito;
     @FXML private TextField fldcercaPrestito; 
     @FXML MenuButton RicercamenuButtonPrestito;
@@ -70,21 +71,16 @@ public class GestionePrestitiController implements Initializable {
         tabellaPrestiti.setItems(prestiti);
         configuraColonne();
         caricaPrestiti();
-
-        btnEliminaPrestito.setDisable(true);
         
-        // Aggiungi listener per la selezione della tabella
-        tabellaPrestiti.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                // Abilita il pulsante di eliminazione quando un prestito è selezionato
-                btnEliminaPrestito.setDisable(false);
-            } else {
-                btnEliminaPrestito.setDisable(true);
-            }
-        });
         Matricola.setOnAction(event -> tipoRicerca = "matricola");
         ISBN.setOnAction(event -> tipoRicerca = "ISBN");
         btnCercaHomePrestito.setOnAction(event->handleCercaPrestito(event));
+    }
+    // Carica i prestiti attivi nella TableView
+    private void caricaPrestiti() {
+        if (utenteSelezionato != null) {
+            prestiti.setAll(archivioPrestiti.getPrestitiAttiviPerUtente(utenteSelezionato)); // Carica i prestiti per l'utente selezionato
+     }
     }
 
     // Configura le colonne della TableView
@@ -97,22 +93,27 @@ public class GestionePrestitiController implements Initializable {
         colDataFine.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getDataScadenzaPrevista().toString())); // Data fine
         colDataRestituzione.setCellValueFactory(c -> new SimpleStringProperty(
             c.getValue().getDataRestituzioneEffettiva() != null ? c.getValue().getDataRestituzioneEffettiva().toString() : "Non restituito")); // Data restituzione
+    
+        tabellaPrestiti.setRowFactory(tableview->{
+            TableRow<Prestito>row= new TableRow<>();
+            row.itemProperty().addListener((obs,oldItem,newItem)->{
+                if(newItem!=null && newItem.isInRitardo()){
+                    row.setStyle("-fx-background-color:red; -fx-text-fill:gray");
+                }else{
+                    row.setStyle("");
+                }
+            });
+            return row;
+        });
     }
-
-    // Carica i prestiti attivi nella TableView
-    private void caricaPrestiti() {
-        if (utenteSelezionato != null) {
-            prestiti.setAll(archivioPrestiti.getPrestitiAttiviPerUtente(utenteSelezionato)); // Carica i prestiti per l'utente selezionato
-        }
-    }
-
+   
     // Gestisce la creazione di un nuovo prestito
     @FXML
     private void handleCreaPrestito(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/classibiblioteca/views/creaprestito.fxml"));
             Pane page = loader.load();
-            
+
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Crea Nuovo Prestito");
             dialogStage.initModality(Modality.WINDOW_MODAL);
@@ -143,7 +144,20 @@ public class GestionePrestitiController implements Initializable {
     }
     tabellaPrestiti.refresh(); 
 }
+    // Carica solo i prestiti restituiti
+    @FXML
+    private void handleVisualizzaRestituzioni(ActionEvent event) {
+    
+        prestiti.setAll(archivioPrestiti.getPrestitiRestituiti()); // Chiama il metodo aggiunto in ArchivioPrestiti
+        tabellaPrestiti.refresh(); 
+}
 
+    @FXML
+    private void handleVisualizzaPrestitiOrdinatiScadenza(ActionEvent event) {
+    
+        prestiti.setAll(archivioPrestiti.getPrestitiOrdinatiPerScadenza()); // Chiama il metodo aggiunto in ArchivioPrestiti
+        tabellaPrestiti.refresh();  
+}
     // Gestisce la restituzione di un prestito
     @FXML
     private void handleRestituisci(ActionEvent event) {
@@ -161,13 +175,16 @@ public class GestionePrestitiController implements Initializable {
 
             RestituzioneController controller = loader.getController();
             controller.setDialogStage(dialogStage);
+            if (selezionato != null) {
             controller.setPrestito(selezionato); 
+            }
             dialogStage.showAndWait();
             if(selezionato!=null && selezionato.getDataRestituzioneEffettiva()!= null){
                 prestiti.remove(selezionato);
                 tabellaPrestiti.refresh();
-    } catch (IOException e){
-        e.printStackTrace();
+            }
+        } catch (IOException e){
+             e.printStackTrace();
     }
         
 }} 

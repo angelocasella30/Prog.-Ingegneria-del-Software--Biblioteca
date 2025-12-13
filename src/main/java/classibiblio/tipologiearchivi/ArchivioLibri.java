@@ -163,6 +163,30 @@ public class ArchivioLibri implements Serializable {
         ordinata.sort(Comparator.comparing(Libro::getPrimoAutore, String.CASE_INSENSITIVE_ORDER));
         return ordinata;
     }
+    public List<Libro> getLibriDisponibili() {
+        List<Libro> libriDisponibiliList = new ArrayList<>();
+
+        // Aggiungi i libri che hanno almeno una copia disponibile
+        for (Libro libro : listlibro) {
+            if (libro.getNumeroCopie() > 0) {
+                libriDisponibiliList.add(libro);
+            }
+        }
+
+        return libriDisponibiliList;
+    }
+    public void aggiornaLibro(Libro libro) {
+        for (int i = 0; i < listlibro.size(); i++) {
+            if (listlibro.get(i).getTitolo().equalsIgnoreCase(libro.getTitolo())) {
+                listlibro.set(i, libro);  // Sostituisce il libro aggiornato nell'archivio
+                System.out.println("Libro aggiornato: " + libro.getTitolo());
+                return;
+            }
+        }
+    }
+    public class ArchivioLibri {
+    private List<Libro> libriDisponibili;
+}
 
     public List<Libro> getLista() 
     {

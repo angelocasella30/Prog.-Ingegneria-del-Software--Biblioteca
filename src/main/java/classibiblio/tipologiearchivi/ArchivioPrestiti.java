@@ -2,10 +2,14 @@ package classibiblio.tipologiearchivi;
 
 import classibiblioteca.entita.Prestito;
 import classibiblioteca.entita.Utente;
+import classibiblio.tipologiearchivi.ArchivioUtenti;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * Classe ArchivioPrestiti
@@ -69,6 +73,18 @@ public class ArchivioPrestiti implements Serializable {
         System.out.println("Errore: Nessun prestito attivo trovato per Matricola " + matricola + " e ISBN " + ISBN);
         return false;
     }
+    public List<Utente> getUtentiConLibroInPrestito(Libro libroSelezionato) {
+    List<Utente> utentiConLibro = new ArrayList<>();
+
+    for (Prestito prestito : listprestiti) {
+        
+        if (prestito.getLibro().equals(libroSelezionato) && prestito.getDataRestituzioneEffettiva() == null) {
+            utentiConLibro.add(prestito.getUtente());
+        }
+    }
+
+    return utentiConLibro;
+}
 
     // --- Metodi per l'Interfaccia Grafica ---
 
@@ -82,6 +98,16 @@ public class ArchivioPrestiti implements Serializable {
         
         return ordinata;
     }
+    // Metodo per ottenere solo i prestiti restituiti
+    public List<Prestito> getPrestitiRestituiti() {
+        List<Prestito> restituiti = new ArrayList<>();
+        for (Prestito p : listprestiti) {
+            if (p.getDataRestituzioneEffettiva() != null) {  // Controlla se il prestito è stato restituito
+                restituiti.add(p);
+        }
+    }
+    return restituiti;
+}
 
     // Metodo utile per il controller: ottieni solo quelli in ritardo
     public List<Prestito> getPrestitiScaduti() {
@@ -145,6 +171,30 @@ public class ArchivioPrestiti implements Serializable {
         
         return prestitiAttiviUtente;
     }
+    public List<Utente> getUtentiConMenoDiTrePrestiti() {
+    List<Utente> utentiDisponibili = new ArrayList<>();
+    Map<String, Integer> prestitiPerUtente = new HashMap<>();  
+    for (Prestito prestito : listprestiti) {
+        if (prestito.getDataRestituzioneEffettiva() == null) {
+            String matricola = prestito.getMatricola();
+            prestitiPerUtente.put(matricola, prestitiPerUtente.getOrDefault(matricola, 0) + 1);
+        }
+    }
+    for (Map.Entry<String, Integer> entry : prestitiPerUtente.entrySet()) {
+        if (entry.getValue() < 3) {
+            // Trova l'utente tramite la matricola
+            Utente utente = getUtenteByMatricola(entry.getKey());
+            if (utente != null) {
+                utentiDisponibili.add(utente);  // Aggiungi l'utente alla lista
+            }
+        }
+    }
+
+    return utentiDisponibili;
+}
+
+    
+    
     //metodo per ottenere il singolo prestito attivo
     public Prestito getSingoloPrestitoAttivo(String matricola, Prestito precedente) {
     boolean trovatoPrecedente = (precedente == null); 
