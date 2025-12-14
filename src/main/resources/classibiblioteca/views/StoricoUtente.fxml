@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -9,9 +10,12 @@
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../styles/maincontrollerview.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classibiblioteca.viewControllers.StoricoUtenteController">
 
     <children>
-      <HBox alignment="CENTER" prefHeight="54.0" prefWidth="600.0" stylesheets="@../../styles/maincontrollerview.css">
+      <HBox alignment="CENTER" prefHeight="44.0" prefWidth="600.0" styleClass="header-panel" stylesheets="@../../styles/maincontrollerview.css">
          <children>
-              <Label fx:id="lblIntestazione" alignment="CENTER" stylesheets="@../../styles/maincontrollerview.css" text="Storico Prestiti" />
+              <Label fx:id="lblIntestazione" alignment="CENTER" styleClass="label-bold" stylesheets="@../../styles/maincontrollerview.css" text="Storico Prestiti">
+               <HBox.margin>
+                  <Insets right="150.0" top="-5.0" />
+               </HBox.margin></Label>
          </children>
       </HBox>
 

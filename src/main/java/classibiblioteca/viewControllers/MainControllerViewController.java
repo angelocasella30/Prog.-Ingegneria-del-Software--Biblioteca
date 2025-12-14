@@ -6,6 +6,7 @@ import classibiblio.tipologiearchivi.ArchivioPrestiti;
 import classibiblio.tipologiearchivi.ArchivioUtenti;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ResourceBundle;
 
@@ -30,18 +31,27 @@ public class MainControllerViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // Carica Archivio di default all'avvio
         try {
+            System.out.println("=== CARICAMENTO ARCHIVIO ===");
+            System.out.println("Default path: " + Archivio.defaultPath());
+
             archivio = Archivio.caricaDefault();
             savePath = Archivio.defaultPath();
-            System.out.println("✓ Archivio caricato da: " + savePath);
+
+            System.out.println("✓ Archivio caricato");
+            System.out.println("Utenti: " + archivio.getArchivioUtenti().getLista().size());
+            System.out.println("Libri: " + archivio.getArchivioLibri().getLista().size());
+            System.out.println("Prestiti: " + archivio.getArchivioPrestiti().getLista().size());
+            System.out.println("=== FINE CARICAMENTO ===");
+
         } catch (IOException | ClassNotFoundException e) {
             System.err.println("Errore caricamento archivio: " + e.getMessage());
             archivio = new Archivio();
             savePath = Archivio.defaultPath();
         }
 
-        // Carica HomePage di default all'avvio
         caricaSchermata("HomePage");
     }
+
 
     // ========== METODI DI NAVIGAZIONE ==========
 
@@ -133,41 +143,44 @@ public class MainControllerViewController implements Initializable {
     // ========== METODO DI RESET ==========
      @FXML private Button btnReset;
 
-       @FXML
-        private void handleResetArchivio(ActionEvent event) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Conferma Reset");
-            alert.setHeaderText("Stai per cancellare TUTTI i dati");
-            alert.setContentText("Questa operazione è irreversibile. Sei sicuro?");
+  @FXML
+private void handleResetArchivio(ActionEvent event) {
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Conferma Reset");
+    alert.setHeaderText("Stai per cancellare TUTTI i dati");
+    alert.setContentText("Questa operazione è irreversibile. Sei sicuro?");
 
-            if (alert.showAndWait().get() == ButtonType.OK) {
-                try {
-                    // Crea un archivio vuoto
-                    archivio = new Archivio(
-                        new ArchivioUtenti(), 
-                        new ArchivioLibri(), 
-                        new ArchivioPrestiti()
-                    );
+    if (alert.showAndWait().get() == ButtonType.OK) {
+        try {
+            // ✅ Svuota i dati in memoria
+            archivio.getArchivioUtenti().getLista().clear();
+            archivio.getArchivioLibri().getLista().clear();
+            archivio.getArchivioPrestiti().getLista().clear();
+            
+            System.out.println("✓ Archivi svuotati in memoria");
+            
+            // ✅ Salva l'archivio vuoto
+            Archivio.salva(archivio, savePath);
+            System.out.println("✓ Archivio vuoto salvato");
+            
+            Alert info = new Alert(Alert.AlertType.INFORMATION);
+            info.setTitle("Reset Completato");
+            info.setContentText("Archivio ripristinato a zero.");
+            info.showAndWait();
+            
+            caricaSchermata("HomePage");
 
-                    // Salva l'archivio vuoto
-                    Archivio.salva(archivio, savePath);
-
-                    // Ricarica la schermata corrente (così i controller ricevono il nuovo archivio)
-                    caricaSchermata("HomePage");
-
-                    Alert info = new Alert(Alert.AlertType.INFORMATION);
-                    info.setTitle("Reset Completato");
-                    info.setContentText("Archivio ripristinato a zero.");
-                    info.showAndWait();
-
-                } catch (IOException e) {
-                    Alert errore = new Alert(Alert.AlertType.ERROR);
-                    errore.setTitle("Errore");
-                    errore.setContentText("Reset fallito: " + e.getMessage());
-                    errore.showAndWait();
-                }
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert errore = new Alert(Alert.AlertType.ERROR);
+            errore.setTitle("Errore");
+            errore.setContentText("Reset fallito: " + e.getMessage());
+            errore.showAndWait();
         }
+    }
+}
+
+
 
     // ========== GETTER (se necessari per accesso esterno) ==========
 
