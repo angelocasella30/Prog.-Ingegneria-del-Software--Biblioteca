@@ -7,50 +7,90 @@ import java.io.*;
 
 /**
  * Classe Facade che aggrega tutti gli archivi del sistema.
- * Gestisce la persistenza dei dati su file (DF-1.4).
+ * <p>
+ * Fornisce un punto di accesso unico ai dati della biblioteca
+ * (utenti, libri e prestiti) e gestisce la persistenza
+ * dell'intero stato dell'applicazione su file.
+ * </p>
  */
 public class Archivio implements Serializable {
 
-    private ArchivioUtenti listautenti;
-    private ArchivioLibri listalibri;
-    private ArchivioPrestiti listaprestiti;
+    private static final long serialVersionUID = 1L;
 
-    // Costruttore vuoto: Inizializza archivi vuoti (per il primo avvio)
-    public Archivio() {
-        this.listautenti = new ArchivioUtenti();
-        this.listalibri = new ArchivioLibri();
-        this.listaprestiti = new ArchivioPrestiti();
-    } //decidere se metterlo
+    /** Archivio degli utenti */
+    private ArchivioUtenti archivioUtenti;
 
-    // Costruttore con parametri (utile per test o iniezioni)
-    public Archivio(ArchivioUtenti listautenti, ArchivioLibri listalibri, ArchivioPrestiti listaprestiti) {
-        this.listautenti = listautenti;
-        this.listalibri = listalibri;
-        this.listaprestiti = listaprestiti;
-    }
+    /** Archivio dei libri */
+    private ArchivioLibri archivioLibri;
 
-    // --- Getters per accedere ai sotto-archivi ---
-    // I Controller useranno questi metodi per manipolare i dati specifici
-
-    public ArchivioUtenti getArchivioUtenti() {
-        return listautenti;
-    }
-
-    public ArchivioLibri getArchivioLibri() {
-        return listalibri;
-    }
-
-    public ArchivioPrestiti getArchivioPrestiti() {
-        return listaprestiti;
-    }
-
-    // --- Gestione Persistenza (Salvataggio/Caricamento) ---
+    /** Archivio dei prestiti */
+    private ArchivioPrestiti archivioPrestiti;
 
     /**
-     * Salva l'intero stato dell'archivio su un file binario.
-     * @param archivio L'oggetto da salvare.
-     * @param filepath Il percorso del file.
-     * @throws IOException Se ci sono errori di scrittura su disco.
+     * Costruttore di default.
+     * <p>
+     * Inizializza archivi vuoti ed è utilizzato
+     * al primo avvio dell'applicazione.
+     * </p>
+     */
+    public Archivio() {
+        this.archivioUtenti = new ArchivioUtenti();
+        this.archivioLibri = new ArchivioLibri();
+        this.archivioPrestiti = new ArchivioPrestiti();
+    }
+
+    /**
+     * Costruttore parametrizzato.
+     * <p>
+     * Utilizzato principalmente per test o per iniezione
+     * di archivi già esistenti.
+     * </p>
+     *
+     * @param archivioUtenti archivio utenti
+     * @param archivioLibri archivio libri
+     * @param archivioPrestiti archivio prestiti
+     */
+    public Archivio(ArchivioUtenti archivioUtenti,
+                    ArchivioLibri archivioLibri,
+                    ArchivioPrestiti archivioPrestiti) {
+        this.archivioUtenti = archivioUtenti;
+        this.archivioLibri = archivioLibri;
+        this.archivioPrestiti = archivioPrestiti;
+    }
+
+    /**
+     * Restituisce l'archivio utenti.
+     *
+     * @return archivio utenti
+     */
+    public ArchivioUtenti getArchivioUtenti() {
+        return archivioUtenti;
+    }
+
+    /**
+     * Restituisce l'archivio libri.
+     *
+     * @return archivio libri
+     */
+    public ArchivioLibri getArchivioLibri() {
+        return archivioLibri;
+    }
+
+    /**
+     * Restituisce l'archivio prestiti.
+     *
+     * @return archivio prestiti
+     */
+    public ArchivioPrestiti getArchivioPrestiti() {
+        return archivioPrestiti;
+    }
+
+    /**
+     * Salva lo stato completo dell'archivio su file binario.
+     *
+     * @param archivio archivio da salvare
+     * @param filepath percorso del file
+     * @throws IOException in caso di errori di I/O
      */
     public static void salvaArchivio(Archivio archivio, String filepath) throws IOException {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filepath))) {
@@ -59,13 +99,15 @@ public class Archivio implements Serializable {
     }
 
     /**
-     * Carica lo stato dell'archivio da un file binario.
-     * @param filepath Il percorso del file da leggere.
-     * @return L'oggetto Archivio ricostruito.
-     * @throws IOException Se il file non esiste o non è leggibile.
-     * @throws ClassNotFoundException Se la classe nel file non corrisponde al codice.
+     * Carica lo stato dell'archivio da file binario.
+     *
+     * @param filepath percorso del file
+     * @return archivio ricostruito
+     * @throws IOException in caso di errori di I/O
+     * @throws ClassNotFoundException se la classe non è compatibile
      */
-    public static Archivio caricaArchivio(String filepath) throws IOException, ClassNotFoundException {
+    public static Archivio caricaArchivio(String filepath)
+            throws IOException, ClassNotFoundException {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filepath))) {
             return (Archivio) in.readObject();
         }
