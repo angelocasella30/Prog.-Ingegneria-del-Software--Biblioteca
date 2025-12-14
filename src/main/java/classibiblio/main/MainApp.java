@@ -1,4 +1,4 @@
-package com.mycompany.gestionebiblio;
+package classibiblio.main;
 
 import classibiblio.Archivio;
 import classibiblioteca.viewControllers.MainControllerViewController;
