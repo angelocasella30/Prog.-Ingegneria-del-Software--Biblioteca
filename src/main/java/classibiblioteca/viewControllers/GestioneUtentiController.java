@@ -311,32 +311,37 @@ public class GestioneUtentiController implements Initializable {
         }
     }
 
-    @FXML
-    private void handleVisualizzaStorico(ActionEvent event) {
-        Utente selezionato = tabellaUtenti.getSelectionModel().getSelectedItem();
-        if (selezionato == null) {
-            mostraErrore("Nessuna selezione", "Seleziona un utente.");
-            return;
-        }
-
-        boolean haStorico = false;
-        for (Prestito p : archivioPrestitiGlobale.getLista()) {
-            if (p.getMatricola() != null
-                    && selezionato.getMatricola() != null
-                    && p.getMatricola().equalsIgnoreCase(selezionato.getMatricola())
-                    && p.getDataRestituzioneEffettiva() != null) {
-                haStorico = true;
-                break;
-            }
-        }
-
-        if (!haStorico) {
-            mostraErrore("Storico Vuoto", "L'utente non ha mai restituito libri.");
-            return;
-        }
-
-        System.out.println("Visualizzo storico per: " + selezionato.getCognome());
+   @FXML
+private void handleVisualizzaStorico(ActionEvent event) {
+    Utente selezionato = tabellaUtenti.getSelectionModel().getSelectedItem();
+    if (selezionato == null) {
+        mostraErrore("Nessuna selezione", "Seleziona un utente.");
+        return;
     }
+
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/classibiblioteca/views/StoricoUtente.fxml"));
+        Pane page = loader.load();
+
+        StoricoUtenteController controller = loader.getController();
+        controller.setArchivioPrestiti(archivioPrestitiGlobale);
+        controller.initData(selezionato);
+
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Storico Prestiti Utente");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        if (tabellaUtenti.getScene() != null) {
+            dialogStage.initOwner(tabellaUtenti.getScene().getWindow());
+        }
+        dialogStage.setScene(new Scene(page));
+        dialogStage.showAndWait();
+
+    } catch (IOException e) {
+        e.printStackTrace();
+        mostraErrore("Errore Caricamento", "Impossibile aprire lo storico: " + e.getMessage());
+    }
+}
+
 
     @FXML
     private void handleMostraTutti(ActionEvent event) {

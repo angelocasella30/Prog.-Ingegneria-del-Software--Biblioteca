@@ -23,31 +23,37 @@ public class ArchivioPrestiti implements Serializable {
 
     // --- Gestione Lista ---
 
-    public void aggiungiPrestito(Prestito p) {
-        // 1. Validazione base: oggetto nullo
-        if (p == null) {
-            System.out.println("Errore: Impossibile aggiungere un prestito nullo.");
-            return;
-        }
+        public boolean aggiungiPrestito(Prestito p) {
+         // 1. Validazione base: oggetto nullo
+         if (p == null) {
+             System.out.println("Errore: Impossibile aggiungere un prestito nullo.");
+             return false;
+         }
 
-        // 2. Validazione campi obbligatori
-        if (p.getMatricola() == null || p.getMatricola().isEmpty() ||
-            p.getISBN() == null || p.getISBN().isEmpty() ||
-            p.getDatainizio() == null || p.getDataScadenzaPrevista() == null) {
-            System.out.println("Errore: Dati prestito incompleti (Matricola, ISBN o Date mancanti).");
-            return;
-        }
+         // 2. Validazione campi obbligatori
+         if (p.getMatricola() == null || p.getMatricola().isEmpty() ||
+             p.getISBN() == null || p.getISBN().isEmpty() ||
+             p.getDatainizio() == null || p.getDataScadenzaPrevista() == null) {
+             System.out.println("Errore: Dati prestito incompleti (Matricola, ISBN o Date mancanti).");
+             return false;
+         }
 
-        // 3. Controllo duplicati (Opzionale ma consigliato)
-        // Evitiamo di inserire lo stesso identico prestito due volte
-        if (listprestiti.contains(p)) {
-            System.out.println("Attenzione: Questo prestito è già registrato in archivio.");
-            return;
-        }
+         // 3. Controllo: niente doppio prestito ATTIVO per stesso utente e stesso libro
+         for (Prestito esistente : listprestiti) {
+             boolean stessoUtente = esistente.getMatricola().equalsIgnoreCase(p.getMatricola());
+             boolean stessoLibro  = esistente.getISBN().equalsIgnoreCase(p.getISBN());
+             boolean ancoraAperto = esistente.getDataRestituzioneEffettiva() == null;
 
-        // Tutto ok, aggiungo
-        listprestiti.add(p);
-    }
+             if (stessoUtente && stessoLibro && ancoraAperto) {
+                 System.out.println("Attenzione: esiste già un prestito ATTIVO per questo utente e questo libro.");
+                 return false;
+             }
+         }
+
+         // Tutto ok, aggiungo
+         listprestiti.add(p);
+         return true;
+     }
 
     // UC-12: Gestione Restituzione
     public boolean restituzioneLibro(String matricola, String ISBN) {

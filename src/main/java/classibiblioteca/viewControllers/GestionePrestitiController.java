@@ -181,6 +181,7 @@ public class GestionePrestitiController implements Initializable {
     @FXML
     private void handleVisualizzaAttivi(ActionEvent event) {
         filteredData.setPredicate(p -> p.getDataRestituzioneEffettiva() == null);
+        tabellaPrestiti.refresh();
     }
 
     @FXML
@@ -211,6 +212,8 @@ public class GestionePrestitiController implements Initializable {
 
         // 1) chiudo il prestito
         selezionato.chiudiPrestito();
+        masterData.setAll(archivioFacade.getArchivioPrestiti().getLista());
+        tabellaPrestiti.refresh();
 
         // 2) aggiorno il libro: copiePrestate--
         Libro l = archivioFacade.getArchivioLibri().getLibroByISBN(selezionato.getISBN());
@@ -228,10 +231,13 @@ public class GestionePrestitiController implements Initializable {
         salvaSuFileSilenzioso();
 
         if (eraInRitardo) {
-            mostraInfo("Restituzione", "Prestito restituito oltre il limite previsto.");
-        } else {
-            mostraInfo("Restituzione", "Prestito restituito con successo.");
+                mostraErrore("Restituzione in ritardo",
+                 "Prestito restituito oltre la data di scadenza.");
+            }
+       else {
+        mostraInfo("Restituzione", "Prestito restituito con successo.");
         }
+
     }
 
 
@@ -277,16 +283,27 @@ public class GestionePrestitiController implements Initializable {
 
             // check finali
             if (!u.puoRichiederePrestito()) {
-                mostraErrore("Utente non idoneo", "Limite prestiti o email non valida.");
+                mostraErrore("Utente non idoneo", "Limite prestiti superato.");
                 return;
             }
-            if (!l.presta()) {
-                mostraErrore("Libro non disponibile", "Non ci sono copie disponibili.");
-                return;
-            }
+           if (!l.presta()) {
+            mostraErrore("Libro non disponibile", "Non ci sono copie disponibili.");
+            return;
+        }
 
-            archivioFacade.getArchivioPrestiti().aggiungiPrestito(p);
-            u.aggiungiPrestito(p);
+        // prova ad aggiungere il prestito in archivio
+        boolean inserito = archivioFacade.getArchivioPrestiti().aggiungiPrestito(p);
+        if (!inserito) {
+            // rollback della copia prestata perché il prestito non è stato registrato
+            l.restituisci();
+            mostraErrore("Prestito non creato",
+                         "Esiste già un prestito ATTIVO per questo utente e questo libro.");
+            return;
+        }
+
+        // solo se è stato aggiunto anche in ArchivioPrestiti aggiorno l'utente
+        u.aggiungiPrestito(p);
+
 
             masterData.setAll(archivioFacade.getArchivioPrestiti().getLista());
             tabellaPrestiti.refresh();

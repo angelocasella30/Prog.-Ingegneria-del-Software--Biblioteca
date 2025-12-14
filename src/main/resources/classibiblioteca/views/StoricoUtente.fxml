@@ -1,25 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classibiblioteca.viewControllers.StoricoUtenteController">
-   <children>
-      <Label fx:id="lblIntestazione" layoutX="262.0" layoutY="14.0" stylesheets="@../../styles/maincontrollerview.css" text="Storico Prestiti" />
-      <TableView fx:id="tabellaStorico" layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
-        <columns>
-          <TableColumn fx:id="colTitolo" prefWidth="75.0" text="Titolo" />
-          <TableColumn fx:id="colISBN" prefWidth="75.0" text="ISBN" />
-            <TableColumn fx:id="colDataInizio" prefWidth="75.0" text="Data Inizio" />
-            <TableColumn fx:id="colDataRestituzione" prefWidth="75.0" text="Data restituzione" />
-        </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
-      </TableView>
-   </children>
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../styles/maincontrollerview.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classibiblioteca.viewControllers.StoricoUtenteController">
+
+    <children>
+      <HBox alignment="CENTER" prefHeight="54.0" prefWidth="600.0" stylesheets="@../../styles/maincontrollerview.css">
+         <children>
+              <Label fx:id="lblIntestazione" alignment="CENTER" stylesheets="@../../styles/maincontrollerview.css" text="Storico Prestiti" />
+         </children>
+      </HBox>
+
+        <TableView fx:id="tabellaStorico" layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../styles/maincontrollerview.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+
+            <columns>
+                <TableColumn fx:id="colTitolo" prefWidth="75.0" text="Titolo" />
+                <TableColumn fx:id="colISBN" prefWidth="75.0" text="ISBN" />
+                <TableColumn fx:id="colDataInizio" prefWidth="75.0" text="Data Inizio" />
+                <TableColumn fx:id="colScadenza" prefWidth="75.0" text="Scadenza" />
+                <TableColumn fx:id="colDataRestituzione" prefWidth="75.0" text="Data restituzione" />
+            </columns>
+
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
+    </children>
 </AnchorPane>
