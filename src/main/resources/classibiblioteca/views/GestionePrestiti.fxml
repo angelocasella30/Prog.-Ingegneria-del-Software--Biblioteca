@@ -33,16 +33,17 @@
       </HBox>
    </top>
    <left>
-      <VBox spacing="15.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleCreaPrestito" prefHeight="30.0" text="Crea Prestito" />
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleRestituisciLibro" prefHeight="30.0" text="Restituisci Libro" />
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleVisualizzaAttivi" prefHeight="30.0" text="Prestiti Attivi" />
-         </children>
-         <padding>
-            <Insets left="20.0" right="10.0" top="0.0" />
-         </padding>
-      </VBox>
+   <VBox spacing="15.0" BorderPane.alignment="CENTER">
+     <children>
+        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleCreaPrestito" prefHeight="30.0" text="Crea Prestito" />
+        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleRestituisciLibro" prefHeight="30.0" text="Restituisci Libro" />
+        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleVisualizzaAttivi" prefHeight="30.0" text="Prestiti Attivi" />
+        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleVisualizzaStorico" prefHeight="30.0" text="Storico Prestiti" />
+     </children>
+     <padding>
+        <Insets left="20.0" right="10.0" top="0.0" />
+     </padding>
+  </VBox>
    </left>
    <center>
       <TableView fx:id="tabellaPrestiti" BorderPane.alignment="CENTER">

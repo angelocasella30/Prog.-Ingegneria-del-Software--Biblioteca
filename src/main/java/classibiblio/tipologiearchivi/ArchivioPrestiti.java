@@ -97,6 +97,17 @@ public class ArchivioPrestiti implements Serializable {
         return attivi;
     }
     
+    public List<Prestito> getPrestitiStorico() {
+    List<Prestito> storico = new ArrayList<>();
+    for (Prestito p : listprestiti) {
+        if (p.getDataRestituzioneEffettiva() != null) {
+            storico.add(p);
+        }
+    }
+    return storico;
+}
+
+    
     // Metodo per cercare i prestiti per titolo del libro
 public List<Prestito> ricercaPrestito(String titolo) {
     List<Prestito> risultati = new ArrayList<>();

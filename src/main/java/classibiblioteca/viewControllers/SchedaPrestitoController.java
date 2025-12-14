@@ -91,10 +91,6 @@ public class SchedaPrestitoController {
             return;
         }
 
-        if (scadenza.isBefore(dataInizio)) {
-            mostraErrore("Date non valide", "La scadenza non può essere precedente alla data di inizio.");
-            return;
-        }
 
         Utente utente = archivio.getArchivioUtenti().getUtenteByMatricola(matricola);
         if (utente == null) {

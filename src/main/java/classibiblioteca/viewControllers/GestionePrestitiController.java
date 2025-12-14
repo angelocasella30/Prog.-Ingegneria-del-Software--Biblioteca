@@ -183,6 +183,12 @@ public class GestionePrestitiController implements Initializable {
         filteredData.setPredicate(p -> p.getDataRestituzioneEffettiva() == null);
     }
 
+    @FXML
+    private void handleVisualizzaStorico(ActionEvent event) {
+    // mostra solo i prestiti con data di restituzione valorizzata (chiusi)
+    filteredData.setPredicate(p -> p.getDataRestituzioneEffettiva() != null);
+    }
+
    @FXML
        private void handleRestituisciLibro(ActionEvent event) {
         if (archivioFacade == null) {
