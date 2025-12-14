@@ -6,10 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe Libro 
- * @implements serializable
- * 
- * rappresenta libro con dettagli, get e set di data
+ * Classe Libro.
+ * <p>
+ * Rappresenta un libro della biblioteca con i relativi
+ * dati descrittivi e lo stato delle copie disponibili
+ * e prestate.
+ * </p>
+ *
+ * La classe implementa {@link Serializable} per consentire
+ * la persistenza dei dati.
  */
 public class Libro implements Serializable {
     
@@ -117,9 +122,13 @@ public class Libro implements Serializable {
         return false;
     }
 
-    /**
-     * Decrementa il contatore delle copie prestate (restituzione).
-     */
+/**
+ * Registra la restituzione di una copia del libro.
+ *
+ * @return true se la restituzione è avvenuta,
+ *         false se non risultano copie prestate
+ */
+
     public boolean restituisci() 
     {
         if (copiePrestate > 0) {
@@ -129,24 +138,35 @@ public class Libro implements Serializable {
         return false;
     }
     
-    /*
-    Metodo aggiunto per avere un ordinamento basato sul primo autore più funzionale
-    */
+/**
+ * Restituisce il primo autore del libro.
+ *
+ * @return nome del primo autore oppure stringa vuota
+ */
+
     public String getPrimoAutore() 
     {
     return (autori != null && !autori.isEmpty()) ? autori.get(0) : "";
         
     }
     
-    /**
-     * Verifica se ci sono delle copie attualmente fuori in prestito.
-     */
+/**
+ * Verifica se si presenta almeno un prestito attivo
+ *
+ * @return true se esistono prestiti attivi, false altrimenti
+ */
     public boolean isPrestato() 
     {
         return copiePrestate > 0;
     }
     
     // --- Equals, HashCode e ToString ---
+/**
+ * Confronta due libri tramite ISBN
+ *
+ * @param x oggetto da confrontare
+ * @return true se i due libri hanno lo stesso ISBN
+ */
 
     @Override
     public boolean equals(Object x) 
@@ -156,12 +176,22 @@ public class Libro implements Serializable {
         Libro libro = (Libro) x;
         return this.ISBN.equals(libro.ISBN);
     }
+/**
+ * Calcola l'hash code del libro in base all'ISBN.
+ *
+ * @return valore hash del libro
+ */
 
     @Override
     public int hashCode() 
     {
         return this.ISBN != null ? this.ISBN.hashCode() : 0;  
     }
+/**
+ * Restituisce un' output testuale del libro.
+ *
+ * @return stringa descrittiva del libro
+ */
 
     @Override
     public String toString()

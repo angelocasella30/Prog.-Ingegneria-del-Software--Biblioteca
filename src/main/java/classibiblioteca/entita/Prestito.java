@@ -4,6 +4,19 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * Classe Prestito.
+ * <p>
+ * Rappresenta un prestito di libro a un utente esistente della biblioteca.
+ * Registra le informazioni relative all'utente, al libro,
+ * alla data di inizio, alla data di scadenza prevista e
+ * all'eventuale data di restituzione.
+ * </p>
+ *
+ * La classe implementa {@link Serializable} per consentire
+ * la persistenza dei dati.
+ */
+
 public class Prestito implements Serializable {
     //private Utente utente;  
     private static final long serialVersionUID = 1L;
@@ -86,6 +99,19 @@ public class Prestito implements Serializable {
     /*public Utente getUtente() {
         return utente;
     }*/
+/**
+ * Restituisce lo stato del prestito.
+ * <p>
+ * Lo stato può essere:
+ * <ul>
+ *   <li>"In Corso"</li>
+ *   <li>"IN RITARDO"</li>
+ *   <li>"Concluso"</li>
+ * </ul>
+ * </p>
+ *
+ * @return stato del prestito
+ */
 
     // --- Metodo per la UI (Stato) ---
     // Questo serve alla TableView per la colonna "Stato"
@@ -104,6 +130,11 @@ public class Prestito implements Serializable {
     Verifica se il prestito è in ritardo oppure no. Il primo controllo
     viene fatto per evitare il caso in cui il prestito sia già stato concluso
     */
+/**
+ * Verifica se il prestito è in ritardo rispetto alla scadenza prevista.
+ *
+ * @return true se il prestito è in ritardo, false altrimenti
+ */
 
     public boolean isInRitardo() 
     {
@@ -116,6 +147,10 @@ public class Prestito implements Serializable {
       /*
       Chiude il prestito impostando la data di restituzione a oggi.
      */
+/**
+ * Chiude il prestito impostando la data
+ * di restituzione effettiva alla data odierna.
+ */
 
     public void chiudiPrestito() 
     {
@@ -127,6 +162,16 @@ public class Prestito implements Serializable {
        /*
     Un prestito è uguale se il suo campo matricola isbn e data di inizio sono uguali contemporaneamente
     */
+/**
+ * Confronta due prestiti
+ * <p>
+ * Due prestiti sono considerati uguali se appartengono allo stesso utente tramite
+ * matricola e lo stesso libro tramite ISBN  e hanno la stessa data di inizio.
+ * </p>
+ *
+ * @param o oggetto da confrontare
+ * @return true se i prestiti sono uguali
+ */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -138,12 +183,21 @@ public class Prestito implements Serializable {
                this.ISBN.equals(prestito.ISBN) &&
                this.dataInizio.equals(prestito.dataInizio);
     }
-
+/**
+ * Calcola l'hash code del prestito sulla base
+ * di matricola, ISBN e data di inizio.
+ *
+ * @return valore hash del prestito
+ */
     @Override
     public int hashCode() {
         return Objects.hash(matricola, ISBN, dataInizio);
     }
-
+/**
+ * Restituisce un'output testuale del prestito.
+ *
+ * @return stringa descrittiva del prestito
+ */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

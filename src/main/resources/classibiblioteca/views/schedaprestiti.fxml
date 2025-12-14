@@ -11,37 +11,38 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.packagefxml.UtenteschedaController">
+<Pane prefHeight="350.0" prefWidth="400.0"   xmlns="http://javafx.com/javafx/8.0.171"  xmlns:fx="http://javafx.com/fxml/1" fx:controller="classibiblioteca.viewControllers.SchedaPrestitoController">
+
    <children>
-      <AnchorPane layoutY="-7.0" prefHeight="357.0" prefWidth="400.0">
+      <AnchorPane prefHeight="357.0" prefWidth="400.0">
          <children>
-            <VBox layoutX="62.0" layoutY="81.0" prefHeight="253.0" prefWidth="267.0">
-               <children>
-                  <ComboBox fx:id="PrestitoLibriDispBox" prefHeight="30.0" prefWidth="361.0" promptText="LIBRI DISPONIBILI" />
-                  <ComboBox fx:id="PrestitoUtentiDispBox" prefHeight="30.0" prefWidth="349.0" promptText="UTENTI DISPONIBILI">
-                     <VBox.margin>
-                        <Insets top="30.0" />
-                     </VBox.margin>
-                  </ComboBox>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Data scadenza">
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                  </Text>
-                  <TextField fx:id="PrestitoFldScadenza" />
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="61.0" prefWidth="267.0">
-                     <children>
-                        <Button fx:id="btnPrestitoSalva" layoutX="175.0" layoutY="26.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="salva" />
-                     </children>
-                  </AnchorPane>
-               </children>
+
+            <VBox layoutX="62.0" layoutY="81.0" spacing="10">
+
+               <ComboBox fx:id="PrestitoLibriDispBox"
+                         promptText="LIBRI DISPONIBILI"/>
+
+               <ComboBox fx:id="PrestitoUtentiDispBox"
+                         promptText="UTENTI DISPONIBILI"/>
+
+               <Text text="Data scadenza"/>
+
+               <DatePicker fx:id="PrestitoFldScadenza"/>
+
+               <Button fx:id="btnPrestitoSalva"
+                       text="Salva"
+                       onAction="#confermaPrestito"/>
+
             </VBox>
-            <Text layoutX="95.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SCHEDA PRESTITO">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Text>
-            <Label fx:id="PrestitoDataInizioLabel" layoutX="260.0" layoutY="59.0" text="Data inizio" />
+
+            <Text layoutX="95.0" layoutY="50.0"
+                  text="SCHEDA PRESTITO"
+                  style="-fx-font-size:24px; -fx-font-weight:bold;"/>
+
+            <Label fx:id="lblDataInizio"
+                   layoutX="260.0"
+                   layoutY="59.0"/>
+
          </children>
       </AnchorPane>
    </children>

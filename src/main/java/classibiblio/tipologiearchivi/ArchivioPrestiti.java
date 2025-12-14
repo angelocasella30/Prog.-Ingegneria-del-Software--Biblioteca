@@ -13,8 +13,14 @@ import java.util.Map;
 
 /**
  * Classe ArchivioPrestiti
- * @implements serializable
- * * gestisce aggiunta prestito, restituzione e ricerche in archivio
+ * <p>
+ * Gestisce i prestiti della biblioteca, tra cui 
+ * l'aggiunta di nuovi prestiti, la restituzione 
+ * e la consultazione dei prestiti attivi, scaduti o ordinati.
+ * </p>
+ *
+ * La classe implementa {@link Serializable} per consentire
+ * la persistenza dei dati.
  */
 public class ArchivioPrestiti implements Serializable {
 
@@ -26,6 +32,19 @@ public class ArchivioPrestiti implements Serializable {
     }
 
     // --- Gestione Lista ---
+/**
+ * Aggiunge un nuovo prestito all'archivio.
+ * <p>
+ * Il prestito viene inserito solo se:
+ * <ul>
+ *   <li>non è nullo</li>
+ *   <li>contiene matricola, ISBN e date valide</li>
+ *   <li>non è già presente nell'archivio</li>
+ * </ul>
+ * </p>
+ *
+ * @param p prestito da aggiungere
+ */
 
     public void aggiungiPrestito(Prestito p) {
         // 1. Validazione base: oggetto nullo
@@ -54,6 +73,17 @@ public class ArchivioPrestiti implements Serializable {
     }
 
     // UC-12: Gestione Restituzione
+/**
+ * Registra la restituzione di un libro.
+ * <p>
+ * La restituzione chiude il prestito attivo associato
+ * alla matricola dell'utente e all'ISBN del libro.
+ * </p>
+ *
+ * @param matricola matricola dell'utente
+ * @param ISBN codice ISBN del libro
+ * @return true se la restituzione è avvenuta, false altrimenti
+ */
     public boolean restituzioneLibro(String matricola, String ISBN) {
         if (matricola == null || ISBN == null) return false;
 
@@ -87,6 +117,11 @@ public class ArchivioPrestiti implements Serializable {
 } */
 
     // --- Metodi per l'Interfaccia Grafica ---
+/**
+ * Restituisce la lista dei prestiti attivi ordinati per data di scadenza prevista.
+ *
+ * @return lista dei prestiti ordinata per data di scadenza
+ */
 
     // Requisito UI-1.4: Visualizzazione ordinata per data scadenza
     public List<Prestito> getPrestitiOrdinatiPerScadenza() {
@@ -108,7 +143,15 @@ public class ArchivioPrestiti implements Serializable {
     }
     return restituiti;
 }*/
-
+/**
+ * Restituisce l'elenco dei prestiti scaduti.
+ * <p>
+ * Un prestito è considerato scaduto se risulta in ritardo
+ * rispetto alla data di scadenza prevista.
+ * </p>
+ *
+ * @return lista dei prestiti scaduti
+ */
     // Metodo utile per il controller: ottieni solo quelli in ritardo
     public List<Prestito> getPrestitiScaduti() {
         List<Prestito> scaduti = new ArrayList<>();
@@ -147,7 +190,15 @@ public class ArchivioPrestiti implements Serializable {
     
     return risultati;
 } */
-
+/**
+ * Restituisce l'elenco dei prestiti attivi.
+ * <p>
+ * Un prestito è attivo se non è ancora stata registrata
+ * la data di restituzione effettiva.
+ * </p>
+ *
+ * @return lista dei prestiti attivi
+ */
     // Metodo per vedere solo i prestiti ATTIVI (non ancora restituiti)
     public List<Prestito> getPrestitiAttivi() {
         List<Prestito> attivi = new ArrayList<>();
@@ -210,7 +261,11 @@ public class ArchivioPrestiti implements Serializable {
     }
     return null;
 }*/
-
+/**
+ * Restituisce la lista completa dei prestiti presenti nell'archivio.
+ *
+ * @return lista dei prestiti
+ */
     public List<Prestito> getLista() {
         return listprestiti;
     }

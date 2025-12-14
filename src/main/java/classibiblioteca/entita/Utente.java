@@ -9,11 +9,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * Classe Utente 
- * @implements serializable
+ * Classe Utente.
+ * <p>
  * Rappresenta l'utente della biblioteca.
- * Esso viene identificato univocamente dalla Matricola
+ * L'utente è identificato univocamente dalla matricola.
+ * </p>
  *
+ * La classe implementa {@link Serializable}
+ * per consentire la persistenza dei dati.
  */
 public class Utente implements Serializable {
 
@@ -78,25 +81,42 @@ public class Utente implements Serializable {
 
     // --- Metodi di Logica ---
 
-    /*
-    Verifica se l'utente può richiedere un nuovo prestito.
-    Regola: Deve avere meno di 3 prestiti attivi.
-    */
+/**
+ * Verifica se l'utente può richiedere un nuovo prestito.
+ * <p>
+ * Le condizioni sono:
+ * <ul>
+ *   <li>utente ha meno di 3 prestiti attivi</li>
+ *   <li>email valida (studente o docente)</li>
+ * </ul>
+ * </p>
+ *
+ * @return true se l'utente può richiedere un prestito
+ */
     public boolean puoRichiederePrestito() {
         return prestitiAttivi.size()<MAX_PRESTITI && isEmailValida() ; //modificare diagramma delle classi
     }
-    /*
-    Verifica se l'utente ha un email valida per richiedere il prestito
-    Vincolo FC 1.4
-    
-    */
+
+    //Vincolo FC 1.4
+
+/**
+ * Verifica se l'email dell'utente è valida.
+ * <p>
+ * Un'email è valida se appartiene al dominio
+ * studenti o docenti.
+ * </p>
+ *
+ * @return true se l'email è valida
+ */
     public boolean isEmailValida()
     {
        return this.email.endsWith(DOMINIO_STUDENTI) || this.email.endsWith(DOMINIO_DOCENTI);
     }
-     /*
-    Verifica se l'utente ha prestiti attivi
-    */
+/**
+ * Verifica se l'utente ha prestiti attivi
+ *
+ * @return true se esistono prestiti attivi
+ */
     public boolean verificaPrestitiAttivi()
     {
         return !prestitiAttivi.isEmpty();
@@ -122,6 +142,13 @@ public class Utente implements Serializable {
     }
 
     // --- Metodi Fondamentali per Collezioni e Ricerca ---
+/**
+ * Confronta due utenti.
+ * Due utenti sono uguali se hanno la stessa matricola.
+ *
+ * @param x oggetto da confrontare
+ * @return true se gli utenti sono uguali
+ */
 
     @Override
     public boolean equals(Object x) {
@@ -132,17 +159,24 @@ public class Utente implements Serializable {
         // Due utenti sono uguali se hanno la stessa matricola
         return this.matricola.equals(user.matricola);
     }
+/**
+ * Calcola l'hash code utente
+ *
+ * @return hashcode utente, altrimenti 0 se falsa
+ */
 
     @Override
     public int hashCode() 
     {
         return this.matricola != null ? this.matricola.hashCode() : 0;
     }
+
 /**
- * @override
- * @return Restituisce una stringa che stampa alcuni campi dell'utente
+ * Restituisce una rappresentazione testuale dell'utente,
+ * utile per il debugging e la visualizzazione.
+ *
+ * @return stringa descrittiva dell'utente
  */
-    
 
     @Override
     public String toString() {

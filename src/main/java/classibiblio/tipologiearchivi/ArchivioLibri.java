@@ -9,8 +9,14 @@ import java.util.List;
 
 /**
  * Classe ArchivioLibri
- * @implements serializable
- * * gestisce aggiunta, elimina, crea e modifica libro in archivio
+ * <p>
+ * Gestisce gli elementi libri del sistema 
+ * Gestisce le operazioni come aggiunta, elimina, ricerca, modifica
+ * ed visualizzazione ordinata dei libri
+ * </p>
+ * La classe implementa {@link Serializable} per garantire la persistenza
+ * dei dati durante il funzionamento dell'applicazione
+ * 
  */
 public class ArchivioLibri implements Serializable {
 
@@ -21,7 +27,18 @@ public class ArchivioLibri implements Serializable {
         this.listlibro = new ArrayList<>();
     }
 
-    // --- Gestione Lista ---
+/**
+ * Aggiunge un libro all'archivio.
+ * <p>
+ * L'inserimento avviene solo se:
+ * <ul>
+ *   <li>i campi obbligatori sono non vuoti</li>
+ *   <li>non esiste già un libro con lo stesso ISBN</li>
+ * </ul>
+ * </p>
+ *
+ * @param x libro da aggiungere all'archivio
+ */
 
     public void aggiungiLibro(Libro x)
     {
@@ -44,7 +61,15 @@ public class ArchivioLibri implements Serializable {
         }
     }
 
-    // --- MODIFICA QUI ---
+/**
+ * Elimina un libro dall'archivio tramite ISBN.
+ * <p>
+ * L'eliminazione è bloccata se il libro ha copie attive in prestito.
+ * </p>
+ *
+ * @param ISBN codice ISBN del libro da eliminare
+ * @return true se il libro è stato eliminato, false altrimenti
+ */
     public boolean eliminaLibro(String ISBN) 
     {
         Libro daEliminare = getLibroByISBN(ISBN);
@@ -60,7 +85,12 @@ public class ArchivioLibri implements Serializable {
         }
         return false;
     }
-    // --------------------
+/**
+ * Verifica l'esistenza di un libro tramite ISBN.
+ *
+ * @param ISBN codice ISBN da verificare se esistente
+ * @return true se il libro esiste nell'archivio, false altrimenti
+ */
 
     public boolean existByIsbn(String ISBN) 
     {
@@ -73,7 +103,16 @@ public class ArchivioLibri implements Serializable {
         }
         return false;
     }
-
+/**
+ * Aggiorna i dati di un libro esistente.
+ *
+ * @param ISBN ISBN del libro da aggiornare
+ * @param nuovoTitolo titolo modificato 
+ * @param nuoviAutori lista aggiornata degli autori
+ * @param nuovaData data di pubblicazione aggiornata
+ * @param nuoveCopie numero di copie aggiornato
+ * @return true se l'aggiornamento è avvenuto con successo, false altrimenti
+ */
     public boolean aggiornaLibro(String ISBN, String nuovoTitolo, List<String> nuoviAutori, LocalDate nuovaData, int nuoveCopie) 
     {
         // 1 Controllo che i nuovi dati non siano vuoti
@@ -110,6 +149,16 @@ public class ArchivioLibri implements Serializable {
     }
 
     // --- Metodi per la Ricerca (UC-4) ---
+/**
+ * Ricerca libri nell'archivio tramite parola chiave.
+ * <p>
+ * La ricerca viene effettuata su:
+ * titolo, ISBN e autori.
+ * </p>
+ *
+ * @param keyword parola chiave di ricerca
+ * @return lista dei libri che corrispondono ai criteri
+ */
 
     public List<Libro> ricercaLibro(String keyword)
     {
@@ -149,6 +198,11 @@ public class ArchivioLibri implements Serializable {
     }
 
     // --- Metodi per l'Interfaccia Grafica (Ordinamento) ---
+/**
+ * Restituisce la lista dei libri ordinata per titolo.
+ *
+ * @return lista dei libri ordinata per titolo
+ */
 
     public List<Libro> getLibriPerTitolo() 
     {
@@ -156,7 +210,11 @@ public class ArchivioLibri implements Serializable {
         ordinata.sort(Comparator.comparing(Libro::getTitolo, String.CASE_INSENSITIVE_ORDER));
         return ordinata; 
     }
-
+/**
+ * Restituisce la lista dei libri ordinata per autore.
+ *
+ * @return lista dei libri ordinata per autore
+ */
     public List<Libro> getLibriPerAutore() 
     {
       List<Libro> ordinata = new ArrayList<>(listlibro);
@@ -189,6 +247,11 @@ public class ArchivioLibri implements Serializable {
     private List<Libro> libriDisponibili;
 }
 */
+/**
+ * Restituisce la lista completa dei libri presenti nell'archivio.
+ *
+ * @return lista dei libri
+ */
     public List<Libro> getLista() 
     {
         return listlibro;
