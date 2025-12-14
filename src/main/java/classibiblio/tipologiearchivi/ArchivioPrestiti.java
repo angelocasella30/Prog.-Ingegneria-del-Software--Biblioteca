@@ -123,9 +123,20 @@ public List<Prestito> ricercaPrestito(String titolo) {
             risultati.add(p);
         }
     }
-
     return risultati;
 }
+    
+ public List<Prestito> getPrestitiScaduti()
+      {
+        List<Prestito> scaduti = new ArrayList<>();
+        
+        for (Prestito p : listprestiti) {
+            if (p.isInRitardo()) {
+                scaduti.add(p);
+            }
+        }
+        return scaduti;
+    }    
 
 
     public List<Prestito> getLista() {
