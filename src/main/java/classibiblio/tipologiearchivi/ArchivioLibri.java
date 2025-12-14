@@ -38,28 +38,28 @@ public class ArchivioLibri implements Serializable {
  * </p>
  *
  * @param x libro da aggiungere all'archivio
+ * @return 
  */
 
-    public void aggiungiLibro(Libro x)
-    {
-        // 1. Controllo campi vuoti
-        if (x.getTitolo() == null || x.getTitolo().trim().isEmpty() ||
-            x.getISBN() == null || x.getISBN().trim().isEmpty() ||
-            x.getAutori() == null || x.getAutori().isEmpty() ||
-            x.getDatapubbl() == null) 
-        {
-            System.out.println("Errore: Impossibile salvare un libro con campi vuoti.");
-            return; 
-        }
+    public boolean aggiungiLibro(Libro x) {
+       if (x.getTitolo() == null || x.getTitolo().trim().isEmpty() ||
+           x.getISBN() == null || x.getISBN().trim().isEmpty() ||
+           x.getAutori() == null || x.getAutori().isEmpty() ||
+           x.getDatapubbl() == null) 
+       {
+           System.out.println("Errore: Impossibile salvare un libro con campi vuoti.");
+           return false;
+       }
 
-        // 2. Controllo duplicati ISBN
-        if (!existByIsbn(x.getISBN())) 
-        {
-            listlibro.add(x);
-        } else {
-            System.out.println("Errore: Libro con ISBN " + x.getISBN() + " già presente.");
-        }
-    }
+       if (!existByIsbn(x.getISBN())) {
+           listlibro.add(x);
+           return true;
+       } else {
+           System.out.println("Errore: Libro con ISBN " + x.getISBN() + " già presente.");
+           return false;
+       }
+   }
+
 
 /**
  * Elimina un libro dall'archivio tramite ISBN.
@@ -221,33 +221,8 @@ public class ArchivioLibri implements Serializable {
         ordinata.sort(Comparator.comparing(Libro::getPrimoAutore, String.CASE_INSENSITIVE_ORDER));
         return ordinata;
     }
-    /*
-    public List<Libro> getLibriDisponibili() {
-        List<Libro> libriDisponibiliList = new ArrayList<>();
-
-        // Aggiungi i libri che hanno almeno una copia disponibile
-        for (Libro libro : listlibro) {
-            if (libro.getNumeroCopie() > 0) {
-                libriDisponibiliList.add(libro);
-            }
-        }
-
-        return libriDisponibiliList;
-    }
-    public void aggiornaLibro(Libro libro) {
-        for (int i = 0; i < listlibro.size(); i++) {
-            if (listlibro.get(i).getTitolo().equalsIgnoreCase(libro.getTitolo())) {
-                listlibro.set(i, libro);  // Sostituisce il libro aggiornato nell'archivio
-                System.out.println("Libro aggiornato: " + libro.getTitolo());
-                return;
-            }
-        }
-    }
-    public class ArchivioLibri {
-    private List<Libro> libriDisponibili;
-}
-*/
-/**
+  
+/*
  * Restituisce la lista completa dei libri presenti nell'archivio.
  *
  * @return lista dei libri

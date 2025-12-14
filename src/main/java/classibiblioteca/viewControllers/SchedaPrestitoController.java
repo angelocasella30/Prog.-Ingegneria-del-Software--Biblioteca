@@ -118,6 +118,7 @@ public class SchedaPrestitoController {
             mostraErrore("Libro non disponibile", "Non ci sono copie disponibili per questo libro.");
             return;
         }
+        // QUI aggiorni veramente il numero di copie prestate
 
         prestitoCreato = new Prestito(
                 utente.getEmail(),

@@ -39,6 +39,8 @@ public class GestioneLibriController implements Initializable {
     @FXML private TableColumn<Libro, String> colAnno;
     @FXML private TableColumn<Libro, String> colISBN;
     @FXML private TableColumn<Libro, String> colCopie;
+    @FXML private TableColumn<Libro, String> colCopiePrestate;
+
 
     private String filtroAttivo = null;
     private ArchivioLibri archivioLibri;
@@ -89,6 +91,7 @@ public class GestioneLibriController implements Initializable {
         colAutori.setCellValueFactory(cellData -> new SimpleStringProperty(String.join(", ", cellData.getValue().getAutori())));
         colAnno.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getDatapubbl().getYear())));
         colCopie.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getNumeroCopie())));
+        colCopiePrestate.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getCopiePrestate())));
         
         // Crea i menu item
         crearMenuFiltri();
@@ -238,41 +241,45 @@ public class GestioneLibriController implements Initializable {
         }
     }
 
-    public boolean showBookEditDialog(Libro libro) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/classibiblioteca/views/BookEditDialog.fxml"));
-            Pane page = (Pane) loader.load();
+   public boolean showBookEditDialog(Libro libro) {
+    try {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/classibiblioteca/views/BookEditDialog.fxml"));
+        Pane page = (Pane) loader.load();
 
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle(libro == null ? "Nuovo Libro" : "Modifica Libro");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            
-            if (tableviewLibri != null && tableviewLibri.getScene() != null) {
-                dialogStage.initOwner(tableviewLibri.getScene().getWindow());
-            }
-            
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle(libro == null ? "Nuovo Libro" : "Modifica Libro");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        if (tableviewLibri != null && tableviewLibri.getScene() != null) {
+            dialogStage.initOwner(tableviewLibri.getScene().getWindow());
+        }
+        Scene scene = new Scene(page);
+        dialogStage.setScene(scene);
 
-            BookEditDialogController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-            controller.setLibro(libro);
+        BookEditDialogController controller = loader.getController();
+        controller.setDialogStage(dialogStage);
+        controller.setLibro(libro);
 
-            dialogStage.showAndWait();
+        dialogStage.showAndWait();
 
-            if (controller.isOkClicked()) {
-                if (libro == null) {
-                    archivioLibri.aggiungiLibro(controller.getLibro());
+        if (controller.isOkClicked()) {
+            if (libro == null) { // creazione nuovo
+                boolean inserito = archivioLibri.aggiungiLibro(controller.getLibro());
+                if (!inserito) {
+                    mostraAvviso("ISBN duplicato",
+                            "Esiste già un libro con questo ISBN. Modifica l'ISBN oppure modifica il libro esistente.");
+                    return false; // non aggiornare tabella
                 }
             }
-            return controller.isOkClicked();
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
         }
+        return controller.isOkClicked();
+
+    } catch (IOException e) {
+        e.printStackTrace();
+        return false;
     }
+}
+
     
         private Archivio archivio;
         private Path savePath;

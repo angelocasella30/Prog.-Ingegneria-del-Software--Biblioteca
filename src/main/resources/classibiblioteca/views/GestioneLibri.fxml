@@ -65,7 +65,7 @@
           <TableColumn fx:id="colAnno" text="Anno" />
           <TableColumn fx:id="colISBN" text="ISBN" />
           <TableColumn fx:id="colCopie" text="N° Copie" />
-          <TableColumn text="Copie Prestate" />
+          <TableColumn fx:id="colCopiePrestate" text="Copie Prestate" />
         </columns>
       </TableView>
    </center>

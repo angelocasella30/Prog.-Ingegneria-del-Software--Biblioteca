@@ -50,7 +50,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>com.mycompany.gestionebiblio.Main</mainClass>
+                    <mainClass>com.mycompany.gestionebiblio.MainApp</mainClass>
                 </configuration>
             </plugin>
 

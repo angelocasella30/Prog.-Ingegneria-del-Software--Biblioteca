@@ -183,8 +183,8 @@ public class GestionePrestitiController implements Initializable {
         filteredData.setPredicate(p -> p.getDataRestituzioneEffettiva() == null);
     }
 
-    @FXML
-    private void handleRestituisciLibro(ActionEvent event) {
+   @FXML
+       private void handleRestituisciLibro(ActionEvent event) {
         if (archivioFacade == null) {
             mostraErrore("Archivio non inizializzato", "Archivio non caricato.");
             return;
@@ -203,16 +203,20 @@ public class GestionePrestitiController implements Initializable {
 
         boolean eraInRitardo = selezionato.isInRitardo();
 
-        // chiudo prestito
+        // 1) chiudo il prestito
         selezionato.chiudiPrestito();
 
-        // aggiorno libro
+        // 2) aggiorno il libro: copiePrestate--
         Libro l = archivioFacade.getArchivioLibri().getLibroByISBN(selezionato.getISBN());
-        if (l != null) l.restituisci();
+        if (l != null) {
+            l.restituisci();
+        }
 
-        // aggiorno utente
+        // 3) aggiorno l'utente
         Utente u = archivioFacade.getArchivioUtenti().getUtenteByMatricola(selezionato.getMatricola());
-        if (u != null) u.restituisciPrestito(selezionato);
+        if (u != null) {
+            u.restituisciPrestito(selezionato);
+        }
 
         tabellaPrestiti.refresh();
         salvaSuFileSilenzioso();
@@ -223,6 +227,7 @@ public class GestionePrestitiController implements Initializable {
             mostraInfo("Restituzione", "Prestito restituito con successo.");
         }
     }
+
 
     @FXML
     private void handleCreaPrestito(ActionEvent event) {
