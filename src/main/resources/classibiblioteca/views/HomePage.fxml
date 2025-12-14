@@ -1,17 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../styles/maincontrollerview.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classibiblioteca.views.HomePageController">
+<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" 
+           stylesheets="@../../styles/maincontrollerview.css" 
+           xmlns="http://javafx.com/javafx/8" 
+           xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="252.0" fitWidth="326.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../../Downloads/logo%20progetto.png" />
-         </image>
-      </ImageView>
-      <VBox alignment="TOP_CENTER" prefHeight="324.0" prefWidth="491.0" />
+      <VBox alignment="CENTER" spacing="20.0" prefHeight="324.0" prefWidth="491.0">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         
+         <!-- Logo con ColorAdjust per il blu -->
+         <ImageView fitHeight="600.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@/immagini/logoprogetto.png" />
+            </image>
+            <effect>
+               <ColorAdjust hue="-0.15" saturation="0.8" brightness="0.05" contrast="0.1" />
+            </effect>
+         </ImageView>
+   
+      </VBox>
    </children>
 </StackPane>

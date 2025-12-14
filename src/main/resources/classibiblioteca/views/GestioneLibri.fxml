@@ -29,9 +29,9 @@
             <TextField fx:id="txtRicerca" onAction="#handleCercaLibro" prefHeight="30.0" prefWidth="250.0" promptText="Cerca...." />
             <MenuButton fx:id="menuFiltro" mnemonicParsing="false" prefHeight="36.0" prefWidth="95.0" text="Filtro">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#handleOrdinaPerTitolo" text="Titolo" />
-                <MenuItem mnemonicParsing="false" onAction="#handleOrdinaPerAutore" text="Autore" />
-                <MenuItem mnemonicParsing="false" onAction="#handleMostraTutti" text="Nessuno" />
+                <MenuItem mnemonicParsing="false" text="Titolo" />
+                <MenuItem mnemonicParsing="false" text="Autore" />
+                <MenuItem mnemonicParsing="false" text="Nessuno" />
               </items>
             </MenuButton>
             <Button fx:id="btnCercaLibri" mnemonicParsing="false" onAction="#handleCercaLibro" prefHeight="36.0" prefWidth="99.0" text="Cerca" />

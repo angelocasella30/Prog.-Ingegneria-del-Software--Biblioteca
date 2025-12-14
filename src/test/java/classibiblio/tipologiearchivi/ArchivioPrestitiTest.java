@@ -1,5 +1,6 @@
 package classibiblio.tipologiearchivi;
 
+import classibiblio.tipologiearchivi.ArchivioPrestiti;
 import classibiblioteca.entita.Prestito;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
