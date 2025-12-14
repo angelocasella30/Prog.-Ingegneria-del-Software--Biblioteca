@@ -15,20 +15,17 @@ public class TestSoloLibri extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        // ATTENZIONE: Qui devi mettere il percorso ESATTO del tuo file GestioneLibri.fxml
-        // Se è in: src/main/resources/classibiblioteca/views/GestioneLibri.fxml
-        // Allora scrivi:
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/classibiblioteca/views/GestioneLibri.fxml"));
-        
-        Parent root = loader.load();
+        // ... codice che carica l'FXML ...
+        Parent root = FXMLLoader.load(getClass().getResource("/classibiblioteca/views/GestioneLibri.fxml"));
         
         Scene scene = new Scene(root);
-        
-        // (Opzionale) Carica il CSS se non lo hai già collegato in Scene Builder
-        // scene.getStylesheets().add(getClass().getResource("/styles/application.css").toExternalForm());
-
-        stage.setTitle("TEST AREA - Gestione Libri");
         stage.setScene(scene);
+        stage.setTitle("Gestione Biblioteca");
+        
+        // --- AGGIUNGI QUESTA RIGA ---
+        stage.setMaximized(true); 
+        // ----------------------------
+        
         stage.show();
     }
 

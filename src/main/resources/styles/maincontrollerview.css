@@ -1,15 +1,15 @@
 /* --- IMPOSTAZIONI GENERALI --- */
 .root {
     -fx-background-color: #FFFFFF;
-    /* Riduco leggermente il font base per far entrare tutto meglio */
     -fx-font-family: "Saira", "Arial", sans-serif;
-    -fx-font-size: 13px; 
+    /* AUMENTATO: Da 13px a 16px per ingrandire tutto base */
+    -fx-font-size: 16px; 
 }
 
 /* --- TITOLO MACRO (Home) --- */
 .titolo-home {
     -fx-text-fill: rgb(17, 85, 204); 
-    -fx-font-size: 32px;  /* Ridotto da 48 a 32 per evitare che esca */
+    -fx-font-size: 36px;  /* Riportato a una grandezza dignitosa */
     -fx-font-weight: 800; 
     -fx-effect: none;
     -fx-text-alignment: center;
@@ -20,10 +20,9 @@
     -fx-text-fill: #000000;
 }
 
-/* Label in grassetto (es. sottotitoli) */
 .label-bold {
     -fx-font-weight: bold;
-    -fx-font-size: 14px; /* Leggermente più grande del testo base */
+    -fx-font-size: 16px; /* Adattato al nuovo standard */
 }
 
 /* --- BOTTONI DEL MENU --- */
@@ -33,10 +32,13 @@
     -fx-background-radius: 4;
     -fx-font-family: "Saira";
     -fx-font-weight: bold;
-    -fx-font-size: 13px; /* Ridotto per rendere i bottoni più eleganti */
+    -fx-font-size: 15px; /* Testo più grande */
     -fx-cursor: hand;
-    /* Riduco il padding (spaziatura interna) così i bottoni sono meno "grassi" */
-    -fx-padding: 6 12 6 12; 
+    
+    /* MODIFICA CHIAVE: Aumento drasticamente il padding laterale */
+    /* Prima era: 6 12 6 12 -> Ora è: 12 30 12 30 */
+    /* Questo rende i bottoni larghi e comodi da cliccare */
+    -fx-padding: 12 30 12 30; 
 }
 
 .button:hover {
@@ -54,7 +56,10 @@
     -fx-control-inner-background: #FFFFFF;
     -fx-table-cell-border-color: #E0E0E0;
     -fx-table-header-border-color: transparent;
-    -fx-font-size: 12px; /* Testo tabella compatto */
+    -fx-font-size: 14px; /* Testo tabella più leggibile */
+    
+    /* MODIFICA CHIAVE: Celle più alte per dare "aria" alla tabella */
+    -fx-cell-size: 45px; 
 }
 
 .table-view .column-header-background {
@@ -66,42 +71,38 @@
 .table-view .column-header .label {
     -fx-text-fill: #000000;
     -fx-font-weight: bold;
-    -fx-font-size: 12px;
+    -fx-font-size: 14px;
 }
 
-/* --- HEADER DIALOG (Fascia blu in alto) --- */
+/* --- CAMPI DI TESTO E RICERCA --- */
+.text-field {
+    -fx-font-size: 15px;      
+    -fx-padding: 10;          /* Più spazio interno (stile touch) */
+}
+
+/* --- HEADER DIALOG --- */
 .header-panel {
     -fx-background-color: rgb(17, 85, 204);
-    -fx-padding: 15;      /* Aggiunge un po' di spazio attorno */
-    -fx-alignment: CENTER; /* Centra il contenuto se è un HBox */
+    -fx-padding: 15;      
+    -fx-alignment: CENTER; 
 }
 
-/* Regola "intelligente": Tutte le Label DENTRO l'header-panel diventano bianche */
 .header-panel .label {
     -fx-text-fill: white;
     -fx-font-family: "Saira";
     -fx-font-weight: bold;
-    -fx-font-size: 20px;
+    -fx-font-size: 22px;
 }
 
-/* Testo del titolo dentro la fascia */
 .titolo-dialog {
-    -fx-text-fill: white;      /* Bianco su sfondo blu */
-    -fx-font-size: 20px;       /* Grande ma non enorme */
+    -fx-text-fill: white;      
+    -fx-font-size: 22px;       
     -fx-font-weight: bold;
     -fx-font-family: "Saira";
 }
 
-/* --- FORM DIALOG (Etichette e Campi) --- */
-/* QUESTA È LA PARTE NUOVA PER I CAMPI */
-
 .label-form {
-    -fx-font-size: 15px;      /* Più grande e leggibile */
-    -fx-font-weight: bold;    /* Grassetto */
-    -fx-text-fill: #333333;   /* Grigio scuro quasi nero */
-}
-
-.text-field {
-    -fx-font-size: 14px;      /* Testo dentro le caselle più leggibile */
-    -fx-padding: 8;           /* Più spazio interno (stile moderno) */
+    -fx-font-size: 16px;      
+    -fx-font-weight: bold;    
+    -fx-text-fill: #333333;   
 }

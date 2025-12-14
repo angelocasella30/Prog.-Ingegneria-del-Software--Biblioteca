@@ -93,39 +93,14 @@ public class ArchivioUtenti implements Serializable {
     
     // Requisito UI-1.3
     
-    public List<Utente> getUtentiOrdinatiPerCognome() {
+    public List<Utente> getUtentiOrdinati() {
         List<Utente> ordinata = new ArrayList<>(listutenti);
   
         ordinata.sort(Comparator.comparing(Utente::getCognome, String.CASE_INSENSITIVE_ORDER)
                             .thenComparing(Utente::getNome, String.CASE_INSENSITIVE_ORDER));
         return ordinata;
     }
-    public List<Utente> getUtentiOrdinatiPerNome() {
-        List<Utente> ordinata = new ArrayList<>(listutenti);
-        ordinata.sort(Comparator.comparing(Utente::getNome, String.CASE_INSENSITIVE_ORDER)
-                            .thenComparing(Utente::getCognome, String.CASE_INSENSITIVE_ORDER));
-    return ordinata;
-    }
     
-    public List<Utente> ricercaUtentePerMatricola(String matricola) {
-        List<Utente> risultati = new ArrayList<>();
-        for (Utente u : listutenti) {
-            if (u.getMatricola().contains(matricola)) {  // Usa contains per cercare una sottostringa
-            risultati.add(u);
-        }
-    }
-    return risultati;
-}
-
-    public List<Utente> ricercaUtentePerCognome(String cognome) {
-        List<Utente> risultati = new ArrayList<>();
-        for (Utente u : listutenti) {
-            if (u.getCognome().toLowerCase().contains(cognome.toLowerCase())) {  // Cerca per cognome
-            risultati.add(u);
-        }
-    }
-    return risultati;
-}
 
     public List<Utente> getLista() {
         return listutenti;

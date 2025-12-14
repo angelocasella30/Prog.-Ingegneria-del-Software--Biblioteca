@@ -13,7 +13,7 @@
 
 <Pane fx:id="SchedaCreaLibro" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classibiblioteca.viewControllers.BookEditDialogController">
    <children>
-      <AnchorPane layoutY="11.0" prefHeight="500.0" prefWidth="600.0" stylesheets="@../../styles/maincontrollerview.css">
+      <AnchorPane layoutY="11.0" prefHeight="500.0" prefWidth="560.0" stylesheets="@../../styles/maincontrollerview.css">
          <children>
             <VBox layoutY="-11.0" prefHeight="70.0" prefWidth="600.0" styleClass="header-panel">
                <children>
@@ -24,9 +24,9 @@
                   </Label>
                </children>
             </VBox>
-            <VBox layoutX="43.0" layoutY="55.0" prefHeight="272.0" prefWidth="450.0" spacing="5.0" styleClass="column-header" stylesheets="@../../styles/maincontrollerview.css" AnchorPane.bottomAnchor="50.0">
+            <VBox layoutX="43.0" layoutY="55.0" prefHeight="272.0" prefWidth="450.0" spacing="5.0" styleClass="column-header" stylesheets="@../../styles/maincontrollerview.css" AnchorPane.bottomAnchor="50.0" AnchorPane.topAnchor="60.0">
                <children>
-                  <Text fx:id="txtTitolo" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titolo-dialog" text="Titolo:" wrappingWidth="63.23999786376953" />
+                  <Text fx:id="txtTitolo" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titolo-dialog" text="Titolo:" wrappingWidth="72.23999786376953" />
                   <TextField fx:id="fldTitoloScLibro" />
                   <Text fx:id="txtAutore" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titolo-dialog" text="Autore:" />
                   <TextField fx:id="fldAutoreScLibro" />
@@ -34,22 +34,22 @@
                   <TextField fx:id="fldAnnoScLibro" prefHeight="25.0" prefWidth="193.0" />
                   <Text fx:id="txtISBN" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titolo-dialog" text="ISBN:" wrappingWidth="96.70703125" />
                   <TextField fx:id="fldISBNScLibro" prefHeight="25.0" prefWidth="193.0" />
-                  <HBox prefHeight="55.0" prefWidth="409.0" stylesheets="@../../styles/maincontrollerview.css">
+                  <HBox prefHeight="39.0" prefWidth="450.0" stylesheets="@../../styles/maincontrollerview.css">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titolo-dialog" text="N°Copie:" wrappingWidth="82.0404052734375">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titolo-dialog" text="N°Copie:" wrappingWidth="90.0404052734375">
                            <HBox.margin>
-                              <Insets top="25.0" />
+                              <Insets top="40.0" />
                            </HBox.margin>
                         </Text>
                         <TextField fx:id="fldICopieDisponScLibro" prefHeight="25.0" prefWidth="77.0">
                            <HBox.margin>
-                              <Insets left="3.0" top="26.0" />
+                              <Insets bottom="1.0" left="3.0" top="40.0" />
                            </HBox.margin>
                         </TextField>
                      </children>
-                     <padding>
-                        <Insets top="10.0" />
-                     </padding>
+                     <VBox.margin>
+                        <Insets top="-20.0" />
+                     </VBox.margin>
                   </HBox>
                   <AnchorPane prefHeight="72.0" prefWidth="219.0" />
                </children>

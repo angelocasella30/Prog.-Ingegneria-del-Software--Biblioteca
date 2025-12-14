@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Prestito implements Serializable {
-    private Utente utente;  
+    //private Utente utente;  
     private static final long serialVersionUID = 1L;
     private String emailuser;
     private String matricola;
@@ -83,9 +83,9 @@ public class Prestito implements Serializable {
     this.dataRestituzioneEffettiva = dataRestituzione;
     }
 
-    public Utente getUtente() {
+    /*public Utente getUtente() {
         return utente;
-    }
+    }*/
 
     // --- Metodo per la UI (Stato) ---
     // Questo serve alla TableView per la colonna "Stato"

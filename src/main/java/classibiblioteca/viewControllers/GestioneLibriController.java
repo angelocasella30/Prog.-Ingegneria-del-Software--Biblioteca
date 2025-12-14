@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -23,137 +24,207 @@ import javafx.stage.Stage;
 
 public class GestioneLibriController implements Initializable {
 
-    // --- Elementi FXML ---
-    @FXML private TableView<Libro> tabellaLibri;
+    // --- NOMI CHE HAI CONFERMATO ---
+    @FXML private TextField txtRicerca;     // ID confermato da te
+    @FXML private MenuButton menuFiltro;    // ID confermato da te
+    
+    // ATTENZIONE: Nel file FXML che mi hai mandato la tabella si chiamava "tableviewLibri".
+    // Se l'hai rinominata in "tabellaLibri" lascia così, altrimenti rimetti "tableviewLibri".
+    @FXML private TableView<Libro> tableviewLibri; 
+    
     @FXML private TableColumn<Libro, String> colTitolo;
     @FXML private TableColumn<Libro, String> colAutori;
-    @FXML private TableColumn<Libro, String> colAnno; // Visualizzeremo l'anno come stringa
+    @FXML private TableColumn<Libro, String> colAnno;
     @FXML private TableColumn<Libro, String> colISBN;
     @FXML private TableColumn<Libro, String> colCopie;
-    
-    @FXML private TextField txtRicerca;
 
-    // --- Dati ---
-    private ArchivioLibri archivio; // La tua classe di gestione
-    private ObservableList<Libro> libriData; // La lista che vede JavaFX
+    private String filtroAttivo = "GENERALE";
+    private ArchivioLibri archivio;
+    private ObservableList<Libro> libriData;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // 1. Inizializziamo l'archivio (in un'app reale lo caricheremmo da file/DB)
+        // DIAGNOSI RAPIDA (Stampiamo se li trova)
+        System.out.println("Cerco txtRicerca: " + (txtRicerca != null ? "TROVATO" : "NULL"));
+        System.out.println("Cerco menuFiltro: " + (menuFiltro != null ? "TROVATO" : "NULL"));
+        
         archivio = new ArchivioLibri();
         libriData = FXCollections.observableArrayList();
+        libriData.setAll(archivio.getLista());
         
-        // Colleghiamo la lista alla tabella
-        tabellaLibri.setItems(libriData);
+        tableviewLibri.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        
+        // Assicurati che questo nome corrisponda all'ID della tabella nel FXML
+        if (tableviewLibri != null) {
+            tableviewLibri.setItems(libriData);
+        } else {
+            System.out.println("ATTENZIONE: tableviewLibri è NULL. Controlla il nome della tabella in Scene Builder!");
+        }
 
-        // 2. Configuriamo le colonne (Come leggere i dati dall'oggetto Libro)
+        // Configurazione Menu e Ricerca
+        if (menuFiltro != null && txtRicerca != null) {
+            menuFiltro.setText("Filtro");
+            menuFiltro.disableProperty().bind(txtRicerca.textProperty().isEmpty());
+        }
+
+        // Configurazione Colonne
         colTitolo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitolo()));
         colISBN.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getISBN()));
-        
-        // Per gli Autori (che sono una lista), li trasformiamo in stringa
-        colAutori.setCellValueFactory(cellData -> 
-            new SimpleStringProperty(String.join(", ", cellData.getValue().getAutori())));
-            
-        // Per l'Anno (LocalDate), mostriamo solo l'anno
-        colAnno.setCellValueFactory(cellData -> 
-            new SimpleStringProperty(String.valueOf(cellData.getValue().getDatapubbl().getYear())));
-            
-        // Per le Copie (int)
-        colCopie.setCellValueFactory(cellData -> 
-            new SimpleStringProperty(String.valueOf(cellData.getValue().getNumeroCopie())));
+        colAutori.setCellValueFactory(cellData -> new SimpleStringProperty(String.join(", ", cellData.getValue().getAutori())));
+        colAnno.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getDatapubbl().getYear())));
+        colCopie.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getNumeroCopie())));
     }    
 
-    // --- AZIONI BOTTONI ---
+    @FXML
+    private void handleCercaLibro(ActionEvent event) {
+        System.out.println("--- CLICK TASTO CERCA ---");
+        
+        String testo = txtRicerca.getText();
+        System.out.println("Testo cercato: " + testo);
+        System.out.println("Filtro attivo: " + filtroAttivo);
+        
+        // Se la casella è vuota
+        if (testo == null || testo.trim().isEmpty()) {
+            System.out.println("Casella vuota -> Resetto tutto");
+            menuFiltro.setText("Filtro");
+            filtroAttivo = "GENERALE";
+            libriData.setAll(archivio.getLista());
+            return;
+        }
+
+        String testoMinuscolo = testo.toLowerCase();
+        ObservableList<Libro> risultati = FXCollections.observableArrayList();
+        
+        // Stampiamo quanti libri ci sono in totale
+        System.out.println("Libri totali in archivio: " + archivio.getLista().size());
+
+        switch (filtroAttivo) {
+            case "TITOLO":
+                System.out.println("-> Entro nel caso TITOLO");
+                for (Libro l : archivio.getLista()) {
+                    // Stampa di controllo per ogni libro
+                    // System.out.println("Controllo libro: " + l.getTitolo()); 
+                    if (l.getTitolo().toLowerCase().contains(testoMinuscolo)) {
+                        risultati.add(l);
+                        System.out.println(">>> TROVATO: " + l.getTitolo());
+                    }
+                }
+                break;
+
+            case "AUTORE":
+                System.out.println("-> Entro nel caso AUTORE");
+                for (Libro l : archivio.getLista()) {
+                    for (String autore : l.getAutori()) {
+                        if (autore.toLowerCase().contains(testoMinuscolo)) {
+                            risultati.add(l);
+                            break; 
+                        }
+                    }
+                }
+                break;
+
+            default:
+                System.out.println("-> Entro nel caso GENERALE (Default)");
+                risultati.setAll(archivio.ricercaLibro(testo));
+                break;
+        }
+
+        System.out.println("Risultati trovati: " + risultati.size());
+        
+        // Aggiorna la tabella
+        libriData.setAll(risultati);
+        System.out.println("Tabella aggiornata.");
+    }
+
+    @FXML
+    private void handleOrdinaPerTitolo(ActionEvent event) {
+        menuFiltro.setText("Titolo");
+        filtroAttivo = "TITOLO";
+    }
+
+    @FXML
+    private void handleOrdinaPerAutore(ActionEvent event) {
+        menuFiltro.setText("Autore");
+        filtroAttivo = "AUTORE";
+    }
+    
+    @FXML
+    private void handleMostraTutti(ActionEvent event) {
+        menuFiltro.setText("Filtro");
+        filtroAttivo = "GENERALE";
+    }
 
     @FXML
     private void handleCreaLibro(ActionEvent event) {
-        System.out.println("DEBUG: Ho cliccato sul bottone Aggiungi!"); // <--- AGGIUNGI QUESTO
-
         boolean okClicked = showBookEditDialog(null);
-
         if (okClicked) {
-            System.out.println("DEBUG: Libro salvato!"); // <--- AGGIUNGI QUESTO
-            refreshTabella(); 
+            libriData.setAll(archivio.getLista());
         }
     }
     
     @FXML
     private void handleModificaLibro(ActionEvent event) {
-        Libro selezionato = tabellaLibri.getSelectionModel().getSelectedItem();
+        if (tableviewLibri == null) return;
+        Libro selezionato = tableviewLibri.getSelectionModel().getSelectedItem();
         if (selezionato != null) {
             boolean okClicked = showBookEditDialog(selezionato);
             if (okClicked) {
-                // Aggiorniamo l'archivio con i nuovi dati (l'oggetto è lo stesso, quindi basta refresh)
-                refreshTabella();
+                tableviewLibri.refresh();
             }
         } else {
-            mostraAvviso("Nessuna selezione", "Seleziona un libro dalla tabella per modificarlo.");
+            mostraAvviso("Nessuna selezione", "Seleziona un libro da modificare.");
         }
     }
 
     @FXML
     private void handleEliminaLibro(ActionEvent event) {
-        Libro selezionato = tabellaLibri.getSelectionModel().getSelectedItem();
+        if (tableviewLibri == null) return;
+        
+        Libro selezionato = tableviewLibri.getSelectionModel().getSelectedItem();
+        
         if (selezionato != null) {
-            boolean rimosso = archivio.eliminaLibro(selezionato.getISBN());
-            if (rimosso) {
-                libriData.remove(selezionato);
-            } else {
-                mostraAvviso("Impossibile Eliminare", "Il libro ha copie in prestito o non esiste.");
+            // --- 1. CHIEDIAMO CONFERMA ---
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Conferma Eliminazione");
+            alert.setHeaderText("Stai per eliminare il libro: " + selezionato.getTitolo());
+            alert.setContentText("Sei sicuro di voler procedere? L'operazione non è reversibile.");
+
+            // Mostriamo l'avviso e aspettiamo la risposta
+            // Se l'utente preme OK, il risultato sarà ButtonType.OK
+            if (alert.showAndWait().get() == javafx.scene.control.ButtonType.OK) {
+                
+                // --- 2. PROCEDIAMO CON L'ELIMINAZIONE ---
+                boolean rimosso = archivio.eliminaLibro(selezionato.getISBN());
+                
+                if (rimosso) {
+                    libriData.remove(selezionato);
+                    // Opzionale: un messaggino di successo
+                    // mostraAvviso("Successo", "Libro eliminato correttamente."); 
+                } else {
+                    mostraAvviso("Errore", "Impossibile eliminare il libro (forse ha prestiti attivi).");
+                }
             }
+            
         } else {
             mostraAvviso("Nessuna selezione", "Seleziona un libro da eliminare.");
         }
     }
-    
-    @FXML
-    private void handleCercaLibro(ActionEvent event) {
-        String testoRicerca = txtRicerca.getText();
-        
-        // Se la barra di ricerca è vuota, mostra tutto
-        if (testoRicerca == null || testoRicerca.trim().isEmpty()) {
-            libriData.setAll(archivio.getLista());
-        } else {
-            // Altrimenti usa il metodo di ricerca dell'archivio
-            libriData.setAll(archivio.ricercaLibro(testoRicerca));
-        }
-    }
-
-    // --- MENU FILTRO / ORDINAMENTO (Che ti mancavano) ---
-    
-    @FXML
-    private void handleOrdinaPerTitolo(ActionEvent event) {
-        // Usiamo il metodo del tuo ArchivioLibri
-        libriData.setAll(archivio.getLibriPerTitolo());
-    }
-
-    @FXML
-    private void handleOrdinaPerAutore(ActionEvent event) {
-        // Usiamo il metodo del tuo ArchivioLibri
-        libriData.setAll(archivio.getLibriPerAutore());
-    }
-
-    @FXML
-    private void handleMostraTutti(ActionEvent event) {
-        // Ricarica la lista originale
-        libriData.setAll(archivio.getLista());
-    }
-    
-    
-
-    // --- METODI DI SUPPORTO ---
 
     public boolean showBookEditDialog(Libro libro) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            // ATTENZIONE AL PERCORSO: Verifica che sia corretto!
             loader.setLocation(getClass().getResource("/classibiblioteca/views/BookEditDialog.fxml"));
             Pane page = (Pane) loader.load();
 
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Scheda Libro");
+            dialogStage.setTitle(libro == null ? "Nuovo Libro" : "Modifica Libro");
             dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(tabellaLibri.getScene().getWindow());
+            
+            // Protezione nel caso la tabella sia null
+            if (tableviewLibri != null && tableviewLibri.getScene() != null) {
+                dialogStage.initOwner(tableviewLibri.getScene().getWindow());
+            }
+            
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
@@ -164,11 +235,8 @@ public class GestioneLibriController implements Initializable {
             dialogStage.showAndWait();
 
             if (controller.isOkClicked()) {
-                // Se è un NUOVO libro, dobbiamo aggiungerlo all'archivio e alla lista grafica
                 if (libro == null) {
-                    Libro nuovoLibro = controller.getLibro();
-                    archivio.aggiungiLibro(nuovoLibro);
-                    libriData.add(nuovoLibro);
+                    archivio.aggiungiLibro(controller.getLibro());
                 }
             }
             return controller.isOkClicked();
@@ -179,15 +247,10 @@ public class GestioneLibriController implements Initializable {
         }
     }
     
-    private void refreshTabella() {
-        tabellaLibri.refresh();
-    }
-    
     private void mostraAvviso(String titolo, String contenuto) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(titolo);
         alert.setContentText(contenuto);
         alert.showAndWait();
     }
-    
 }

@@ -163,6 +163,7 @@ public class ArchivioLibri implements Serializable {
         ordinata.sort(Comparator.comparing(Libro::getPrimoAutore, String.CASE_INSENSITIVE_ORDER));
         return ordinata;
     }
+    /*
     public List<Libro> getLibriDisponibili() {
         List<Libro> libriDisponibiliList = new ArrayList<>();
 
@@ -187,7 +188,7 @@ public class ArchivioLibri implements Serializable {
     public class ArchivioLibri {
     private List<Libro> libriDisponibili;
 }
-
+*/
     public List<Libro> getLista() 
     {
         return listlibro;

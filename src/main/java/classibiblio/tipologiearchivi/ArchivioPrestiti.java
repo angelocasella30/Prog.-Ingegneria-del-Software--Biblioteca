@@ -73,7 +73,7 @@ public class ArchivioPrestiti implements Serializable {
         System.out.println("Errore: Nessun prestito attivo trovato per Matricola " + matricola + " e ISBN " + ISBN);
         return false;
     }
-    public List<Utente> getUtentiConLibroInPrestito(Libro libroSelezionato) {
+    /*public List<Utente> getUtentiConLibroInPrestito(Libro libroSelezionato) {
     List<Utente> utentiConLibro = new ArrayList<>();
 
     for (Prestito prestito : listprestiti) {
@@ -84,7 +84,7 @@ public class ArchivioPrestiti implements Serializable {
     }
 
     return utentiConLibro;
-}
+} */
 
     // --- Metodi per l'Interfaccia Grafica ---
 
@@ -98,7 +98,7 @@ public class ArchivioPrestiti implements Serializable {
         
         return ordinata;
     }
-    // Metodo per ottenere solo i prestiti restituiti
+    /* Metodo per ottenere solo i prestiti restituiti
     public List<Prestito> getPrestitiRestituiti() {
         List<Prestito> restituiti = new ArrayList<>();
         for (Prestito p : listprestiti) {
@@ -107,7 +107,7 @@ public class ArchivioPrestiti implements Serializable {
         }
     }
     return restituiti;
-}
+}*/
 
     // Metodo utile per il controller: ottieni solo quelli in ritardo
     public List<Prestito> getPrestitiScaduti() {
@@ -122,7 +122,7 @@ public class ArchivioPrestiti implements Serializable {
     }
     
     
-    // Metodo per cercare i prestiti per matricola
+    /* Metodo per cercare i prestiti per matricola
     public List<Prestito> ricercaPrestitoPerMatricola(String matricola) {
         List<Prestito> risultati = new ArrayList<>();
     
@@ -133,9 +133,9 @@ public class ArchivioPrestiti implements Serializable {
     }
     
     return risultati;
-}
+} */
 
-    // Metodo per cercare i prestiti per ISBN
+    /*/ Metodo per cercare i prestiti per ISBN
     public List<Prestito> ricercaPrestitoPerISBN(String isbn) {
         List<Prestito> risultati = new ArrayList<>();
     
@@ -146,7 +146,7 @@ public class ArchivioPrestiti implements Serializable {
     }
     
     return risultati;
-}
+} */
 
     // Metodo per vedere solo i prestiti ATTIVI (non ancora restituiti)
     public List<Prestito> getPrestitiAttivi() {
@@ -158,7 +158,7 @@ public class ArchivioPrestiti implements Serializable {
         }
         return attivi;
     }
-    //metodo per ottenere la lista prestitiattivi per utente
+    /*/metodo per ottenere la lista prestitiattivi per utente
     public List<Prestito> getPrestitiAttiviPerUtente(Utente utente) {
         List<Prestito> prestitiAttiviUtente = new ArrayList<>();
         
@@ -209,7 +209,7 @@ public class ArchivioPrestiti implements Serializable {
         }
     }
     return null;
-}
+}*/
 
     public List<Prestito> getLista() {
         return listprestiti;

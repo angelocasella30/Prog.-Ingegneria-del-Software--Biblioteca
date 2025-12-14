@@ -9,60 +9,70 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane; // IMPORTANTE: Aggiungi questo import!
 
 public class MainControllerViewController implements Initializable {
 
     @FXML
     private BorderPane mainContainer;
 
+    // NUOVO: Riferimento allo StackPane che contiene il margine
+    // Assicurati che nel MainView.fxml ci sia fx:id="contentArea" nello StackPane
+    @FXML
+    private StackPane contentArea; 
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Appena parte il programma, carica la Home
-        caricaSchermata("HomePage");
+        // Carichiamo subito GestioneLibri all'avvio
+        caricaSchermata("GestioneLibri");
     }    
 
     @FXML
     private void showHome(ActionEvent event) {
-        caricaSchermata("HomePage");
+        // caricaSchermata("HomePage"); 
     }
 
     @FXML
     private void showGestionePrestiti(ActionEvent event) {
-        caricaSchermata("GestionePrestiti"); // Assicurati di creare questo file
+        // caricaSchermata("GestionePrestiti"); 
     }
 
     @FXML
     private void showGestioneUtenti(ActionEvent event) {
-        caricaSchermata("GestioneUtenti"); // Assicurati di creare questo file
+        // caricaSchermata("GestioneUtenti"); 
     }
 
     @FXML
     private void showGestioneLibri(ActionEvent event) {
-        caricaSchermata("GestioneLibri"); // Assicurati di creare questo file
+        caricaSchermata("GestioneLibri");
     }
     
-    // --- METODO HELPER PER CARICARE LE VISTE ---
-    private void caricaSchermata(String nomeFileFXML) {
+    // --- METODO AGGIORNATO PER MANTENERE IL MARGINE ---
+    private void caricaSchermata(String nomeFile) {
         try {
-            // Carica il file FXML. 
-            // NOTA: Se i file sono nello stesso pacchetto di questo controller, basta il nome.
-            // Se sono in una cartella diversa, serve il percorso (es: "/views/" + nomeFileFXML + ".fxml")
-            URL fileUrl = getClass().getResource(nomeFileFXML + ".fxml");
+            // Percorso assoluto verso la cartella views
+            String percorso = "/classibiblioteca/views/" + nomeFile + ".fxml";
+            
+            URL fileUrl = getClass().getResource(percorso);
             
             if (fileUrl == null) {
-                System.out.println("Impossibile trovare il file: " + nomeFileFXML + ".fxml");
+                System.out.println("ERRORE CRITICO: Non trovo il file " + percorso);
                 return;
             }
 
             FXMLLoader loader = new FXMLLoader(fileUrl);
             Parent vista = loader.load();
             
-            // Inserisce la vista caricata al centro del BorderPane principale
-            mainContainer.setCenter(vista);
+            // --- LA MODIFICA MAGICA È QUI ---
+            // Invece di sostituire tutto il centro (che cancellerebbe il margine),
+            // lavoriamo DENTRO lo StackPane "contentArea".
+            
+            contentArea.getChildren().clear(); // Rimuove la vista precedente
+            contentArea.getChildren().add(vista); // Aggiunge la nuova vista (mantenendo il margine del padre)
             
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Errore nel caricamento della vista: " + nomeFileFXML);
+            System.out.println("Errore nel caricamento: " + nomeFile);
         }
     }
 }
