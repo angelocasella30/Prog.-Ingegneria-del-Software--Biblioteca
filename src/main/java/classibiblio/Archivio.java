@@ -3,113 +3,77 @@ package classibiblio;
 import classibiblio.tipologiearchivi.ArchivioLibri;
 import classibiblio.tipologiearchivi.ArchivioPrestiti;
 import classibiblio.tipologiearchivi.ArchivioUtenti;
-import java.io.*;
 
-/**
- * Classe Facade che aggrega tutti gli archivi del sistema.
- * <p>
- * Fornisce un punto di accesso unico ai dati della biblioteca
- * (utenti, libri e prestiti) e gestisce la persistenza
- * dell'intero stato dell'applicazione su file.
- * </p>
- */
+import java.io.*;
+import java.nio.file.*;
+import static java.nio.file.StandardCopyOption.*;
+
 public class Archivio implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /** Archivio degli utenti */
+    // Percorso di default: <working dir>/data/archivio.dat
+    public static final String DEFAULT_PATH = "data/archivio.dat";
+
     private ArchivioUtenti archivioUtenti;
-
-    /** Archivio dei libri */
     private ArchivioLibri archivioLibri;
-
-    /** Archivio dei prestiti */
     private ArchivioPrestiti archivioPrestiti;
 
-    /**
-     * Costruttore di default.
-     * <p>
-     * Inizializza archivi vuoti ed è utilizzato
-     * al primo avvio dell'applicazione.
-     * </p>
-     */
     public Archivio() {
         this.archivioUtenti = new ArchivioUtenti();
         this.archivioLibri = new ArchivioLibri();
         this.archivioPrestiti = new ArchivioPrestiti();
     }
 
-    /**
-     * Costruttore parametrizzato.
-     * <p>
-     * Utilizzato principalmente per test o per iniezione
-     * di archivi già esistenti.
-     * </p>
-     *
-     * @param archivioUtenti archivio utenti
-     * @param archivioLibri archivio libri
-     * @param archivioPrestiti archivio prestiti
-     */
-    public Archivio(ArchivioUtenti archivioUtenti,
-                    ArchivioLibri archivioLibri,
-                    ArchivioPrestiti archivioPrestiti) {
-        this.archivioUtenti = archivioUtenti;
-        this.archivioLibri = archivioLibri;
-        this.archivioPrestiti = archivioPrestiti;
+    public Archivio(ArchivioUtenti archivioUtenti, ArchivioLibri archivioLibri, ArchivioPrestiti archivioPrestiti) {
+        this.archivioUtenti = archivioUtenti != null ? archivioUtenti : new ArchivioUtenti();
+        this.archivioLibri = archivioLibri != null ? archivioLibri : new ArchivioLibri();
+        this.archivioPrestiti = archivioPrestiti != null ? archivioPrestiti : new ArchivioPrestiti();
     }
 
-    /**
-     * Restituisce l'archivio utenti.
-     *
-     * @return archivio utenti
-     */
-    public ArchivioUtenti getArchivioUtenti() {
-        return archivioUtenti;
+    public ArchivioUtenti getArchivioUtenti() { return archivioUtenti; }
+    public ArchivioLibri getArchivioLibri() { return archivioLibri; }
+    public ArchivioPrestiti getArchivioPrestiti() { return archivioPrestiti; }
+
+    // -------- Persistenza --------
+
+    public static Path defaultPath() {
+        return Paths.get(System.getProperty("user.dir"), DEFAULT_PATH);
     }
 
-    /**
-     * Restituisce l'archivio libri.
-     *
-     * @return archivio libri
-     */
-    public ArchivioLibri getArchivioLibri() {
-        return archivioLibri;
+    public static Archivio caricaDefault() throws IOException, ClassNotFoundException {
+        return carica(defaultPath());
     }
 
-    /**
-     * Restituisce l'archivio prestiti.
-     *
-     * @return archivio prestiti
-     */
-    public ArchivioPrestiti getArchivioPrestiti() {
-        return archivioPrestiti;
-    }
+    public static Archivio carica(Path path) throws IOException, ClassNotFoundException {
+        if (path == null) throw new IllegalArgumentException("Path nullo");
+        if (Files.notExists(path)) return new Archivio(); // primo avvio
 
-    /**
-     * Salva lo stato completo dell'archivio su file binario.
-     *
-     * @param archivio archivio da salvare
-     * @param filepath percorso del file
-     * @throws IOException in caso di errori di I/O
-     */
-    public static void salvaArchivio(Archivio archivio, String filepath) throws IOException {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filepath))) {
-            out.writeObject(archivio);
+        try (ObjectInputStream in = new ObjectInputStream(Files.newInputStream(path))) {
+            Object obj = in.readObject();
+            return (Archivio) obj;
         }
     }
 
-    /**
-     * Carica lo stato dell'archivio da file binario.
-     *
-     * @param filepath percorso del file
-     * @return archivio ricostruito
-     * @throws IOException in caso di errori di I/O
-     * @throws ClassNotFoundException se la classe non è compatibile
-     */
-    public static Archivio caricaArchivio(String filepath)
-            throws IOException, ClassNotFoundException {
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filepath))) {
-            return (Archivio) in.readObject();
+    public void salvaDefault() throws IOException {
+        salva(this, defaultPath());
+    }
+
+    public static void salva(Archivio archivio, Path path) throws IOException {
+        if (archivio == null) throw new IllegalArgumentException("Archivio nullo");
+        if (path == null) throw new IllegalArgumentException("Path nullo");
+
+        Files.createDirectories(path.getParent());
+
+        Path tmp = Paths.get(path.toString() + ".tmp");
+        try (ObjectOutputStream out = new ObjectOutputStream(Files.newOutputStream(tmp))) {
+            out.writeObject(archivio);
+        }
+
+        try {
+            Files.move(tmp, path, REPLACE_EXISTING, ATOMIC_MOVE);
+        } catch (AtomicMoveNotSupportedException ex) {
+            Files.move(tmp, path, REPLACE_EXISTING);
         }
     }
 }
