@@ -1,6 +1,9 @@
 package classibiblioteca.viewControllers;
 
 import classibiblio.Archivio;
+import classibiblio.tipologiearchivi.ArchivioLibri;
+import classibiblio.tipologiearchivi.ArchivioPrestiti;
+import classibiblio.tipologiearchivi.ArchivioUtenti;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -11,6 +14,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.StackPane;
 
 public class MainControllerViewController implements Initializable {
@@ -58,6 +64,7 @@ public class MainControllerViewController implements Initializable {
     public void showGestioneLibri(ActionEvent event) {
         caricaSchermata("GestioneLibri");
     }
+    
 
     // ========== METODO PRINCIPALE DI CARICAMENTO SCHERMATE ==========
     private void caricaSchermata(String nomeFile) {
@@ -122,6 +129,45 @@ public class MainControllerViewController implements Initializable {
             System.out.println("❌ ERRORE salvataggio: " + e.getMessage());
         }
     }
+    
+    // ========== METODO DI RESET ==========
+     @FXML private Button btnReset;
+
+       @FXML
+        private void handleResetArchivio(ActionEvent event) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Conferma Reset");
+            alert.setHeaderText("Stai per cancellare TUTTI i dati");
+            alert.setContentText("Questa operazione è irreversibile. Sei sicuro?");
+
+            if (alert.showAndWait().get() == ButtonType.OK) {
+                try {
+                    // Crea un archivio vuoto
+                    archivio = new Archivio(
+                        new ArchivioUtenti(), 
+                        new ArchivioLibri(), 
+                        new ArchivioPrestiti()
+                    );
+
+                    // Salva l'archivio vuoto
+                    Archivio.salva(archivio, savePath);
+
+                    // Ricarica la schermata corrente (così i controller ricevono il nuovo archivio)
+                    caricaSchermata("HomePage");
+
+                    Alert info = new Alert(Alert.AlertType.INFORMATION);
+                    info.setTitle("Reset Completato");
+                    info.setContentText("Archivio ripristinato a zero.");
+                    info.showAndWait();
+
+                } catch (IOException e) {
+                    Alert errore = new Alert(Alert.AlertType.ERROR);
+                    errore.setTitle("Errore");
+                    errore.setContentText("Reset fallito: " + e.getMessage());
+                    errore.showAndWait();
+                }
+            }
+        }
 
     // ========== GETTER (se necessari per accesso esterno) ==========
 

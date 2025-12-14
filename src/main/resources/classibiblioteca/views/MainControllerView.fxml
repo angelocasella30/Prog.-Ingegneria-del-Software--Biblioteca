@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../styles/maincontrollerview.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classibiblioteca.viewControllers.MainControllerViewController">
+<BorderPane fx:id="mainContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../styles/maincontrollerview.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classibiblioteca.viewControllers.MainControllerViewController">
     
     
    <top>
@@ -34,6 +34,11 @@
                   <Font name="Saira Regular" size="13.0" />
                </font>
             </Button>
+            <Button fx:id="btnReset" mnemonicParsing="false" onAction="#handleResetArchivio" text="Resetta Archivio">
+               <HBox.margin>
+                  <Insets left="500.0" />
+               </HBox.margin>
+            </Button>
          </children>
          
          <padding>
@@ -43,11 +48,11 @@
    </top>
 
    <bottom>
-      <HBox alignment="CENTER" style="-fx-background-color: #e0e0e0;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefWidth="1354.0" style="-fx-background-color: #e0e0e0;" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" text="Utente: Bibliotecario">
                <font>
-                  <Font name="Saira Regular" size="12.0" />
+                  <Font name="Saira Regular" size="18.0" />
                </font>
             </Label>
          </children>
